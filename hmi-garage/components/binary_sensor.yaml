@@ -1,0 +1,443 @@
+binary_sensor:
+  - platform: template
+    id: id_template_api_status
+    internal: True
+    condition:
+      api.connected:
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_ha_status
+            text_color: color_blue
+    on_release: 
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_ha_status
+            text_color: color_dark_gray
+    
+  # Garage Motion Sensor from HA #
+  - platform: homeassistant
+    id: id_ha_motion_garage
+    entity_id: binary_sensor.presence_dans_le_garage
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_motion_status
+            text_color: color_red
+    on_release:
+      then:
+      - lvgl.label.update: 
+          id: id_lv_lab_motion_status
+          text_color: color_dark_gray
+
+  # Garage SS Motion Sensor from HA #
+  - platform: homeassistant
+    id: id_ha_motion_garage_ss
+    entity_id: binary_sensor.presence_dans_le_sous_sol_garage
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_motion_ss_status
+            text_color: color_red
+    on_release:
+      then:
+      - lvgl.label.update: 
+          id: id_lv_lab_motion_ss_status
+          text_color: color_dark_gray
+
+  # Garage inside door to basement from HA #
+  - platform: homeassistant
+    id: id_ha_indoor_basement
+    entity_id: binary_sensor.ademcointerposer_interieur_garage_ss
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_basement_door_status
+            text_color: color_green
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_basement_door_status
+            text_color: color_dark_gray
+
+  # Garage inside door to ground floor from HA #
+  - platform: homeassistant
+    id: id_ha_indoor_rdc
+    entity_id: binary_sensor.ademcointerposer_interieur_garage_rdc
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_groundfloor_door_status
+            text_color: color_green
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_groundfloor_door_status
+            text_color: color_dark_gray
+
+  # Front door from HA #
+  - platform: homeassistant
+    id: id_ha_front_door
+    entity_id: binary_sensor.ademcointerposer_avant
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_front_door
+            hidden: false
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_front_door
+            hidden: true
+
+  # Patio door from HA #
+  - platform: homeassistant
+    id: id_ha_patio_door
+    entity_id: binary_sensor.ademcointerposer_patio
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_patio_door
+            hidden: false
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_patio_door
+            hidden: true
+
+  # Miner is running from HA #
+  - platform: homeassistant
+    id: id_ha_mining_running
+    entity_id: binary_sensor.mining_rig_est_en_fonction
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_miner_status
+            text_color: color_orange
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_miner_status
+            text_color: color_dark_gray
+
+  # Hibiscus needs water from HA #
+  - platform: homeassistant
+    id: id_ha_hibiscus_watering
+    entity_id: binary_sensor.hibiscus_a_soif
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_hibiscus_watering
+            hidden: false
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_hibiscus_watering
+            hidden: true
+
+  # Lys de paix needs water from HA #
+  - platform: homeassistant
+    id: id_ha_lysdepaix_watering
+    entity_id: binary_sensor.lys_de_paix_a_soif
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_lysdepaix_watering
+            hidden: false
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_lysdepaix_watering
+            hidden: true
+
+  # Défi Hilo Status from HA #
+  - platform: homeassistant
+    id: id_ha_defi_hilo_active
+    entity_id: binary_sensor.defi_hilo_thermostat_central_override_is_active
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_defi_hilo
+            hidden: false
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_defi_hilo
+            hidden: true
+
+  # Whole Home Lights #
+  - platform: homeassistant
+    id: id_bin_all_light_state
+    internal: True
+    entity_id: light.toutes_les_lumieres_sauf_eclairage_exterieur
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.widget.update: 
+            id: id_widget_but_all
+            hidden: False
+    on_release:
+      then:
+        - lvgl.widget.update: 
+            id: id_widget_but_all
+            hidden: True
+
+  # Garage RDC Lights #
+  - platform: homeassistant
+    id: id_bin_gr_light_state
+    internal: True
+    entity_id: ${garage_rdc_lights_ha_entity_id}
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_gr_light
+            shadow_color: color_bright_white
+            shadow_spread: 3
+            shadow_width: 35
+        - lvgl.label.update:
+            id: id_lv_lab_gr_light
+            text_color: color_bright_white
+        - lvgl.button.update: 
+            id: id_lv_but_gr
+            shadow_color: color_bright_white
+            shadow_spread: 5
+            shadow_width: 75 
+        - lvgl.label.update:
+            id: id_lv_lab_gr_icon
+            text_color: color_bright_white
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_gr_light
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_gr_light
+            text_color: color_gray
+        - lvgl.button.update: 
+            id: id_lv_but_gr
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_gr_icon
+            text_color: color_gray
+
+  # Garage SS Lights #
+  - platform: homeassistant
+    id: id_bin_gs_light_state
+    entity_id: ${garage_ss_lights_ha_entity_id}
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_gs
+            shadow_color: color_blue
+            shadow_spread: 3
+            shadow_width: 35
+        - lvgl.label.update:
+            id: id_lv_lab_gs
+            text_color: color_bright_white
+        - lvgl.button.update: 
+            id: id_lv_but_page_gs
+            shadow_color: color_bright_white
+            shadow_spread: 5
+            shadow_width: 75 
+        - lvgl.label.update:
+            id: id_lv_lab_gs_ico
+            text_color: color_bright_white
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_gs
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_gs
+            text_color: color_gray
+        - lvgl.button.update: 
+            id: id_lv_but_page_gs
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_gs_ico
+            text_color: color_gray
+
+  # Lampadaire Lights #
+  - platform: homeassistant
+    id: id_bin_lamp_state
+    internal: True
+    entity_id: ${lampadaire_avant_lights_ha_entity_id}
+    publish_initial_state: True
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_lamp
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.button.update: 
+            id: id_lv_but_page_lamp
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_lamp
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_lamp_ico
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_lamp_percent
+            text: "Éteint"
+        - lvgl.arc.update:
+                id: id_lv_arc_lamp
+                value: 0
+
+  # Exterieur Coté #
+  - platform: homeassistant
+    id: id_bin_extc_state
+    internal: True
+    entity_id: ${exterieur_cote_lights_ha_entity_id}
+    publish_initial_state: True
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_extc
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.button.update: 
+            id: id_lv_but_page_extc
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_extc
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_extc_icon
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_extc_bright_percent
+            text: "Éteint"
+        - lvgl.arc.update:
+                id: id_lv_arc_extc_bright
+                value: 0
+
+  # ExtG s #
+  - platform: homeassistant
+    id: id_bin_extg_state
+    internal: True
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    publish_initial_state: True
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_extg
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.button.update: 
+            id: id_lv_but_page_extg
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_extg
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_extg_ico
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_extg_bright_percent
+            text: "Éteint"
+        - lvgl.arc.update:
+                id: id_lv_arc_extg_bright
+                value: 0
+
+  - platform: homeassistant
+    id: id_media_muted
+    internal: True
+    entity_id: ${media_player_garage_entity_id}
+    attribute: is_volume_muted
+    publish_initial_state: True
+    on_state: 
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_speaker_icon
+            text: !lambda  |-
+              if(id(id_media_muted).state == true) {return "${volume_off}";}
+              else if(id(id_media_volume).state < 0.25) {return "${volume_low}";}
+              else if (id(id_media_volume).state < 0.65) {return "${volume_medium}";}
+              else {return "${volume_high}";}
+
+  - platform: homeassistant
+    id: id_text_gr_freeze_active
+    entity_id: ${garage_light_automation_freeze_toggle}
+    internal: true
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_time_end
+            hidden: False
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_init_time
+            hidden: True
+    on_release:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_time_end
+            hidden: True
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_init_time
+            hidden: False
+    on_state:
+      then:
+        - lvgl.widget.update:
+            id: id_lv_switch_gr_freeze_toggle
+            state: 
+              checked: !lambda return id(id_text_gr_freeze_active).state;
+
+  - platform: homeassistant
+    id: id_text_gs_light_freeze_active
+    entity_id: ${garage_ss_light_automation_freeze_toggle}
+    internal: true
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_end_time
+            hidden: False
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_init_time
+            hidden: True
+    on_release:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_end_time
+            hidden: True
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_init_time
+            hidden: False
+    on_state:
+      then:
+        - lvgl.widget.update:
+            id: id_lvgl_switch_gs_freeze_toggle
+            state: 
+              checked: !lambda return id(id_text_gs_light_freeze_active).state;

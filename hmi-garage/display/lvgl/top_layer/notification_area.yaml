@@ -1,0 +1,123 @@
+obj:
+  x: 0
+  y: 0
+  align: TOP_LEFT
+  height: 43
+  width: 800
+  radius: 0
+  bg_opa: TRANSP
+  border_width: 0
+  pad_all: 0
+  widgets:
+    - line:
+          points:
+            - 10, 41
+            - 790, 41
+          line_width: 2
+          line_color: color_dark_gray
+          line_rounded: true
+
+    # Wi-Fi status
+    - label:
+        id: id_lv_lab_wifi_status
+        align: TOP_RIGHT
+        x: -5
+        y: 5
+        text: "${wifi_100}"
+        text_color: color_dark_gray
+        text_font: mdi_icons_32
+
+    # Home Assistant status
+    - label:
+        id: id_lv_lab_ha_status
+        align: TOP_RIGHT
+        x: -40
+        y: 5
+        text: "${ha}"
+        text_color: color_dark_gray
+        text_font: mdi_icons_32
+
+
+    # Heating status
+    - label:
+        id: id_lv_lab_miner_status
+        align: TOP_MID
+        x: -17
+        y: 5
+        text: "${heating}"
+        text_color: color_dark_gray
+        text_font: mdi_icons_32
+    # Défi Hilo active
+    - label:
+        id: id_lv_lab_defi_hilo
+        align: TOP_MID
+        x: 18
+        y: 5
+        text: "${h_circle_outline}"
+        text_color: color_dark_gray
+        text_font: mdi_icons_32
+        hidden: true
+    - obj: # a properly placed coontainer object for all these controls
+          align: TOP_LEFT
+          width: 200
+          height: 40
+          x: 0
+          y: 0
+          pad_all: 0
+          bg_opa: TRANSP
+          border_opa: TRANSP
+          pad_left: 1
+          layout: # enable the FLEX layout for the children widgets
+            type: FLEX
+            flex_flow: ROW  # the order of the widgets starts top left
+            flex_align_main : START # they sould be centered
+            pad_column: 3
+          widgets:
+            # Front door
+            - label:
+                id: id_lv_lab_front_door
+                #width: 40
+                #height: 40
+                #align: CENTER #TOP_LEFT
+                #x: 5
+                #y: 5
+                text: "${door_open}"
+                text_color: color_red
+                text_font: mdi_icons_32
+                hidden: true
+            # Patio door
+            - label:
+                id: id_lv_lab_patio_door
+                #width: 40
+                #height: 40
+                #align: CENTER #TOP_LEFT
+                #x: 50
+                #y: 5
+                text: "${patio_door_open}"
+                text_color: color_red
+                text_font: mdi_icons_32
+                hidden: true
+            # Hibiscus watering
+            - label:
+                id: id_lv_lab_hibiscus_watering
+                #width: 40
+                #height: 40
+                #align: CENTER #TOP_LEFT
+                #x: 95
+                #y: 5
+                text: "${watering_can}"
+                text_color: color_blue
+                text_font: mdi_icons_32
+                hidden: true
+            # Lys de Paix watering
+            - label:
+                id: id_lv_lab_lysdepaix_watering
+                #width: 40
+                #height: 40
+                #align: CENTER #TOP_LEFT
+                #x: 95
+                #y: 5
+                text: "${watering_can}"
+                text_color: color_green
+                text_font: mdi_icons_32
+                hidden: true

@@ -1,0 +1,274 @@
+obj: # Outdoor Weather widget
+  align: TOP_LEFT
+  width: 245
+  height: 108
+  x: 14
+  y: 56
+  pad_all: 0
+  bg_opa: TRANSP
+  border_opa: TRANSP
+  scrollable: "OFF"
+  widgets:
+    - obj: # Animated weather effect widget
+        align: TOP_LEFT
+        width: 100
+        height: 100
+        x: 0
+        y: 8
+        pad_all: 0
+        bg_opa: TRANSP
+        border_opa: TRANSP
+        scrollable: "OFF"
+        widgets:
+          # WEATHER ICON  
+          - animimg:
+              id: weather_rainy
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ rainy0, rainy1, rainy2, rainy3, rainy4, rainy5, rainy6, rainy7, rainy8, rainy9, rainy10, rainy11]
+              duration: 1200ms
+          - animimg:
+              id: weather_pouring
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ pouring0, pouring1, pouring2, pouring3, pouring4, pouring5, pouring6, pouring7, pouring8, pouring9, pouring10, pouring11 ]
+              duration: 400ms
+          - animimg:
+              id: weather_lightning_rainy
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ lightning_rainy0, rainy1, lightning_rainy1, rainy3, rainy4, rainy5, rainy6, rainy7, rainy8, rainy9, rainy10, rainy11,
+                      lightning_rainy2, rainy1, lightning_rainy3, rainy3, rainy4, rainy5, rainy6, rainy7, rainy8, rainy9, rainy10, rainy11
+                    ]
+              duration: 1500ms
+          - animimg:
+              id: weather_snowy_rainy
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ snowy_rainy0, snowy_rainy1, snowy_rainy2, snowy_rainy3, snowy_rainy4, snowy_rainy5, snowy_rainy6, snowy_rainy7, snowy_rainy8,
+                      snowy_rainy9, snowy_rainy10, snowy_rainy11
+                    ]
+              duration: 1200ms
+          - animimg:
+              id: weather_snowy
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ snowy0, snowy1, snowy2, snowy3, snowy4, snowy5, snowy6, snowy7, snowy8, snowy9, snowy10, snowy11 ]
+              duration: 1200ms
+          - button:
+              id: weather_sunny
+              hidden: true
+              pad_all: 0
+              width: 100
+              height: 100
+              x: 0
+              y: 0
+              bg_opa: TRANSP
+              shadow_opa: TRANSP
+              widgets:
+                - image:
+                    src: sunny
+          - button:
+              id: weather_clear_night
+              hidden: true
+              pad_all: 0
+              width: 100
+              height: 100
+              x: 0
+              y: 0
+              bg_opa: TRANSP
+              shadow_opa: TRANSP
+              widgets:
+                - image:
+                    src: clear_night
+          - animimg:
+              id: weather_hail
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ hail0, hail1, hail2, hail3, hail4, hail5, hail6, hail7, hail8, hail9, hail10, hail11 ]
+              duration: 1200ms
+          - animimg:
+              id: weather_partlycloudy_sun
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ partlycloudy_sun0, partlycloudy_sun1, partlycloudy_sun2, partlycloudy_sun3, partlycloudy_sun4, partlycloudy_sun5, partlycloudy_sun6, 
+                      partlycloudy_sun7, partlycloudy_sun6, partlycloudy_sun5, partlycloudy_sun4, partlycloudy_sun3, partlycloudy_sun2, partlycloudy_sun1 
+                    ]
+              duration: 2600ms
+          - animimg:
+              id: weather_partlycloudy_moon
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ partlycloudy_moon0, partlycloudy_moon1, partlycloudy_moon2, partlycloudy_moon3, partlycloudy_moon4, partlycloudy_moon5, partlycloudy_moon6,
+                      partlycloudy_moon7, partlycloudy_moon6, partlycloudy_moon5, partlycloudy_moon4, partlycloudy_moon3, partlycloudy_moon2, partlycloudy_moon1 
+                    ]
+              duration: 2600ms
+          - animimg:
+              id: weather_windy
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ windy0, windy1, windy2, windy3, windy2, windy1 ]
+              duration: 1000ms
+          - animimg:
+              id: weather_windy_variant
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ windy_variant0, windy_variant1, windy_variant2, windy_variant3, windy_variant2, windy_variant1 ]
+              duration: 1000ms
+          - animimg:
+              id: weather_lightning
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ lightning0, lightning1, lightning1, lightning1, 
+                      lightning0, lightning1, lightning1, lightning1, 
+                      lightning1, lightning1, lightning1, lightning1, 
+                      lightning2, lightning3, lightning3, lightning3, 
+                      lightning2, lightning3, lightning3, lightning3, 
+                      lightning3, lightning3, lightning3, lightning3, 
+                      lightning3, lightning3, lightning3, lightning3, 
+                      lightning3, lightning3, lightning3, lightning3
+                    ]
+              duration: 2000ms
+          - animimg:
+              id: weather_fog
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ fog0, fog1, fog2, fog3, fog4, fog5, fog6, fog7, fog8, fog9, fog10, fog11, fog12, fog11, fog10, fog9, fog8, fog7, fog6, fog5, fog4, fog3, fog2, fog1 ]
+              duration: 5000ms
+          - animimg:
+              id: weather_cloudy
+              hidden: true
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              src: [ cloudy0, cloudy1, cloudy2, cloudy3, cloudy2, cloudy1 ]
+              duration: 600ms
+    - obj: # WEATHER TEMPERATURE
+        align: TOP_LEFT
+        width: 145
+        height: 48
+        x: 90
+        y: 0
+        pad_all: 0
+        bg_opa: TRANSP
+        border_opa: TRANSP
+        scrollable: "OFF"
+        widgets:
+          # Temperature icon
+          - label:
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              text_font: icons_48
+              text_color: color_green
+              text: "${temperature}"
+          # Temperature text
+          - button:
+              width: 100
+              height: 36
+              x: 26
+              y: 4
+              bg_opa: TRANSP
+              shadow_opa: TRANSP
+              align: TOP_LEFT
+              widgets:          
+                - label:
+                    align: LEFT_MID
+                    id: id_lv_lab_weather_temperature
+                    text_font: lato_30
+                    text_color: color_white
+                    text: ""
+    - obj: # WEATHER HUMIDITY
+        align: TOP_LEFT
+        width: 100
+        height: 36
+        x: 95
+        y: 40
+        pad_all: 0
+        bg_opa: TRANSP
+        border_opa: TRANSP
+        scrollable: "OFF"
+        widgets:
+          # Humidity icon
+          - label:
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              text_font: icons_36
+              text_color: color_dark_blue
+              text: "${humidity}"
+          # Humidity Text
+          - button:
+              width: 80
+              height: 24
+              x: 22
+              y: 5
+              bg_opa: TRANSP
+              shadow_opa: TRANSP
+              align: TOP_LEFT
+              widgets:          
+                - label:
+                    align: LEFT_MID
+                    id: id_lv_lab_weather_humidity
+                    text_font: lato_18
+                    text_color: color_white
+                    text: ""
+    - obj: # WEATHER WIND SPEED
+        align: TOP_LEFT
+        width: 100
+        height: 36
+        x: 97
+        y: 74
+        pad_all: 0
+        bg_opa: TRANSP
+        border_opa: TRANSP
+        scrollable: "OFF"
+        widgets:
+          # Wind Speed icon
+          - label:
+              x: 0
+              y: 0
+              align: TOP_LEFT
+              text_font: mdi_icons_32
+              text_color: color_yellow
+              text: "${wind_speed}"
+          # Wind speed text
+          - button:
+              width: 80
+              height: 24
+              x: 20
+              y: 4
+              bg_opa: TRANSP
+              shadow_opa: TRANSP
+              align: TOP_LEFT
+              widgets:          
+                - label:
+                    align: LEFT_MID
+                    id: id_lv_lab_weather_wind_speed
+                    text_font: lato_18
+                    text_color: color_white
+                    text: ""

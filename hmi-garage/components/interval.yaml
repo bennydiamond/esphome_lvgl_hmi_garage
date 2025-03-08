@@ -1,0 +1,21 @@
+interval:
+  - interval: 800ms
+    startup_delay: 0s
+    then:
+      - if:
+          condition: 
+            - lambda: "return id(id_blinker_toggle) == false;"
+          then:
+            - lvgl.label.update: 
+                id: id_lv_lab_defi_hilo
+                text_color: color_yellow
+            - globals.set:
+                id: id_blinker_toggle
+                value: "true"
+          else:
+            - lvgl.label.update: 
+                id: id_lv_lab_defi_hilo
+                text_color: color_dark_gray
+            - globals.set:
+                id: id_blinker_toggle
+                value: "false"

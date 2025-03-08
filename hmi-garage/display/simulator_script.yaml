@@ -1,0 +1,13 @@
+- id: time_update
+  then:
+    - lvgl.label.update:
+        id: id_lv_lab_display_time
+        text: "12:34"
+
+    - lvgl.label.update:
+        id: id_lv_lab_display_day
+        text: "Weekday"
+
+    - lvgl.label.update:
+        id: id_lv_lab_display_date
+        text: "day+month"

@@ -1,0 +1,41 @@
+globals:
+  - id: id_blinker_toggle
+    type: bool
+    restore_value: no
+    initial_value: "false"
+  - id: id_global_lamp_color
+    type: lv_color_t
+    restore_value: no
+    initial_value: "lv_color_make(0xff, 0xcc, 0x66)"
+  - id: id_global_lamp_color32
+    type: lv_color32_t
+    restore_value: no
+    initial_value: "(lv_color32_t)LV_COLOR_MAKE32(0xff, 0xcc, 0x66)"
+  - id: id_global_lamp_kelvin
+    type: int
+    restore_value: no
+    initial_value: "2000"
+  - id: id_global_extc_color
+    type: lv_color_t
+    restore_value: no
+    initial_value: "lv_color_make(0xff, 0xcc, 0x66)"
+  - id: id_global_extc_color32
+    type: lv_color32_t
+    restore_value: no
+    initial_value: "(lv_color32_t)LV_COLOR_MAKE32(0xff, 0xcc, 0x66)"
+  - id: id_global_extc_kelvin
+    type: int
+    restore_value: no
+    initial_value: "2000"
+  - id: id_global_extg_color
+    type: lv_color_t
+    restore_value: no
+    initial_value: "lv_color_make(0xff, 0xcc, 0x66)"
+  - id: id_global_extg_color32
+    type: lv_color32_t
+    restore_value: no
+    initial_value: "(lv_color32_t)LV_COLOR_MAKE32(0xff, 0xcc, 0x66)"
+  - id: id_global_extg_kelvin
+    type: int
+    restore_value: no
+    initial_value: "2000"

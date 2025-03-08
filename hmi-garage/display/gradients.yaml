@@ -1,0 +1,18 @@
+- id: id_gradient_color_bar
+  direction: VER
+  dither: none
+  stops:
+    - color: 0xFF0000
+      position: 0
+    - color: 0xFFFF00
+      position: 42
+    - color: 0x00FF00
+      position: 84
+    - color: 0x00FFFF
+      position: 127
+    - color: 0x0000FF
+      position: 169
+    - color: 0xFF00FF
+      position: 212
+    - color: 0xFF0000
+      position: 255

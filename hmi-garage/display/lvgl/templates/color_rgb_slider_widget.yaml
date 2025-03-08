@@ -1,0 +1,153 @@
+bg_opa: TRANSP
+border_opa: TRANSP
+shadow_opa: TRANSP
+pad_all: 0
+grid_cell_column_pos: 2
+grid_cell_row_pos: 1
+grid_cell_x_align: STRETCH
+grid_cell_y_align: STRETCH
+grid_cell_row_span: 3
+align: CENTER
+hidden: True
+layout:
+  pad_column: 0
+  pad_row: 0
+  type: GRID
+  grid_columns: [FR(10), FR(25), FR(5), FR(25), FR(5), FR(25), FR(5)]
+  grid_rows: [FR(8), FR(48), FR(8)]
+widgets:
+  - led:
+      grid_cell_column_pos: 1
+      grid_cell_row_pos: 2
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: CENTER
+      y: 4
+      color: 0xFF0000
+      brightness: 100%
+  - led:
+      grid_cell_column_pos: 3
+      grid_cell_row_pos: 2
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: CENTER
+      y: 4
+      color: 0x00FF00
+      brightness: 100%
+  - led:
+      grid_cell_column_pos: 5
+      grid_cell_row_pos: 2
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: CENTER
+      y: 4
+      color: 0x0000FF
+      brightness: 100%
+
+  - slider:
+      id: ${id_lv_slid_red}
+      bg_opa: TRANSP
+      border_opa: 50%
+      border_width: 1
+      border_color: color_dark_gray
+      shadow_opa: TRANSP
+      pad_all: 0
+      grid_cell_column_pos: 1
+      grid_cell_row_pos: 1
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: STRETCH
+      grid_cell_column_span: 1
+      grid_cell_row_span: 1
+      radius: 20
+      bg_color: color_gray
+      align: CENTER
+      width: 60
+      height: 160
+      min_value: 0
+      max_value: 255
+      indicator:
+        bg_color: 0xFF0000
+        bg_grad_color: 0x0F0000
+        bg_grad_dir: VER
+        radius: 20
+      knob:
+        bg_opa: TRANSP
+      on_release:
+        - homeassistant.action: 
+            action: script.esphome_rgb_light_set
+            data:
+              light_name: ${light_ha_entity_id}
+              red: !lambda return (uint8_t)x;
+              green: !lambda return id(${id_global_color32}).ch.green;
+              blue: !lambda return id(${id_global_color32}).ch.blue;
+
+  - slider:
+      id: ${id_lv_slid_green}
+      bg_opa: TRANSP
+      border_opa: 50%
+      border_width: 1
+      border_color: color_dark_gray
+      shadow_opa: TRANSP
+      pad_all: 0
+      grid_cell_column_pos: 3
+      grid_cell_row_pos: 1
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: STRETCH
+      grid_cell_column_span: 1
+      grid_cell_row_span: 1
+      radius: 20
+      bg_color: color_gray
+      align: CENTER
+      width: 60
+      height: 160
+      min_value: 0
+      max_value: 255
+      indicator:
+        bg_color: 0x00FF00
+        bg_grad_color: 0x000F00
+        bg_grad_dir: VER
+        radius: 20
+      knob:
+        bg_opa: TRANSP
+      on_release:
+        - homeassistant.action: 
+            action: script.esphome_rgb_light_set
+            data:
+              light_name: ${light_ha_entity_id}
+              red: !lambda return id(${id_global_color32}).ch.red;
+              green: !lambda return (uint8_t)x;
+              blue: !lambda return id(${id_global_color32}).ch.blue;
+
+  - slider:
+      id: ${id_lv_slid_blue}
+      bg_opa: TRANSP
+      border_opa: 50%
+      border_width: 1
+      border_color: color_dark_gray
+      shadow_opa: TRANSP
+      pad_all: 0
+      grid_cell_column_pos: 5
+      grid_cell_row_pos: 1
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: STRETCH
+      grid_cell_column_span: 1
+      grid_cell_row_span: 1
+      radius: 20
+      bg_color: color_gray
+      align: CENTER
+      width: 60
+      height: 160
+      min_value: 0
+      max_value: 255
+      indicator:
+        bg_color: 0x0000FF
+        bg_grad_color: 0x00000F
+        bg_grad_dir: VER
+        radius: 20
+      knob:
+        bg_opa: TRANSP
+      on_release:
+        - homeassistant.action: 
+            action: script.esphome_rgb_light_set
+            data:
+              light_name: ${light_ha_entity_id}
+              red: !lambda return id(${id_global_color32}).ch.red;
+              green: !lambda return id(${id_global_color32}).ch.green;
+              blue: !lambda return (uint8_t)x;

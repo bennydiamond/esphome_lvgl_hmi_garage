@@ -1,0 +1,110 @@
+obj: # Speaker Volume control
+  id: id_lvgl_widget_media_control
+  align: TOP_RIGHT
+  width: 80
+  height: 440
+  x: -10
+  y: 40
+  pad_all: 0
+  bg_opa: TRANSP
+  border_opa: TRANSP
+  scrollable: False
+  widgets:
+      - line:
+          align: LEFT_MID
+          points:
+            - 0, -40
+            - 0, 300
+          line_width: 2
+          line_color: color_dark_gray
+          line_rounded: true
+      # Speaker Icon
+      - button:
+          id: id_lvgl_button_volume_speaker
+          width: 82
+          height: 80
+          y: 0
+          x: 4
+          align: TOP_MID
+          opa: TRANSP
+          bg_opa: TRANSP
+          border_width: 0
+          radius: 0
+          on_press:
+            - homeassistant.action:
+                action: media_player.volume_mute
+                data:
+                  entity_id: ${media_player_garage_entity_id}
+                  is_volume_muted: !lambda "return !id(id_media_muted).state;"
+      - label:
+          id: id_lv_lab_speaker_icon
+          align: TOP_MID
+          x: 0
+          y: 16
+          width: 85
+          height: 50
+          text_font: mdi_icons_48
+          text_color: color_white
+          text_align: CENTER
+          text: ${volume_high}
+      
+          
+      - slider:
+          id: id_lv_slid_media_volume
+          x: 0
+          y: 84
+          align: TOP_MID
+          width: 18
+          height: 260
+          min_value: 0
+          max_value: 100
+          # main (background) styles
+          bg_opa: cover
+          radius: 6
+          indicator:
+            bg_opa: cover 
+          knob:
+            radius: 15
+            width: 10
+            height: 12%
+            bg_color: color_blue
+          on_value:
+            - lvgl.label.update:
+                id: id_lv_lab_speaker_icon
+                text: !lambda  |-
+                  if(id(id_media_muted).state == true) {return "${volume_off}";}
+                  else if(x < 25) {return "${volume_low}";}
+                  else if (x < 65) {return "${volume_medium}";}
+                  else {return "${volume_high}";}
+          on_release:
+            - homeassistant.action:
+                action: media_player.volume_set
+                data:
+                  entity_id: ${media_player_garage_entity_id}
+                  volume_level: !lambda "return x / 100.0;"
+      - button:
+          width: 82
+          height: 80
+          y: 0
+          x: 4
+          align: BOTTOM_MID
+          opa: TRANSP
+          bg_opa: TRANSP
+          border_width: 0
+          radius: 0
+          on_press:
+            - homeassistant.action:
+                action: media_player.media_play_pause
+                data:
+                  entity_id: ${media_player_garage_entity_id}
+      - label:
+          id: id_lv_lab_music_playpause_icon
+          align: BOTTOM_MID
+          x: -3
+          y: -16
+          width: 85
+          height: 50
+          text_font: mdi_icons_48
+          text_color: color_white
+          text_align: CENTER
+          text: ${play_icon}

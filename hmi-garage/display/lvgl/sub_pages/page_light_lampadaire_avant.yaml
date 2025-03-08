@@ -1,0 +1,24 @@
+id: page_lamp
+<<: !include  { file: ../templates/rgb_light_sub_page_body.yaml, 
+                vars: { light_name: "Lampadaire Avant", 
+                        light_ha_entity_id: '${lampadaire_avant_lights_ha_entity_id}', 
+                        id_lvgl_widget_arc: id_lv_arc_lamp, 
+                        id_lvgl_widget_button: id_lv_but_page_lamp, 
+                        id_lvgl_widget_icon: id_lv_lab_lamp_ico, 
+                        id_txt_bright_percent: id_lv_lab_lamp_percent, 
+                        id_lv_lab_kelvin: id_lv_lab_lamp_kelvin, 
+                        id_lv_slid_kelvin: id_lv_slid_lamp_kelvin, 
+                        id_lv_obj_color_kelvin: id_lv_obj_lamp_color_kelvin, 
+                        id_lv_obj_color_rgb: id_lv_obj_lamp_color_rgb, 
+                        id_lvgl_dropdown_effects: id_lv_drop_lamp_effects, 
+                        id_select_dropdown_effects: id_select_drop_lamp_effects, 
+                        id_light_active_light_effect: lampadaire_avant_active_effect, 
+                        id_lv_but_ctemp: id_lv_but_lamp_ctemp, 
+                        id_lv_but_crgb: id_lv_but_lamp_crgb, 
+                        id_global_kelvin: id_global_lamp_kelvin, 
+                        id_global_color32: id_global_lamp_color32, 
+                        id_lv_slid_red: id_lv_lamp_slid_red, 
+                        id_lv_slid_green: id_lv_lamp_slid_green, 
+                        id_lv_slid_blue: id_lv_lamp_slid_blue 
+                      } 
+              }

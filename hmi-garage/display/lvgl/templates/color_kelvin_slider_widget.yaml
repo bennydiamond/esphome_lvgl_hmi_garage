@@ -1,0 +1,87 @@
+bg_opa: TRANSP
+border_opa: TRANSP
+shadow_opa: TRANSP
+pad_all: 0
+grid_cell_column_pos: 2
+grid_cell_row_pos: 1
+grid_cell_x_align: STRETCH
+grid_cell_y_align: STRETCH
+grid_cell_row_span: 3
+align: CENTER
+hidden: True
+layout:
+  pad_column: 0
+  pad_row: 0
+  type: GRID
+  grid_columns: [100%]
+  grid_rows: [FR(8), FR(48), FR(8)]
+widgets:
+  - button:
+      bg_opa: TRANSP
+      border_opa: TRANSP
+      shadow_opa: TRANSP
+      pad_all: 0
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 0
+      grid_cell_x_align: STRETCH
+      grid_cell_y_align: STRETCH
+      grid_cell_column_span: 1
+      grid_cell_row_span: 1
+      widgets:
+        - label:
+            id: ${id_lv_lab_kelvin}
+            align: BOTTOM_MID
+            text_font: lato_18
+            text_color: color_white
+
+  - slider:
+      id: ${id_lv_slid_kelvin}
+      bg_opa: TRANSP
+      border_opa: 50%
+      border_width: 1
+      border_color: color_dark_gray
+      shadow_opa: TRANSP
+      pad_all: 0
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 1
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: STRETCH
+      grid_cell_column_span: 1
+      grid_cell_row_span: 1
+      radius: 20
+      bg_color: color_gray
+      align: CENTER
+      width: 60
+      height: 160
+      min_value: ${lampadaire_avant_min_kelvin}
+      max_value: ${lampadaire_avant_max_kelvin}
+      indicator:
+        bg_color: color_orange
+        bg_grad_color: color_white
+        bg_grad_dir: VER
+        radius: 20
+      knob:
+        bg_opa: TRANSP
+      on_release:
+          - homeassistant.action:
+              action: light.turn_on
+              data:
+                entity_id: ${light_ha_entity_id}
+                color_temp_kelvin: !lambda return -int(x) + (${lampadaire_avant_min_kelvin} + ${lampadaire_avant_max_kelvin});
+              
+  - label:
+      bg_opa: TRANSP
+      border_opa: TRANSP
+      shadow_opa: TRANSP
+      pad_all: 0
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 2
+      grid_cell_x_align: STRETCH
+      grid_cell_y_align: STRETCH
+      grid_cell_column_span: 1
+      grid_cell_row_span: 1
+      align: CENTER
+      text_font: icons_36
+      text_color: color_white
+      text_align: CENTER
+      text: "${color_temp}"

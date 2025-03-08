@@ -1,0 +1,165 @@
+esphome:
+  name: hmi-garage-ser2net
+  friendly_name: hmi-garage-ser2net
+  platformio_options:
+    board_build.flash_mode: dio
+#    board_build.f_cpu: 160000000L
+
+esp32:
+  board: esp32-c3-devkitm-1
+  flash_size: 4MB
+  framework:
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_BT_BLE_50_FEATURES_SUPPORTED: y
+      CONFIG_BT_BLE_42_FEATURES_SUPPORTED: y
+      CONFIG_ESP_TASK_WDT: y
+      CONFIG_ESP_TASK_WDT_TIMEOUT_S: "10"
+
+# Enable logging
+logger:
+  level: ERROR
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+  on_client_connected:
+    - if:
+        condition:
+          - binary_sensor.is_off: id_serial_in_use
+        then:
+          - esp32_ble_tracker.start_scan:
+              continuous: true
+  # Disable BLE tracking when there are no api connections live
+  on_client_disconnected:
+    if:
+      condition:
+        not:
+          api.connected:
+      then:
+        - esp32_ble_tracker.stop_scan:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  use_address: 192.168.1.138
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Hmi-Garage-Ser2Net"
+    password: !secret fallback_hotspot_password
+
+captive_portal:
+
+esp32_ble_tracker:
+  scan_parameters:
+    # Don't auto start BLE scanning, we control it in the `api` block's automation.
+    continuous: False
+    
+    active: False  # send scan-request packets to gather more info, like device name for some devices.
+
+    interval: 320ms  # default 320ms - how long to spend on each advert channel
+    window:   300ms  # default 30ms - how long to actually "listen" in each interval. Reduce this if device is unstable.
+    # If the device cannot keep up or becomes unstable, reduce the "window" setting. This may be
+    # required if your device is controlling other sensors or doing PWM for lights etc.
+
+bluetooth_proxy:
+  active: False  # allows outbound connections from HA to devices.
+
+external_components:
+  - source: github://oxan/esphome-stream-server
+
+uart:
+   id: uart_bus
+   # add further configuration for the UART here
+   rx_pin: GPIO20
+   tx_pin: GPIO21
+   baud_rate: 115200
+   rx_buffer_size: 2048 # default is 256
+
+stream_server:
+   uart_id: uart_bus
+   port: 1234
+   buffer_size: 2048
+
+binary_sensor:
+  - platform: stream_server
+    connected:
+      name: "Serial Connected"
+      id: id_serial_in_use
+      on_press:
+        then:
+          - esp32_ble_tracker.stop_scan:
+      on_release:
+        - if:
+            condition:
+              - api.connected:
+            then:
+              - esp32_ble_tracker.start_scan:
+                  continuous: true
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi RSSID"
+    update_interval: 60s
+
+text_sensor:
+  - platform: wifi_info
+    ssid:
+      name: "WiFi SSID"
+      entity_category: diagnostic
+    ip_address:
+      name: "IP Address"
+      entity_category: diagnostic
+    mac_address:
+      name: "MAC Address"
+      entity_category: diagnostic
+
+switch:
+  - platform: gpio
+    name: "HMI reset signal"
+    id: id_switch_reset_signal
+    pin: 
+      number: GPIO1
+      inverted: True
+      mode:
+        output: True
+        open_drain: True
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: "HMI IO0 signal"
+    id: id_switch_io_signal
+    pin: 
+      number: GPIO0
+      inverted: True
+      mode:
+        output: True
+        open_drain: True
+    restore_mode: RESTORE_DEFAULT_OFF
+
+button:
+  - platform: restart
+    name: "Restart Device (Safe Mode)"
+  - platform: safe_mode
+    name: "Restart Device (Safe Mode)"
+  - platform: template
+    name: "Put HMI in programming mode"
+    on_press:
+      - switch.turn_on: id_switch_io_signal
+      - switch.turn_on: id_switch_reset_signal
+      - delay: 200ms
+      - switch.turn_off: id_switch_reset_signal
+      - delay: 300ms
+      - switch.turn_off: id_switch_io_signal
+  - platform: template
+    name: "Reset HMI"
+    on_press:
+      - switch.turn_off: id_switch_io_signal
+      - switch.turn_on: id_switch_reset_signal
+      - delay: 200ms
+      - switch.turn_off: id_switch_reset_signal
+
+    

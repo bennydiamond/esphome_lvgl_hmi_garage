@@ -1,0 +1,63 @@
+obj: # Digital Clock and date widget
+  align: TOP_RIGHT
+  width: 202
+  height: 98
+  x: -114
+  y: 70
+  pad_all: 0
+  bg_opa: TRANSP
+  border_opa: TRANSP
+  widgets:
+    # TIME
+    - label:
+        id: id_lv_lab_display_time
+        align: TOP_LEFT
+        x: 2
+        y: -9
+        width: 196
+        height: 60
+        text_font: lato_72
+        text_color: color_white
+        text_align: CENTER
+        text: ""
+
+    # DAY OF WEEK
+    - label:
+        id: id_lv_lab_display_day
+        align: BOTTOM_LEFT
+        x: 6
+        y: 0
+        width: 84
+        height: 20
+        text_font: lato_18
+        text_color: color_white
+        text_align: LEFT
+        text: ""
+
+    # DATE
+    - label:
+        id: id_lv_lab_display_date
+        x: 90
+        y: 0
+        width: 98
+        height: 20
+        align: BOTTOM_LEFT
+        text_font: lato_18
+        text_color: color_white
+        text_align: RIGHT
+        text: ""
+
+    - line:
+        points:
+          - 0, 0
+          - 196, 0
+        line_width: 2
+        line_color: color_white
+        line_rounded: true
+    - line:
+        points:
+          - 0, 75
+          - 196, 75
+        line_width: 2
+        line_color: color_white
+        line_rounded: true

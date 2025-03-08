@@ -1,0 +1,28 @@
+esphome:
+  name: sdl-hmi-garage
+  min_version: 2025.02.0
+  on_boot:
+    - script.execute: time_update
+
+host:
+  mac_address: "de:ad:be:ef:fe:ed"
+
+logger:
+  level: DEBUG
+
+text_sensor:
+  - platform: template
+    id: sntp_time
+
+display:
+  - platform: sdl
+    #show_test_card: true
+    dimensions:
+      width: 800
+      height: 480
+    auto_clear_enabled: false 
+
+touchscreen:
+  platform: sdl
+
+script: !include display/simulator_script.yaml

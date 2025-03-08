@@ -1,0 +1,4 @@
+button:
+  - platform: restart
+    name: "Device Restart"
+    id: id_button_device_restart

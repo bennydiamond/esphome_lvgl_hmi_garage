@@ -1,0 +1,353 @@
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 8MB
+  framework:
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
+      CONFIG_ESPTOOLPY_FLASHSIZE_8MB: "y"
+      CONFIG_FREERTOS_HZ: "1000"
+      CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240: y
+      CONFIG_ESPTOOLPY_FLASHMODE_QIO: y
+      CONFIG_ESPTOOLPY_FLASHFREQ_120M: y
+      CONFIG_SPIRAM_MODE_OCT: y
+      CONFIG_IDF_EXPERIMENTAL_FEATURES: y
+      CONFIG_SPIRAM_SPEED_120M: y
+      CONFIG_SPIRAM_FETCH_INSTRUCTIONS: y
+      CONFIG_SPIRAM_RODATA: y
+      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: y
+      #CONFIG_COMPILER_OPTIMIZATION_SIZE: y
+      CONFIG_COMPILER_OPTIMIZATION_PERF: y
+      #CONFIG_COMPILER_OPTIMIZATION_DEBUG: y
+
+esphome:
+  name: ${dname}
+  min_version: 2025.02.0
+  platformio_options:
+    build_unflags: -Werror=all
+    board_build.flash_mode: dio
+    build_flags: "-DBOARD_HAS_PSRAM" # Added
+    board_build.esp-idf.memory_type: qio_opi #Added
+    board_upload.maximum_ram_size: 524288 #Added
+    board_build.flash_size: 8MB #Added
+    # No second OTA partition. Must be flashed through serial (hint: ser2net)
+#    board_build.partitions: "../../../hmi-garage/custom_partition_no_ota.csv"
+
+logger:
+  level: DEBUG
+  hardware_uart: UART0
+  #baud_rate: 0
+  logs: 
+    safe_mode: INFO
+    debug: INFO
+    main: INFO
+    esp-idf: WARN
+    esp32.preferences: INFO
+    wifi: WARN
+    api: WARN
+    sntp: WARN
+    i2c: WARN
+    i2c.idf: WARN
+    ch422g: WARN
+    touchscreen: WARN
+    gt911.touchscreen: WARN
+    switch: WARN
+    sensor: WARN
+    binary_sensor: WARN
+    text_sensor: WARN
+    light: WARN
+    select: WARN
+    homeassistant.sensor: WARN
+    homeassistant.binary_sensor: WARN
+    homeassistant.text_sensor: WARN
+    template.switch: WARN
+
+debug:
+  update_interval: 10s
+
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  use_address: 192.168.1.139
+  fast_connect: True
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+#  ap:
+#    ssid: "HMI Garage Fallback hotspot"
+#    password: !secret fallback_hotspot_password
+
+ota:
+  platform: esphome
+
+#web_server:
+#  port: 80
+#  version: 3
+#  include_internal: True
+
+time:
+  - platform: sntp
+    id: sntp_time
+    timezone: America/Toronto
+    servers:
+     - 192.168.0.3
+     - 192.168.0.250
+    on_time_sync:
+      - script.execute: time_update
+    on_time:
+      - minutes: '*'
+        seconds: 0
+        then:
+          - script.execute: time_update
+
+# Video memory
+psram:
+  mode: octal
+  speed: 120MHz
+
+ch422g:
+  - id: io_ex
+
+# i2c connections
+i2c:
+  sda: 8
+  scl: 9
+  frequency: 400kHz
+  scan: true
+  id: bus_a
+
+button:
+  - platform: safe_mode
+    name: "Device Restart (Safe mode)"
+    id: id_button_device_restart_safe_mode
+    icon: mdi:restart-alert
+
+text_sensor:
+  - platform: wifi_info
+    ssid:
+      name: "WiFi SSID"
+      id: id_wifi_ssid
+      entity_category: diagnostic
+      #web_server:
+        #sorting_weight: 201
+      on_value:
+        then:
+          - lvgl.label.update:
+              id: id_lv_lab_debug_network_info_ssid
+              text: !lambda |-
+                return ("SSID: " + x).c_str();
+    ip_address:
+      name: "IP Address"
+      id: id_ip_address
+      entity_category: diagnostic
+      #web_server:
+        #sorting_weight: 203
+      on_value:
+        then:
+          - lvgl.label.update:
+              id: id_lv_lab_debug_network_info_ip
+              text: !lambda |-
+                return ("IP Address: " + x).c_str();
+    mac_address:
+      name: "MAC Address"
+      id: id_mac_address
+      entity_category: diagnostic
+      #web_server:
+        #sorting_weight: 204
+
+  - platform: debug
+    device:
+      name: "Device Info"
+      id: id_sensor_debug_device_info
+      internal: True
+      filters:
+        - lambda: |-
+            std::replace(x.begin(), x.end(), '|', '\n');
+            return x;
+        - prepend: "ESPHome version: "
+      on_value:
+        then:
+          - lvgl.label.update:
+              id: id_lv_lab_debug_device_info
+              text: !lambda "return x.c_str();"
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi RSSI"
+    id: id_wifi_rssi
+    update_interval: 30s
+    entity_category: diagnostic
+    #web_server:
+      #sorting_weight: 202
+    on_value: 
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_wifi_status
+            text_color: !lambda |-
+              if (id(id_wifi_rssi).state < 0) {
+              return lv_color_hex(0x00FF00);
+              }
+              return lv_color_hex(0x333333);
+            text: !lambda |-
+              if (id(id_wifi_rssi).state <= -80) {
+              return "${wifi_25}";
+              } else if (id(id_wifi_rssi).state > -80 && id(id_wifi_rssi).state <= -70) {
+              return "${wifi_50}";
+              } else if (id(id_wifi_rssi).state > -70 && id(id_wifi_rssi).state <= -60) {
+              return "${wifi_75}";
+              } else if (id(id_wifi_rssi).state > -60) {
+              return "${wifi_100}";
+              }
+              return "${wifi_100}";
+        - lvgl.label.update:
+              id: id_lv_lab_debug_network_info_rssi
+              text:
+                format: "RSSI: %.1fdBm"
+                args: [x]
+  - platform: debug
+    free:
+      name: "Heap Free"
+      id: id_sensor_debug_heap_free
+      internal: True
+      on_value: 
+        then:
+          - lvgl.label.update:
+              id: id_lv_lab_debug_heap_free
+              text:
+                format: "Heap free: %.3fkB"
+                args: [x / 1024]
+#    block:
+#      name: "Heap Max Block"
+#      id: id_sensor_debug_heap_max_block
+#      internal: True
+    loop_time:
+      name: "Loop Time"
+      id: id_sensor_debug_loop_time
+      internal: True
+      on_value: 
+        then:
+          - lvgl.label.update:
+              id: id_lv_lab_debug_loop_time
+              text:
+                format: "Loop time: %.0fms"
+                args: [x]
+    psram:
+      name: "Free PSRAM"
+      id: id_sensor_debug_free_psram
+      internal: True
+      on_value: 
+        then:
+          - lvgl.label.update:
+              id: id_lv_lab_debug_psram_free
+              text:
+                format: "PSRAM free: %.3fkB"
+                args: [x / 1024]
+
+# Backlight
+# GPIO16 is mapped to RS-485 output port, pin A
+# This GPIO should be wired to the solderpad on the right of the ESP32-S3 module, next to its antenna, below 2 * 0603 ceramic capacitors
+# https://community.home-assistant.io/t/esp32-s3-7inch-capacitive-touch-display-adjust-brightness/771030
+output:
+  - platform: ledc
+    pin: GPIO16
+    id: id_output_backlight_brightness
+    min_power: 0.08
+
+light:
+  - platform: monochromatic
+    id: id_light_backlight_brightness
+    output: id_output_backlight_brightness
+    name: "Backlight Brightness"
+    restore_mode: ALWAYS_ON
+    on_state:
+      then:
+        - lvgl.arc.update:
+            id: id_lv_arc_backlight_brigthness
+            value: !lambda "return id(id_light_backlight_brightness).remote_values.get_brightness() * 100.0;"
+        - lvgl.label.update:
+            id: id_lv_lab_backlight_brightness
+            text:
+                format: "%u%%"
+                args: [(uint8_t)(id(id_light_backlight_brightness).remote_values.get_brightness() * 100)]
+
+switch:
+  - platform: gpio
+    name: "Backlight Switch"
+    id: display_backlight
+    pin: 
+      ch422g: io_ex
+      number: 2
+    restore_mode: ALWAYS_ON
+    internal: False
+
+# Touch screen
+touchscreen:
+  platform: gt911
+  address: 0x5D
+  id: my_touchscreen
+  update_interval: 16ms
+  interrupt_pin: 4
+  reset_pin:
+    ch422g: io_ex
+    number: 1
+  on_release:
+    - if:
+        condition: lvgl.is_paused
+        then:
+          - logger.log: "LVGL resuming"
+          - lvgl.resume:
+          - lvgl.widget.redraw:
+          - switch.turn_on: display_backlight
+
+# Display
+display:
+  - platform: rpi_dpi_rgb
+    id: device_display
+    update_interval: never
+    auto_clear_enabled: false
+    color_order: RGB
+    pclk_frequency: 16MHz
+    dimensions:
+      width: 800
+      height: 480
+    reset_pin:
+      ch422g: io_ex
+      number: 3
+    de_pin:
+      number: 5
+    hsync_pin:
+      number: 46
+      ignore_strapping_warning: true
+    vsync_pin:
+      number: 3
+      ignore_strapping_warning: true
+    pclk_pin: 7
+    pclk_inverted: true
+    hsync_back_porch: 8
+    hsync_front_porch: 8
+    hsync_pulse_width: 4
+    vsync_back_porch: 16
+    vsync_front_porch: 16
+    vsync_pulse_width: 4
+    data_pins:
+      red:
+        - 1         #r3.
+        - 2         #r4.
+        - 42        #r5
+        - 41        #r6
+        - 40        #r7
+      blue:
+        - 14        #b3
+        - 38        #b4
+        - 18        #b5
+        - 17        #b6
+        - 10        #b7
+      green:
+        - 39        #g2
+        - 0         #g3.
+        - 45        #g4
+        - 48        #g5
+        - 47        #g6
+        - 21        #g7
+
+script: !include display/script.yaml

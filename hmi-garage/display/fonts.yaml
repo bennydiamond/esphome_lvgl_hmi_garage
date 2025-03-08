@@ -1,0 +1,280 @@
+#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#  id: lato_16
+#  size: 16
+#  bpp: 4
+
+- file: "hmi-garage/fonts/Lato-Regular.ttf"
+  id: lato_18
+  size: 18
+  bpp: 4
+  extras:
+    - file: "hmi-garage/fonts/Lato-Regular.ttf"
+      glyphs: [
+        à,
+        é,
+        è,
+        û,
+        É,
+        Ç,
+        ñ
+      ]
+
+#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#  id: lato_20
+#  size: 20
+#  bpp: 4
+
+- file: "hmi-garage/fonts/Lato-Regular.ttf"
+  id: lato_24
+  size: 24
+  bpp: 4
+  extras:
+    - file: "hmi-garage/fonts/Lato-Regular.ttf"
+      glyphs: [
+        à,
+        é,
+        è,
+        û,
+        É,
+        Ç,
+        ñ
+      ]
+
+- file: "hmi-garage/fonts/Lato-Regular.ttf"
+  id: lato_30
+  size: 30
+  bpp: 4
+
+#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#  id: lato_36
+#  size: 36
+#  bpp: 4
+
+#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#  id: lato_42
+#  size: 42
+#  bpp: 4
+
+#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#  id: lato_48
+#  size: 48
+#  bpp: 4
+
+#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#  id: lato_60
+#  size: 60
+#  bpp: 4
+
+- file: "hmi-garage/fonts/Lato-Regular.ttf"
+  id: lato_72
+  size: 72
+  bpp: 4
+
+#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#  id: lato_84
+#  size: 84
+#  bpp: 4
+
+- file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
+  id: mdi_icons_32
+  size: 32
+  bpp: 4
+  glyphs: [
+    "\U000F07D0", # mdi-home-assistant
+    "\U000F0493", # mdi-cog
+    "\U000F092F", # mdi-wifi-strength-outline
+    "\U000F091F", # mdi-wifi-strength-1
+    "\U000F0922", # mdi-wifi-strength-2
+    "\U000F0925", # mdi-wifi-strength-3
+    "\U000F0928", # mdi-wifi-strength-4
+    "\U000F0438", # mdi-radiator
+    "\U000F0D91", # mdi-motion-sensor
+    "\U000F081C", # mdi-door-open
+    "\U000F1820", # mdi-door-sliding-open
+#    "\U000F179B", # mdi-light-recessed
+#    "\U000F0769", # mdi-ceiling-light
+#    "\U000F0335", # mdi-lightbulb
+    "\U000F0E66", # mdi-sprout
+    "\U000F1481", # mdi-watering-can
+    "\U000F050F", # mdi-thermometer
+    "\U000F058E", # mdi-water-percent
+    "\U000F059D", # mdi-weather-windy
+    "\U000F0C02", # mdi-alpha-h-circle-outline
+    "\U000F0457", # mdi-repeat-off
+    "\U000F0458", # mdi-repeat-once
+    "\U000F0456", # mdi-repeat
+    "\U000F049E", # mdi-shuffle-disabled
+    "\U000F049D", # mdi-shuffle
+  ]
+
+- file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
+  id: mdi_icons_48
+  size: 48
+  bpp: 4
+  glyphs: [
+#    "\U000F07D0", # mdi-home-assistant
+#    "\U000F0493", # mdi-cog
+#    "\U000F092F", # mdi-wifi-strength-outline
+#    "\U000F091F", # mdi-wifi-strength-1
+#    "\U000F0922", # mdi-wifi-strength-2
+#    "\U000F0925", # mdi-wifi-strength-3
+#    "\U000F0928", # mdi-wifi-strength-4
+#    "\U000F0438", # mdi-radiator
+#    "\U000F0D91", # mdi-motion-sensor
+#    "\U000F081C", # mdi-door-open
+#    "\U000F1820", # mdi-door-sliding-open
+    "\U000F179B", # mdi-light-recessed
+    "\U000F0769", # mdi-ceiling-light
+    "\U000F0335", # mdi-lightbulb
+#    "\U000F0E66", # mdi-sprout
+#    "\U000F1481", # mdi-watering-can
+#    "\U000F050F", # mdi-thermometer
+#    "\U000F058E", # mdi-water-percent
+    "\U000F1A60", # mdi-post-lamp
+    "\U000F075A", # mdi-music
+    "\U000F057E", # mdi-volume-high
+    "\U000F0580", # mdi-volume-medium
+    "\U000F057F", # mdi-volume-low
+    "\U000F0581", # mdi-volume-off
+    "\U000F03E4", # mdi-pause
+    "\U000F040A", # mdi-play
+  ]
+
+- file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
+  id: mdi_icons_72
+  size: 72
+  bpp: 4
+  glyphs: [
+#    "\U000F07D0", # mdi-home-assistant
+#    "\U000F0493", # mdi-cog
+#    "\U000F092F", # mdi-wifi-strength-outline
+#    "\U000F091F", # mdi-wifi-strength-1
+#    "\U000F0922", # mdi-wifi-strength-2
+#    "\U000F0925", # mdi-wifi-strength-3
+#    "\U000F0928", # mdi-wifi-strength-4
+#    "\U000F0438", # mdi-radiator
+#    "\U000F0D91", # mdi-motion-sensor
+#    "\U000F081C", # mdi-door-open
+#    "\U000F1820", # mdi-door-sliding-open
+#    "\U000F179B", # mdi-light-recessed
+#    "\U000F0769", # mdi-ceiling-light
+    "\U000F0335", # mdi-lightbulb
+#    "\U000F0E66", # mdi-sprout
+#    "\U000F1481", # mdi-watering-can
+#    "\U000F050F", # mdi-thermometer
+#    "\U000F058E", # mdi-water-percent
+    "\U000F04AD", # mdi-skip-next
+    "\U000F04AE", # mdi-skip-previous
+  ]
+#- file: "hmi-garage/fonts/Icons.ttf"
+#  id: icons_18
+#  size: 18
+#  bpp: 4
+#  glyphs: [
+#    "\U0000e901", # Thermostat
+#    "\U0000e908", # heating
+#    "\U0000e90c", # color_temp
+#    "\U0000e90d", # ventilation
+#    "\U0000e912", # humidity
+#    "\U0000e915", # temperature
+#    "\U0000e917", # placeholder
+#    ]
+
+#- file: "hmi-garage/fonts/Icons.ttf"
+#  id: icons_24
+#  size: 24
+#  bpp: 4
+#  glyphs: [
+#    "\U0000e901", # Thermostat
+#    "\U0000e908", # heating
+#    "\U0000e90c", # color_temp
+#    "\U0000e90d", # ventilation
+#    "\U0000e912", # humidity
+#    "\U0000e915", # temperature
+#    "\U0000e917", # placeholder
+#    ]
+
+#- file: "hmi-garage/fonts/Icons.ttf"
+#  id: icons_30
+#  size: 30
+#  bpp: 4
+#  glyphs: [
+#    "\U0000e901", # Thermostat
+#    "\U0000e908", # heating
+#    "\U0000e90c", # color_temp
+#    "\U0000e90d", # ventilation
+#    "\U0000e912", # humidity
+#    "\U0000e915", # temperature
+#    "\U0000e917", # placeholder
+#    ]
+    
+- file: "hmi-garage/fonts/Icons.ttf"
+  id: icons_36
+  size: 36
+  bpp: 4
+  glyphs: [
+#    "\U0000e901", # Thermostat
+#    "\U0000e908", # heating
+    "\U0000e90c", # color_temp
+#    "\U0000e90d", # ventilation
+    "\U0000e912", # humidity
+    "\U0000e915", # temperature
+    "\U0000e916", # illumitation
+#    "\U0000e917", # placeholder
+    ]
+
+- file: "hmi-garage/fonts/Icons.ttf"
+  id: icons_48
+  size: 48
+  bpp: 4
+  glyphs: [
+#    "\U0000e901", # Thermostat
+#    "\U0000e908", # heating
+#    "\U0000e90c", # color_temp
+#    "\U0000e90d", # ventilation
+#    "\U0000e912", # humidity
+    "\U0000e915", # temperature
+#    "\U0000e917", # placeholder
+    ]
+
+#- file: "hmi-garage/fonts/Icons.ttf"
+#  id: icons_60
+#  size: 60
+#  bpp: 4
+#  glyphs: [
+#    "\U0000e901", # Thermostat
+#    "\U0000e908", # heating
+#    "\U0000e90c", # color_temp
+#    "\U0000e90d", # ventilation
+#    "\U0000e912", # humidity
+#    "\U0000e915", # temperature
+#    "\U0000e917", # placeholder
+#    ]
+
+#- file: "hmi-garage/fonts/Icons.ttf"
+#  id: icons_72
+#  size: 72
+#  bpp: 4
+#  glyphs: [
+#    "\U0000e901", # Thermostat
+#    "\U0000e908", # heating
+#    "\U0000e90c", # color_temp
+#    "\U0000e90d", # ventilation
+#    "\U0000e912", # humidity
+#    "\U0000e915", # temperature
+#    "\U0000e917", # placeholder
+#    ]
+
+#- file: "hmi-garage/fonts/Icons.ttf"
+#  id: icons_84
+#  size: 84
+#  bpp: 4
+#  glyphs: [
+#    "\U0000e901", # Thermostat
+#    "\U0000e908", # heating
+#    "\U0000e90c", # color_temp
+#    "\U0000e90d", # ventilation
+#    "\U0000e912", # humidity
+#    "\U0000e915", # temperature
+#    "\U0000e917", # placeholder
+#    ]

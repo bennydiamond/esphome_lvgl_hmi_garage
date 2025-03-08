@@ -1,0 +1,82 @@
+# Based of https://github.com/alaltitov/display/tree/main
+
+# ESP32-S3-Touch-LCD-7
+substitutions: !include hmi-garage/substitutions.yaml
+
+packages:
+  hardware: !include hmi-garage/sdl.yaml
+  #hardware: !include hmi-garage/hardware.yaml
+  button: !include hmi-garage/components/button.yaml
+  globals: !include hmi-garage/components/globals.yaml
+  interval: !include hmi-garage/components/interval.yaml
+  text_sensor: !include hmi-garage/components/text_sensor.yaml
+  sensor: !include hmi-garage/components/sensor.yaml
+  binary_sensor: !include hmi-garage/components/binary_sensor.yaml
+  switch: !include hmi-garage/components/switch.yaml
+  online_image: !include hmi-garage/components/online_image.yaml
+  select: !include hmi-garage/components/select.yaml
+
+api:
+
+http_request:
+
+external_components:
+  - source: github://pr#8040
+    refresh: 30s
+    components: [http_request]
+
+
+# Backlight
+# Not needed for unit in the garage
+#output:
+#  - platform: ledc
+#    pin: GPIO16
+#    id: backlight
+
+#light:
+#  - platform: monochromatic
+#    output: backlight
+#    name: ${uname} backlight
+#    restore_mode: ALWAYS_ON
+
+font: !include hmi-garage/display/fonts.yaml
+image: !include hmi-garage/display/images.yaml
+color: !include hmi-garage/display/colors.yaml
+
+lvgl:
+  gradients: !include hmi-garage/display/gradients.yaml
+  pages:
+    - <<: !include hmi-garage/display/lvgl/page_home/page_home.yaml
+    - <<: !include hmi-garage/display/lvgl/sub_pages/page_settings.yaml
+
+    # PAGE GARAGE RDC LIGHTS CONTROL
+    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_garage_rdc.yaml
+
+    # PAGE GARAGE SS LIGHTS CONTROL
+    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_garage_ss.yaml
+
+    # PAGE CORNICHE GARAGE LIGHTS CONTROL
+    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_exterieur_garage.yaml
+
+    # PAGE CORNICHE COTE LIGHTS CONTROL
+    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_exterieur_cote.yaml
+
+    # PAGE LAMPADAIRE_AVANT
+    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_lampadaire_avant.yaml
+    
+    # PAGE MUSIC
+    - <<: !include hmi-garage/display/lvgl/sub_pages/page_music.yaml
+            
+
+  top_layer: # Top Screen Status bar. Visible on all pages, except Boot Screen
+    widgets:
+      - <<: !include hmi-garage/display/lvgl/top_layer/media_control_side_widget.yaml
+      # Top notification area delimiter line
+      - <<: !include hmi-garage/display/lvgl/top_layer/notification_area.yaml
+
+
+button:
+  - platform: restart
+    name: "Device Restart (fake safe mode)"
+    id: id_button_device_restart_safe_mode
+    internal: True

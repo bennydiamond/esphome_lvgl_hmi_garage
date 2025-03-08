@@ -1,0 +1,13 @@
+select:
+  - platform: lvgl
+    id: id_select_drop_lamp_effects
+    internal: True
+    widget: id_lv_drop_lamp_effects
+  - platform: lvgl
+    id: id_select_drop_extc_effects
+    internal: True
+    widget: id_lv_drop_extc_effects
+  - platform: lvgl
+    id: id_select_drop_extg_effects
+    internal: True
+    widget: id_lv_drop_extg_effects

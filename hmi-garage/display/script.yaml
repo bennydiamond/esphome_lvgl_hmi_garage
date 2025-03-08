@@ -1,0 +1,27 @@
+- id: time_update
+  then:
+    - lvgl.label.update:
+        id: id_lv_lab_display_time
+        text: !lambda |-
+          static char time_buf[16];
+          auto now = id(sntp_time).now();            
+          snprintf(time_buf, sizeof(time_buf), "%02d:%02d", now.hour, now.minute);
+          return time_buf;
+
+    - lvgl.label.update:
+        id: id_lv_lab_display_day
+        text: !lambda |-
+          static const char * const days_fr[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+          static char date_buf[32];
+          auto now = id(sntp_time).now();
+          snprintf(date_buf, sizeof(date_buf), "%s", days_fr[now.day_of_week - 1]);
+          return date_buf;
+
+    - lvgl.label.update:
+        id: id_lv_lab_display_date
+        text: !lambda |-
+          static const char * const mon_fr[] = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
+          static char month_buf[32];
+          auto now = id(sntp_time).now();
+          snprintf(month_buf, sizeof(month_buf), "%02d %s", now.day_of_month, mon_fr[now.month - 1]);
+          return month_buf;

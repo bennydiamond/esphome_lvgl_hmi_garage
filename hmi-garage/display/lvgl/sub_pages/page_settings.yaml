@@ -1,0 +1,293 @@
+id: page_settings
+skip: True
+bg_color: color_black
+widgets:
+  - obj:
+      id: id_lvgl_obj_backlight_brightness
+      align: TOP_LEFT
+      x: 90
+      y: 47
+      height: 248
+      width: 210
+      bg_opa: TRANSP
+      border_opa: TRANSP
+      shadow_opa: TRANSP
+      pad_all: 0
+      widgets:
+        - label:
+            align: TOP_MID
+            x: 0
+            y: 0
+            height: 22
+            width: 100
+            bg_opa: TRANSP
+            long_mode: WRAP
+            text_font: lato_18
+            text_color: color_white
+            text_align: CENTER
+            text_decor: UNDERLINE
+            text: "Luminosité"
+
+        - arc:
+            id: id_lv_arc_backlight_brigthness
+            align: TOP_MID
+            x: 0
+            y: 43
+            height: 200
+            width: 200
+            min_value: 1
+            max_value: 100
+            adjustable: True
+            arc_width: 20
+            indicator:
+              arc_width: 20
+            #knob:
+            #  arc_width: 10
+            widgets:
+              - label:
+                  id: id_lv_lab_backlight_brightness
+                  align: BOTTOM_MID
+                  y: -100
+                  bg_opa: TRANSP
+                  text_font: lato_30
+                  text_color: color_white
+                  text_align: CENTER
+                  text: ""
+              - label:
+                  align: BOTTOM_MID
+                  y: -64
+                  text_font: icons_36
+                  text_color: color_white
+                  text: "${illumination}"
+              # Comment when using SDL simulator
+#            on_change:
+#              then:
+#                - light.turn_on:
+#                    id: id_light_backlight_brightness
+#                    brightness: !lambda return x / 100.0;
+
+  - button:
+      align: TOP_LEFT
+      x: 30
+      y: 330
+      widgets:
+        - label:
+            align: CENTER
+            text_font: lato_18
+            text_align: CENTER
+           # text_color: color_dark_gray
+            text: "Redémarrer en\nMode sans échec"
+      on_press:
+        then:
+          - button.press: id_button_device_restart_safe_mode
+
+  - button:
+      align: TOP_LEFT
+      x: 220
+      y: 330
+      widgets:
+        - label:
+            align: CENTER
+            text_font: lato_18
+            text_align: CENTER
+           # text_color: color_dark_gray
+            text: "Rafraichir\nl'écran"
+      on_release:
+        then:
+          - switch.turn_on: id_switch_lcd_antiburn
+
+
+  - label:
+      align: TOP_RIGHT
+      x: -110
+      y: 50
+      height: 22
+      width: 300
+      bg_opa: TRANSP
+      long_mode: WRAP
+      text_font: lato_18
+      text_color: color_white
+      text_align: CENTER
+      text_decor: UNDERLINE
+      text: "Device Info"
+  - obj:
+      align: TOP_RIGHT
+      x: -110
+      y: 72
+      height: 198
+      width: 300
+      pad_top: 0
+      bg_opa: TRANSP
+      scrollable: True
+      scrollbar:
+        opa: 100%
+      widgets:
+        - label:
+            id: id_lv_lab_debug_device_info
+            width: 256
+            bg_opa: TRANSP
+            long_mode: WRAP
+            text_font: lato_18
+            text_color: color_white
+            text_align: LEFT
+            text: ""
+
+  - label:
+      align: TOP_RIGHT
+      x: -110
+      y: 276
+      height: 22
+      width: 300
+      bg_opa: TRANSP
+      long_mode: WRAP
+      text_font: lato_18
+      text_color: color_white
+      text_align: CENTER
+      text_decor: UNDERLINE
+      text: "Network Info"
+  - obj:
+      align: TOP_RIGHT
+      x: -110
+      y: 298
+      height: 75
+      width: 300
+      pad_top: 0
+      bg_opa: TRANSP
+      scrollable: False
+      scrollbar:
+        opa: 100%
+      widgets:
+        - label:
+            id: id_lv_lab_debug_network_info_ssid
+            y: 0
+            height: 25
+            width: 256
+            bg_opa: TRANSP
+            text_font: lato_18
+            text_color: color_white
+            text_align: LEFT
+            long_mode: SCROLL
+            text: ""
+        - label:
+            y: 25
+            id: id_lv_lab_debug_network_info_rssi
+            height: 25
+            width: 156
+            bg_opa: TRANSP
+            text_font: lato_18
+            text_color: color_white
+            text_align: LEFT
+            long_mode: SCROLL
+            text: ""
+        - label:
+            y: 50
+            id: id_lv_lab_debug_network_info_ip
+            height: 25
+            width: 256
+            bg_opa: TRANSP
+            text_font: lato_18
+            text_color: color_white
+            text_align: LEFT
+            long_mode: SCROLL
+            text: ""
+
+  - label:
+      align: TOP_RIGHT
+      x: -110
+      y: 379
+      height: 22
+      width: 300
+      bg_opa: TRANSP
+      long_mode: WRAP
+      text_font: lato_18
+      text_color: color_white
+      text_align: CENTER
+      text_decor: UNDERLINE
+      text: "Memory Info"
+  - obj:
+      align: TOP_RIGHT
+      x: -110
+      y: 401
+      height: 75
+      width: 300
+      pad_top: 0
+      bg_opa: TRANSP
+      scrollable: False
+      scrollbar:
+        opa: 100%
+      widgets:
+        - label:
+            id: id_lv_lab_debug_heap_free
+            y: 0
+            height: 25
+            width: 256
+            bg_opa: TRANSP
+            text_font: lato_18
+            text_color: color_white
+            text_align: LEFT
+            long_mode: SCROLL
+            text: ""
+        - label:
+            y: 25
+            id: id_lv_lab_debug_psram_free
+            height: 25
+            width: 256
+            bg_opa: TRANSP
+            text_font: lato_18
+            text_color: color_white
+            text_align: LEFT
+            long_mode: CLIP
+            text: ""
+        - label:
+            y: 50
+            id: id_lv_lab_debug_loop_time
+            height: 50
+            width: 256
+            bg_opa: TRANSP
+            text_font: lato_18
+            text_color: color_white
+            text_align: LEFT
+            long_mode: SCROLL
+            text: ""
+
+  - button:
+      x: 0
+      y: 0
+      width: 80
+      height: 50
+      bg_opa: TRANSP
+      shadow_opa: TRANSP
+      radius: 0
+      align: BOTTOM_LEFT
+      widgets:
+        - label:
+            x: 5
+            y: -5
+            pad_all: 0
+            text_font: montserrat_22
+            text_color: color_dark_gray
+            text: "\uF015"
+      on_press:
+        then:
+          - lvgl.page.show: 
+              id: page_home
+              animation: OUT_RIGHT
+              time: 300ms
+#on_swipe_up:
+#  then:
+#    - lvgl.page.show: 
+#        id: page_home
+#        animation: FADE_IN
+#        time: 300ms
+#on_swipe_left:
+#  then:
+#    - lvgl.page.show: 
+#        id: page_home
+#        animation: MOVE_LEFT
+#        time: 300ms
+#on_swipe_right:
+#  then:
+#    - lvgl.page.show: 
+#        id: page_home
+#        animation: MOVE_RIGHT
+#        time: 300ms

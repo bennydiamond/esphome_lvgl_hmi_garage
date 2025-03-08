@@ -1,0 +1,16 @@
+id: page_light_garage_ss
+<<: !include  { file: ../templates/light_auto_sub_page_body.yaml, 
+                vars: { light_name: "Sous-Sol Garage", 
+                        light_ha_entity_id: '${garage_ss_lights_ha_entity_id}', 
+                        id_lvgl_switch_freeze_toggle: id_lvgl_switch_gs_freeze_toggle, 
+                        light_freeze_toggle_ha_entity_id: '${garage_ss_light_automation_freeze_toggle}', 
+                        id_lv_lab_freeze_end_time: id_lv_lab_gs_freeze_end_time, 
+                        id_lv_lab_freeze_initial_time: id_lv_lab_gs_freeze_init_time, 
+                        id_button_freeze_add_hour: '${garage_ss_light_automation_freeze_add_hour}', 
+                        id_button_freeze_add_minutes: '${garage_ss_light_automation_freeze_add_minutes}', 
+                        id_button_freeze_sub_hour: '${garage_ss_light_automation_freeze_sub_hour}', 
+                        id_button_freeze_sub_minutes: '${garage_ss_light_automation_freeze_sub_minutes}', 
+                        id_lvgl_widget_button: id_lv_but_page_gs, 
+                        id_lvgl_widget_icon: id_lv_lab_gs_ico 
+                      } 
+              }
