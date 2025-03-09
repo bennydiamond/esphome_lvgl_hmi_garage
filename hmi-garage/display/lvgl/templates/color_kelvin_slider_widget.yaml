@@ -30,13 +30,16 @@ widgets:
       widgets:
         - label:
             id: ${id_lv_lab_kelvin}
-            align: BOTTOM_MID
+            align: TOP_MID
             text_font: lato_18
             text_color: color_white
 
   - slider:
       id: ${id_lv_slid_kelvin}
-      bg_opa: TRANSP
+      bg_opa: COVER
+      bg_color: color_orange
+      bg_grad_color: color_white
+      bg_grad_dir: VER
       border_opa: 50%
       border_width: 1
       border_color: color_dark_gray
@@ -49,25 +52,29 @@ widgets:
       grid_cell_column_span: 1
       grid_cell_row_span: 1
       radius: 20
-      bg_color: color_gray
       align: CENTER
       width: 60
       height: 160
-      min_value: ${lampadaire_avant_min_kelvin}
-      max_value: ${lampadaire_avant_max_kelvin}
+      min_value: ${value_min_kelvin}
+      max_value: ${value_max_kelvin}
       indicator:
-        bg_color: color_orange
-        bg_grad_color: color_white
-        bg_grad_dir: VER
-        radius: 20
+        #radius: 20
+        opa: TRANSP
       knob:
-        bg_opa: TRANSP
+        bg_opa: COVER
+        radius: 3
+        pad_top: -20
+        pad_bottom: -23
+        #bg_color: color_white
+        shadow_opa: COVER
+        shadow_color: color_dark_gray
+        shadow_width: 20
       on_release:
           - homeassistant.action:
               action: light.turn_on
               data:
                 entity_id: ${light_ha_entity_id}
-                color_temp_kelvin: !lambda return -int(x) + (${lampadaire_avant_min_kelvin} + ${lampadaire_avant_max_kelvin});
+                color_temp_kelvin: !lambda return -int(x) + (${value_min_kelvin} + ${value_max_kelvin});
               
   - label:
       bg_opa: TRANSP
@@ -80,7 +87,7 @@ widgets:
       grid_cell_y_align: STRETCH
       grid_cell_column_span: 1
       grid_cell_row_span: 1
-      align: CENTER
+      align: BOTTOM_MID
       text_font: icons_36
       text_color: color_white
       text_align: CENTER

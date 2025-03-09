@@ -19,6 +19,8 @@ id: page_lamp
                         id_global_color32: id_global_lamp_color32, 
                         id_lv_slid_red: id_lv_lamp_slid_red, 
                         id_lv_slid_green: id_lv_lamp_slid_green, 
-                        id_lv_slid_blue: id_lv_lamp_slid_blue 
+                        id_lv_slid_blue: id_lv_lamp_slid_blue,
+                        value_min_kelvin: '${lampadaire_avant_min_kelvin}',
+                        value_max_kelvin: '${lampadaire_avant_max_kelvin}'
                       } 
               }

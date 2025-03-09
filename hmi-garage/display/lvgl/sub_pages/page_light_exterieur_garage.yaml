@@ -19,6 +19,8 @@ id: page_light_exterieur_garage
                         id_global_color32: id_global_extg_color32, 
                         id_lv_slid_red: id_lv_extg_slid_red, 
                         id_lv_slid_green: id_lv_extg_slid_green, 
-                        id_lv_slid_blue: id_lv_extg_slid_blue 
+                        id_lv_slid_blue: id_lv_extg_slid_blue,
+                        value_min_kelvin: '${exterieur_garage_min_kelvin}',
+                        value_max_kelvin: '${exterieur_garage_max_kelvin}'
                       } 
               }

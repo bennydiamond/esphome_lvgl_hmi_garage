@@ -180,8 +180,8 @@ widgets:
             <<: !include  { file: color_kelvin_slider_widget.yaml, 
                             vars: { id_lv_lab_kelvin: "${id_lv_lab_kelvin}", 
                                     id_lv_slid_kelvin: "${id_lv_slid_kelvin}", 
-                                    lampadaire_avant_min_kelvin: "${lampadaire_avant_min_kelvin}", 
-                                    lampadaire_avant_max_kelvin: "${lampadaire_avant_max_kelvin}", 
+                                    value_min_kelvin: "${value_min_kelvin}", 
+                                    value_max_kelvin: "${value_max_kelvin}", 
                                     light_ha_entity_id: "${light_ha_entity_id}" 
                                   } 
                           }
@@ -279,7 +279,7 @@ widgets:
                         action: light.turn_on
                         data:
                           entity_id: ${light_ha_entity_id}
-                          color_temp_kelvin: ${lampadaire_avant_min_kelvin}
+                          color_temp_kelvin: ${default_min_kelvin}
               - button:
                   grid_cell_column_pos: 1
                   grid_cell_row_pos: 0
@@ -297,7 +297,7 @@ widgets:
                         action: light.turn_on
                         data:
                           entity_id: ${light_ha_entity_id}
-                          color_temp_kelvin: ${lampadaire_avant_mid_kelvin}
+                          color_temp_kelvin: ${default_mid_kelvin}
               - button:
                   grid_cell_column_pos: 2
                   grid_cell_row_pos: 0

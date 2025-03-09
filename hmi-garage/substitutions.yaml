@@ -44,16 +44,21 @@ ha_instance_url: "http://192.168.0.250:8123"
 # token is valid for 10 years (2025-02-15)
 default_music_cover_png_url:  "http://192.168.0.250:8123/local/music_note_cover.png?authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI3MjQ0MTJiZDFmNDY0ODFlYmQ4OTcyZmJhZWIwMDJkZSIsImlhdCI6MTczOTcxNTY2OSwiZXhwIjoyMDU1MDc1NjY5fQ.buqT9ik8AmWTGIcsiS5o3DjkqUT8UGjxLJbAoQgHA30"
 
+
+default_min_kelvin: "2000"
+default_max_kelvin: "6535"
+default_mid_kelvin: (${default_min_kelvin} + ${default_max_kelvin}) / 2
+
 exterieur_cote_lights_ha_entity_id: "light.ampoule_exterieur_arriere_3" #"light.exterieur_cote"
-exterieur_cote_min_kelvin: "2000"
-exterieur_cote_max_kelvin: "6535"
+exterieur_cote_min_kelvin: "${default_min_kelvin}"
+exterieur_cote_max_kelvin: "${default_max_kelvin}"
 exterieur_garage_lights_ha_entity_id: "light.ampoule_exterieur_arriere_3" #"light.exterieur_garage"
-exterieur_garage_min_kelvin: "2000"
-exterieur_garage_max_kelvin: "6535"
+exterieur_garage_min_kelvin: "${default_min_kelvin}"
+exterieur_garage_max_kelvin: "${default_max_kelvin}"
 lampadaire_avant_lights_ha_entity_id: "light.ampoule_cagibi" #"light.lampadaire_avant"
-lampadaire_avant_min_kelvin: "2000"
+lampadaire_avant_min_kelvin: "${default_min_kelvin}"
 lampadaire_avant_mid_kelvin: "4000"
-lampadaire_avant_max_kelvin: "6535"
+lampadaire_avant_max_kelvin: "${default_max_kelvin}"
 media_player_garage_entity_id: "media_player.mass_garage"
 
 garage_rdc_lights_ha_entity_id: "light.switch_garage_ss_relay"
