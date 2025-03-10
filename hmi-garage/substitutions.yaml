@@ -47,7 +47,7 @@ default_music_cover_png_url:  "http://192.168.0.250:8123/local/music_note_cover.
 
 default_min_kelvin: "2000"
 default_max_kelvin: "6535"
-default_mid_kelvin: (${default_min_kelvin} + ${default_max_kelvin}) / 2
+default_mid_kelvin: "4000"
 
 exterieur_cote_lights_ha_entity_id: "light.ampoule_exterieur_arriere_3" #"light.exterieur_cote"
 exterieur_cote_min_kelvin: "${default_min_kelvin}"

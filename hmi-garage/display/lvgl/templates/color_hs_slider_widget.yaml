@@ -1,0 +1,114 @@
+bg_opa: TRANSP
+border_opa: TRANSP
+shadow_opa: TRANSP
+pad_all: 0
+pad_left: 24
+pad_right: 5
+grid_cell_column_pos: 2
+grid_cell_row_pos: 1
+grid_cell_x_align: STRETCH
+grid_cell_y_align: STRETCH
+grid_cell_row_span: 3
+align: CENTER
+hidden: True
+layout:
+  pad_column: 0
+  pad_row: 0
+  type: GRID
+  grid_columns: [100%]
+  grid_rows: [FR(5), FR(8), FR(28), FR(14), FR(8), FR(28), FR(9)]
+widgets:
+  - label:
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 1
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: STRETCH
+      text_color: color_white
+      text: "Teinte"
+      align: CENTER
+
+  - slider:
+      id: ${id_lv_slid_hue}
+      border_opa: 50%
+      border_width: 1
+      border_color: color_dark_gray
+      shadow_opa: TRANSP
+      pad_all: 0
+      pad_top: 2
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 2
+      grid_cell_x_align: STRETCH
+      grid_cell_y_align: STRETCH
+      grid_cell_column_span: 1
+      grid_cell_row_span: 1
+      radius: 20
+      bg_opa: COVER
+      bg_grad: id_gradient_hue
+      bg_grad_dir: HOR
+      min_value: 0
+      max_value: 360
+      indicator:
+        opa: TRANSP
+      knob:
+        bg_opa: COVER
+        radius: 4
+        pad_left: -30
+        pad_right: -30
+        shadow_opa: COVER
+        shadow_color: color_dark_gray
+        shadow_width: 22
+      on_release:
+        - homeassistant.action: 
+            action: script.esphome_huesaturation_light_set
+            data:
+              light_name: ${light_ha_entity_id}
+              hue: !lambda return x;
+              saturation: !lambda return id(${id_global_satu});
+
+
+  - label:
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 4
+      grid_cell_x_align: CENTER
+      grid_cell_y_align: STRETCH
+      text_color: color_white
+      text: "Saturation"
+      align: CENTER
+
+  - slider:
+      id: ${id_lv_slid_sat}
+      border_opa: 50%
+      border_width: 1
+      border_color: color_dark_gray
+      shadow_opa: TRANSP
+      pad_top: 2
+      pad_bottom: 30
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 5
+      grid_cell_x_align: STRETCH
+      grid_cell_y_align: STRETCH
+      grid_cell_column_span: 1
+      grid_cell_row_span: 1
+      radius: 20
+      bg_opa: COVER
+      bg_grad: id_gradient_saturation
+      bg_grad_dir: HOR
+      min_value: 0
+      max_value: 100
+      indicator:
+        opa: TRANSP
+      knob:
+        bg_opa: COVER
+        radius: 4
+        pad_left: -30
+        pad_right: -30
+        shadow_opa: COVER
+        shadow_color: color_dark_gray
+        shadow_width: 22
+      on_release:
+        - homeassistant.action: 
+            action: script.esphome_huesaturation_light_set
+            data:
+              light_name: ${light_ha_entity_id}
+              hue: !lambda return id(${id_global_hue});
+              saturation: !lambda return x;

@@ -1,6 +1,7 @@
 id: page_home
 skip: True
 bg_color: color_black
+scrollable: False
 widgets:
   - <<: !include datetime_widget.yaml
   - <<: !include weather_widget.yaml

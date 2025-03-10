@@ -16,10 +16,10 @@ id: page_light_exterieur_garage
                         id_lv_but_ctemp: id_lv_but_extg_ctemp, 
                         id_lv_but_crgb: id_lv_but_extg_crgb, 
                         id_global_kelvin: id_global_extg_kelvin, 
-                        id_global_color32: id_global_extg_color32, 
-                        id_lv_slid_red: id_lv_extg_slid_red, 
-                        id_lv_slid_green: id_lv_extg_slid_green, 
-                        id_lv_slid_blue: id_lv_extg_slid_blue,
+                        id_lv_slid_hue: id_lv_slid_extg_hue,
+                        id_lv_slid_sat: id_lv_slid_extg_satu,
+                        id_global_hue: id_global_extg_hue,
+                        id_global_satu: id_global_extg_satu,
                         value_min_kelvin: '${exterieur_garage_min_kelvin}',
                         value_max_kelvin: '${exterieur_garage_max_kelvin}'
                       } 

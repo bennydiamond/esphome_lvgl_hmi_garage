@@ -13,7 +13,7 @@ widgets:
         pad_column: 0
         pad_row: 0
         type: GRID
-        grid_columns: [FR(40), FR(5), FR(40), FR(15)]
+        grid_columns: [FR(40), FR(5), FR(42), FR(13)]
         grid_rows: [FR(8), FR(8), FR(48), FR(8), FR(30)]
       widgets:
         # MAIN LIGHT
@@ -168,12 +168,11 @@ widgets:
                   bg_grad_dir: VER
                   on_click:
                     - homeassistant.action:
-                        action: script.esphome_rgb_light_set
+                        action: script.esphome_huesaturation_light_set
                         data:
                           light_name: ${light_ha_entity_id}
-                          red: !lambda return id(${id_global_color32}).ch.red;
-                          green: !lambda return id(${id_global_color32}).ch.green;
-                          blue: !lambda return id(${id_global_color32}).ch.blue;
+                          hue: !lambda return id(${id_global_hue});
+                          saturation: !lambda return id(${id_global_satu});
 
         - obj:
             id: ${id_lv_obj_color_kelvin}
@@ -187,12 +186,21 @@ widgets:
                           }
         - obj:
             id: ${id_lv_obj_color_rgb}    
-            <<: !include  { file: color_rgb_slider_widget.yaml, 
-                            vars: { id_lv_slid_red: "${id_lv_slid_red}", 
-                                    id_lv_slid_green: "${id_lv_slid_green}", 
-                                    id_lv_slid_blue: "${id_lv_slid_blue}" 
-                                  }
+            <<: !include  { file: color_hs_slider_widget.yaml,
+                            vars: { id_lv_slid_hue: '${id_lv_slid_hue}',
+                                    id_lv_slid_sat: '${id_lv_slid_sat}',
+                                    id_global_hue: '${id_global_hue}',
+                                    id_global_satu: '${id_global_satu}'
+                                  } 
                           }
+# Not used anymore. Assume not up-to-date on layout. Kept as reference.
+#        - obj:
+#            <<: !include  { file: color_rgb_slider_widget.yaml, 
+#                            vars: { id_lv_slid_red: "${id_lv_slid_red}", 
+#                                    id_lv_slid_green: "${id_lv_slid_green}", 
+#                                    id_lv_slid_blue: "${id_lv_slid_blue}" 
+#                                  }
+#                          }
 
 
         - obj:
@@ -269,8 +277,8 @@ widgets:
                   grid_cell_y_align: CENTER
                   grid_cell_column_span: 1
                   grid_cell_row_span: 1
-                  height: 45
-                  width: 45
+                  height: 50
+                  width: 50
                   radius: 20
                   bg_color: color_warmest_white
                   border_color: color_warmest_white
@@ -287,8 +295,8 @@ widgets:
                   grid_cell_y_align: CENTER
                   grid_cell_column_span: 1
                   grid_cell_row_span: 1
-                  height: 45
-                  width: 45
+                  height: 50
+                  width: 50
                   radius: 20
                   bg_color: color_bright_white
                   border_color: color_bright_white
@@ -305,8 +313,8 @@ widgets:
                   grid_cell_y_align: CENTER
                   grid_cell_column_span: 1
                   grid_cell_row_span: 1
-                  height: 45
-                  width: 45
+                  height: 50
+                  width: 50
                   radius: 20
                   bg_color: color_bulb_blue
                   border_color: color_bulb_blue
@@ -325,8 +333,8 @@ widgets:
                   grid_cell_y_align: CENTER
                   grid_cell_column_span: 1
                   grid_cell_row_span: 1
-                  height: 45
-                  width: 45
+                  height: 50
+                  width: 50
                   radius: 20
                   bg_color: color_bulb_sunset
                   border_color: color_bulb_sunset

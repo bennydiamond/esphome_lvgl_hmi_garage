@@ -99,7 +99,7 @@ text_sensor:
               - binary_sensor.is_on: id_bin_extc_state
             then:
               - globals.set:
-                  id: id_global_extc_color32
+                  id: id_global_extc_color
                   value: !lambda |-
                     uint8_t rgb[3] = {UINT8_MAX, UINT8_MAX, UINT8_MAX};
                     char const * str = x.c_str();
@@ -122,25 +122,13 @@ text_sensor:
                       }
                     }
                     // Default 'light ON' color
-                    lv_color32_t color = LV_COLOR_MAKE32(0xff, 0xcc, 0x66);
+                    lv_color_t color = lv_color_make(0xff, 0xcc, 0x66);
                     if(i == 3)
                     {
-                      color = LV_COLOR_MAKE32(rgb[0], rgb[1], rgb[2]);
+                      color = lv_color_make(rgb[0], rgb[1], rgb[2]);
                     }
                
                     return color;
-              - globals.set:
-                  id: id_global_extc_color
-                  value: !lambda return lv_color_make(id(id_global_extc_color32).ch.red, id(id_global_extc_color32).ch.green, id(id_global_extc_color32).ch.blue);
-              - lvgl.slider.update:
-                  id: id_lv_extc_slid_red
-                  value:  !lambda return id(id_global_extc_color32).ch.red;
-              - lvgl.slider.update:
-                  id: id_lv_extc_slid_green
-                  value:  !lambda return id(id_global_extc_color32).ch.green;
-              - lvgl.slider.update:
-                  id: id_lv_extc_slid_blue
-                  value:  !lambda return id(id_global_extc_color32).ch.blue;
               - lvgl.button.update: 
                   id: id_lv_but_extc
                   shadow_spread: 3
@@ -159,6 +147,54 @@ text_sensor:
                   id: id_lv_lab_extc_icon
                   text_color: !lambda "return id(id_global_extc_color);"
   - platform: homeassistant
+    id: extc_hs
+    internal: true
+    entity_id: ${exterieur_cote_lights_ha_entity_id}
+    attribute: hs_color
+    on_value:
+      then:
+        - if:
+            condition:
+              - binary_sensor.is_on: id_bin_extc_state
+            then:
+              - globals.set:
+                  id: id_global_extc_hue
+                  value: !lambda |-
+                    double hs[2] = {0.0, 0.0};
+                    char const * str = x.c_str();
+                    size_t len = strlen(str);
+                    size_t i = 0;
+                    while (len && i < 2)
+                    {
+                      if(isdigit(*str))
+                      {
+                        char * end;
+                        hs[i] = strtof(str, &end);
+                        i++;
+                        len -= (end - str);
+                        str += (end - str);
+                      }
+                      else
+                      {
+                        str++;
+                        len--;
+                      }
+                    }
+                    if(i == 2)
+                    {
+                      id(id_global_extc_satu) = hs[1];
+                      return hs[0];
+                    }
+
+                    id(id_global_extc_satu) = 0.0;
+                    return 0.0;
+              - lvgl.slider.update:
+                  id: id_lv_slid_extc_hue
+                  value:  !lambda return id(id_global_extc_hue);
+              - lvgl.slider.update:
+                  id: id_lv_slid_extc_satu
+                  value:  !lambda return id(id_global_extc_satu);
+  - platform: homeassistant
     id: extg_rgb
     internal: true
     entity_id: ${exterieur_garage_lights_ha_entity_id}
@@ -170,7 +206,7 @@ text_sensor:
               - binary_sensor.is_on: id_bin_extg_state
             then:
               - globals.set:
-                  id: id_global_extg_color32
+                  id: id_global_extg_color
                   value: !lambda |-
                     uint8_t rgb[3] = {UINT8_MAX, UINT8_MAX, UINT8_MAX};
                     char const * str = x.c_str();
@@ -193,25 +229,13 @@ text_sensor:
                       }
                     }
                     // Default 'light ON' color
-                    lv_color32_t color = LV_COLOR_MAKE32(0xff, 0xcc, 0x66);
+                    lv_color_t color = lv_color_make(0xff, 0xcc, 0x66);
                     if(i == 3)
                     {
-                      color = LV_COLOR_MAKE32(rgb[0], rgb[1], rgb[2]);
+                      color = lv_color_make(rgb[0], rgb[1], rgb[2]);
                     }
                
                     return color;
-              - globals.set:
-                  id: id_global_extg_color
-                  value: !lambda return lv_color_make(id(id_global_extg_color32).ch.red, id(id_global_extg_color32).ch.green, id(id_global_extg_color32).ch.blue);
-              - lvgl.slider.update:
-                  id: id_lv_extg_slid_red
-                  value:  !lambda return id(id_global_extg_color32).ch.red;
-              - lvgl.slider.update:
-                  id: id_lv_extg_slid_green
-                  value:  !lambda return id(id_global_extg_color32).ch.green;
-              - lvgl.slider.update:
-                  id: id_lv_extg_slid_blue
-                  value:  !lambda return id(id_global_extg_color32).ch.blue;
               - lvgl.button.update: 
                   id: id_lv_but_extg
                   shadow_spread: 3
@@ -230,6 +254,54 @@ text_sensor:
                   id: id_lv_lab_extg_ico
                   text_color: !lambda "return id(id_global_extg_color);"
   - platform: homeassistant
+    id: extg_hs
+    internal: true
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    attribute: hs_color
+    on_value:
+      then:
+        - if:
+            condition:
+              - binary_sensor.is_on: id_bin_extg_state
+            then:
+              - globals.set:
+                  id: id_global_extg_hue
+                  value: !lambda |-
+                    double hs[2] = {0.0, 0.0};
+                    char const * str = x.c_str();
+                    size_t len = strlen(str);
+                    size_t i = 0;
+                    while (len && i < 2)
+                    {
+                      if(isdigit(*str))
+                      {
+                        char * end;
+                        hs[i] = strtof(str, &end);
+                        i++;
+                        len -= (end - str);
+                        str += (end - str);
+                      }
+                      else
+                      {
+                        str++;
+                        len--;
+                      }
+                    }
+                    if(i == 2)
+                    {
+                      id(id_global_extg_satu) = hs[1];
+                      return hs[0];
+                    }
+
+                    id(id_global_extg_satu) = 0.0;
+                    return 0.0;
+              - lvgl.slider.update:
+                  id: id_lv_slid_extg_hue
+                  value:  !lambda return id(id_global_extg_hue);
+              - lvgl.slider.update:
+                  id: id_lv_slid_extg_satu
+                  value:  !lambda return id(id_global_extg_satu);
+  - platform: homeassistant
     id: lamp_rgb
     internal: true
     entity_id: ${lampadaire_avant_lights_ha_entity_id}
@@ -241,7 +313,7 @@ text_sensor:
               - binary_sensor.is_on: id_bin_lamp_state
             then:
               - globals.set:
-                  id: id_global_lamp_color32
+                  id: id_global_lamp_color
                   value: !lambda |-
                     uint8_t rgb[3] = {UINT8_MAX, UINT8_MAX, UINT8_MAX};
                     char const * str = x.c_str();
@@ -264,25 +336,13 @@ text_sensor:
                       }
                     }
                     // Default 'light ON' color
-                    lv_color32_t color = LV_COLOR_MAKE32(0xff, 0xcc, 0x66);
+                    lv_color_t color = lv_color_make(0xff, 0xcc, 0x66);
                     if(i == 3)
                     {
-                      color = LV_COLOR_MAKE32(rgb[0], rgb[1], rgb[2]);
+                      color = lv_color_make(rgb[0], rgb[1], rgb[2]);
                     }
                
                     return color;
-              - globals.set:
-                  id: id_global_lamp_color
-                  value: !lambda return lv_color_make(id(id_global_lamp_color32).ch.red, id(id_global_lamp_color32).ch.green, id(id_global_lamp_color32).ch.blue);
-              - lvgl.slider.update:
-                  id: id_lv_lamp_slid_red
-                  value:  !lambda return id(id_global_lamp_color32).ch.red;
-              - lvgl.slider.update:
-                  id: id_lv_lamp_slid_green
-                  value:  !lambda return id(id_global_lamp_color32).ch.green;
-              - lvgl.slider.update:
-                  id: id_lv_lamp_slid_blue
-                  value:  !lambda return id(id_global_lamp_color32).ch.blue;
               - lvgl.button.update: 
                   id: id_lv_but_lamp
                   shadow_spread: 3
@@ -297,6 +357,54 @@ text_sensor:
               - lvgl.label.update:
                   id: id_lv_lab_lamp_ico
                   text_color: !lambda "return id(id_global_lamp_color);"
+  - platform: homeassistant
+    id: lamp_hs
+    internal: true
+    entity_id: ${lampadaire_avant_lights_ha_entity_id}
+    attribute: hs_color
+    on_value:
+      then:
+        - if:
+            condition:
+              - binary_sensor.is_on: id_bin_lamp_state
+            then:
+              - globals.set:
+                  id: id_global_lamp_hue
+                  value: !lambda |-
+                    double hs[2] = {0.0, 0.0};
+                    char const * str = x.c_str();
+                    size_t len = strlen(str);
+                    size_t i = 0;
+                    while (len && i < 2)
+                    {
+                      if(isdigit(*str))
+                      {
+                        char * end;
+                        hs[i] = strtof(str, &end);
+                        i++;
+                        len -= (end - str);
+                        str += (end - str);
+                      }
+                      else
+                      {
+                        str++;
+                        len--;
+                      }
+                    }
+                    if(i == 2)
+                    {
+                      id(id_global_lamp_satu) = hs[1];
+                      return hs[0];
+                    }
+
+                    id(id_global_lamp_satu) = 0.0;
+                    return 0.0;
+              - lvgl.slider.update:
+                  id: id_lv_slid_lamp_hue
+                  value:  !lambda return id(id_global_lamp_hue);
+              - lvgl.slider.update:
+                  id: id_lv_slid_lamp_satu
+                  value:  !lambda return id(id_global_lamp_satu);
   # Light Lampadaire Avant Color mode
   - platform: homeassistant
     id: id_lamp_color_mode

@@ -3,38 +3,55 @@ globals:
     type: bool
     restore_value: no
     initial_value: "false"
+
   - id: id_global_lamp_color
     type: lv_color_t
     restore_value: no
     initial_value: "lv_color_make(0xff, 0xcc, 0x66)"
-  - id: id_global_lamp_color32
-    type: lv_color32_t
+  - id: id_global_lamp_hue
+    type: float
+    initial_value: "120"
     restore_value: no
-    initial_value: "(lv_color32_t)LV_COLOR_MAKE32(0xff, 0xcc, 0x66)"
+  - id: id_global_lamp_satu
+    type: float
+    restore_value: no
+    initial_value: "100"
   - id: id_global_lamp_kelvin
     type: int
     restore_value: no
     initial_value: "2000"
+
+
   - id: id_global_extc_color
     type: lv_color_t
     restore_value: no
     initial_value: "lv_color_make(0xff, 0xcc, 0x66)"
-  - id: id_global_extc_color32
-    type: lv_color32_t
+  - id: id_global_extc_hue
+    type: float
+    initial_value: "120"
     restore_value: no
-    initial_value: "(lv_color32_t)LV_COLOR_MAKE32(0xff, 0xcc, 0x66)"
+  - id: id_global_extc_satu
+    type: float
+    restore_value: no
+    initial_value: "100"
   - id: id_global_extc_kelvin
     type: int
     restore_value: no
     initial_value: "2000"
+
+
   - id: id_global_extg_color
     type: lv_color_t
     restore_value: no
     initial_value: "lv_color_make(0xff, 0xcc, 0x66)"
-  - id: id_global_extg_color32
-    type: lv_color32_t
+  - id: id_global_extg_hue
+    type: float
     restore_value: no
-    initial_value: "(lv_color32_t)LV_COLOR_MAKE32(0xff, 0xcc, 0x66)"
+    initial_value: "120"
+  - id: id_global_extg_satu
+    type: float
+    restore_value: no
+    initial_value: "100"
   - id: id_global_extg_kelvin
     type: int
     restore_value: no

@@ -16,10 +16,10 @@ id: page_light_exterieur_cote
                         id_lv_but_ctemp: id_lv_but_extc_ctemp, 
                         id_lv_but_crgb: id_lv_but_extc_crgb, 
                         id_global_kelvin: id_global_extc_kelvin, 
-                        id_global_color32: id_global_extc_color32, 
-                        id_lv_slid_red: id_lv_extc_slid_red, 
-                        id_lv_slid_green: id_lv_extc_slid_green, 
-                        id_lv_slid_blue: id_lv_extc_slid_blue,
+                        id_lv_slid_hue: id_lv_slid_extc_hue,
+                        id_lv_slid_sat: id_lv_slid_extc_satu,
+                        id_global_hue: id_global_extc_hue,
+                        id_global_satu: id_global_extc_satu,
                         value_min_kelvin: '${exterieur_cote_min_kelvin}',
                         value_max_kelvin: '${exterieur_cote_max_kelvin}'
                       } 
