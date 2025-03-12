@@ -4,7 +4,6 @@
 substitutions: !include hmi-garage/substitutions.yaml
 
 packages:
-  #hardware: !include hmi-garage/sdl.yaml
   hardware: !include hmi-garage/hardware.yaml
   button: !include hmi-garage/components/button.yaml
   globals: !include hmi-garage/components/globals.yaml
@@ -15,6 +14,16 @@ packages:
   switch: !include hmi-garage/components/switch.yaml
   online_image: !include hmi-garage/components/online_image.yaml
   select: !include hmi-garage/components/select.yaml
+
+  # LVGL
+  page_home: !include hmi-garage/display/lvgl/page_home/page_home.yaml
+  page_settings: !include hmi-garage/display/lvgl/sub_pages/page_settings.yaml
+  page_music: !include hmi-garage/display/lvgl/sub_pages/page_music.yaml
+  page_light_lampadaire_avant: !include hmi-garage/display/lvgl/sub_pages/page_light_lampadaire_avant.yaml
+  page_light_garage_rdc: !include hmi-garage/display/lvgl/sub_pages/page_light_garage_rdc.yaml
+  page_light_garage_ss: !include hmi-garage/display/lvgl/sub_pages/page_light_garage_ss.yaml
+  page_light_exterieur_garage: !include hmi-garage/display/lvgl/sub_pages/page_light_exterieur_garage.yaml
+  page_light_exterieur_cote: !include hmi-garage/display/lvgl/sub_pages/page_light_exterieur_cote.yaml
   
 api:
 
@@ -26,30 +35,8 @@ color: !include hmi-garage/display/colors.yaml
 
 lvgl:
   gradients: !include hmi-garage/display/gradients.yaml  
-  pages:
-    - <<: !include hmi-garage/display/lvgl/page_home/page_home.yaml
-    - <<: !include hmi-garage/display/lvgl/sub_pages/page_settings.yaml
-
-
-    # PAGE GARAGE RDC LIGHTS CONTROL
-    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_garage_rdc.yaml
-
-    # PAGE GARAGE SS LIGHTS CONTROL
-    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_garage_ss.yaml
-
-    # PAGE CORNICHE COTE LIGHTS CONTROL
-    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_exterieur_cote.yaml
-
-    # PAGE CORNICHE GARAGE LIGHTS CONTROL
-    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_exterieur_garage.yaml
-
-    # PAGE LAMPADAIRE_AVANT
-    - <<: !include hmi-garage/display/lvgl/sub_pages/page_light_lampadaire_avant.yaml
-    
-    # PAGE MUSIC
-    - <<: !include hmi-garage/display/lvgl/sub_pages/page_music.yaml
             
-  top_layer: # Top Screen Status bar. Visible on all pages, except Boot Screen
+  top_layer: # Top Screen Status bar. Visible on all pages.
     widgets:
       - <<: !include hmi-garage/display/lvgl/top_layer/media_control_side_widget.yaml
       # Top notification area delimiter line

@@ -1,202 +1,377 @@
-id: page_music
-bg_color: color_black
-# TODO online_image re-enable once PNG decoder error is fixed
-#on_load:
-#  then:
-#    - component.update: id_online_img_now_playing
-widgets:
-  - obj:
-      id: id_lvgl_music_player
-      x: 10
-      y: 46
-      height: 370
-      width: 700
-      align: TOP_LEFT
-      bg_opa: TRANSP
-      shadow_opa: TRANSP
-      scrollable: False
-      widgets:
-        - image:
-            src: music_note #id_online_img_now_playing
+online_image:
+  - url: ${default_music_cover_png_url}
+    id: id_online_img_now_playing
+    format: png
+    resize: 200x200
+    type: RGB565
+    placeholder: music_note
+    on_download_finished:
+      then:
+        - lvgl.image.update:
             id: id_lvgl_image_now_playing
-            bg_opa: TRANSP
+            src: id_online_img_now_playing
+    on_error:
+      then:
+        - online_image.set_url:
+            id: id_online_img_now_playing
+            url: ${default_music_cover_png_url}
+
+binary_sensor:
+  # Used by media control widget in LVGL's top_layer
+  - platform: homeassistant
+    id: id_media_muted
+    internal: True
+    entity_id: ${media_player_garage_entity_id}
+    attribute: is_volume_muted
+    publish_initial_state: True
+    on_state: 
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_speaker_icon
+            text: !lambda  |-
+              if(id(id_media_muted).state == true) {return "${volume_off}";}
+              else if(id(id_media_volume).state < 0.25) {return "${volume_low}";}
+              else if (id(id_media_volume).state < 0.65) {return "${volume_medium}";}
+              else {return "${volume_high}";}
+
+sensor:
+  # Media player volume value
+  - platform: homeassistant
+    id: id_media_volume
+    entity_id: ${media_player_garage_entity_id}
+    internal: true
+    attribute: volume_level
+    on_value:
+      - lvgl.slider.update:
+          id: id_lv_slid_media_volume
+          value: !lambda "return x * 100.0;"
+          
+text_sensor:
+  - platform: homeassistant
+    id: id_media_state
+    entity_id: ${media_player_garage_entity_id}
+    internal: true
+    on_value:
+      - if:
+          condition:
+            # Checks if "my_text_sensor" has state "Hello World"
+            text_sensor.state:
+              id: id_media_state
+              state: 'playing'
+          then:
+            - lvgl.label.update:
+                id: id_lv_lab_music_playpause_icon
+                text: ${pause_icon}
+          else:
+            - lvgl.label.update:
+                id: id_lv_lab_music_playpause_icon
+                text: ${play_icon}
+  - platform: homeassistant
+    id: id_media_now_playing_ico
+    entity_id: ${media_player_garage_entity_id}
+    attribute: entity_picture
+    filters:
+      - prepend: ${ha_instance_url}
+    internal: true
+# TODO online_image re-enable once PNG decoder error is fixed
+#    on_value:
+#      then:
+#        - online_image.set_url:
+#            id: id_online_img_now_playing
+#            url: !lambda "return x.c_str();"
+#        - if:
+#            condition:
+#              lvgl.page.is_showing: page_music
+#            then:
+#              - component.update: id_online_img_now_playing
+
+  - platform: homeassistant
+    id: id_media_now_playing_track
+    entity_id: ${media_player_garage_entity_id}
+    attribute: media_title
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_now_playing_track_name
+            text: !lambda "return x.c_str();"
+  - platform: homeassistant
+    id: id_media_now_playing_album
+    entity_id: ${media_player_garage_entity_id}
+    attribute: media_album_name
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_now_playing_album_name
+            text: !lambda "return x.c_str();"
+  - platform: homeassistant
+    id: id_media_now_playing_artist
+    entity_id: ${media_player_garage_entity_id}
+    attribute: media_artist
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_now_playing_artist_name
+            text: !lambda "return x.c_str();"
+  - platform: homeassistant
+    id: id_media_player_repeat
+    entity_id: ${media_player_garage_entity_id}
+    attribute: repeat
+    internal: true
+    on_value:
+      then:
+        - if:
+            condition:
+              text_sensor.state:
+                id: id_media_player_repeat
+                state: 'all'
+            then:
+              - lvgl.label.update:
+                  id: id_label_media_player_repeat
+                  text: ${repeat_icon}
+                  text_color: color_dark_blue
+            else:
+              - if:
+                  condition:
+                    text_sensor.state:
+                      id: id_media_player_repeat
+                      state: 'one'
+                  then:
+                    - lvgl.label.update:
+                        id: id_label_media_player_repeat
+                        text: ${repeat_once_icon}
+                        text_color: color_dark_blue
+                  else:
+                    - lvgl.label.update:
+                        id: id_label_media_player_repeat
+                        text: ${repeat_off_icon}
+                        text_color: color_gray
+  - platform: homeassistant
+    id: id_media_player_shuffle
+    entity_id: ${media_player_garage_entity_id}
+    attribute: shuffle
+    internal: true
+    on_value:
+      then:
+        - if:
+            condition:
+              text_sensor.state:
+                id: id_media_player_shuffle
+                state: 'on'
+            then:
+              - lvgl.label.update:
+                  id: id_label_media_player_shuffle
+                  text: ${shuffle_icon}
+                  text_color: color_dark_blue
+            else:
+              - lvgl.label.update:
+                  id: id_label_media_player_shuffle
+                  text: ${shuffle_disabled_icon}
+                  text_color: color_gray
+
+lvgl:
+  pages:
+    - id: page_music
+      bg_color: color_black
+      # TODO online_image re-enable once PNG decoder error is fixed
+      #on_load:
+      #  then:
+      #    - component.update: id_online_img_now_playing
+      widgets:
+        - obj:
+            id: id_lvgl_music_player
+            x: 10
+            y: 46
+            height: 370
+            width: 700
             align: TOP_LEFT
+            bg_opa: TRANSP
+            shadow_opa: TRANSP
+            scrollable: False
+            widgets:
+              - image:
+                  src: music_note #id_online_img_now_playing
+                  id: id_lvgl_image_now_playing
+                  bg_opa: TRANSP
+                  align: TOP_LEFT
+                  x: 0
+                  y: 0
+                  height: 200
+                  width: 200
+                  radius: 11
+                  clip_corner: true
+              - label:
+                  id: id_lv_lab_now_playing_track_name
+                  bg_opa: TRANSP
+                  align: TOP_LEFT
+                  x: 214
+                  y: 10
+                  height: 30
+                  width: 440
+                  long_mode: SCROLL
+                  text_font: lato_24
+                  text_color: color_white
+                  text_align: LEFT
+                  text: ""
+              - label:
+                  id: id_lv_lab_now_playing_album_name
+                  bg_opa: TRANSP
+                  align: TOP_LEFT
+                  x: 214
+                  y: 60
+                  height: 24
+                  width: 440
+                  long_mode: SCROLL
+                  text_font: lato_18
+                  text_color: color_white
+                  text_align: LEFT
+                  text: ""
+              - label:
+                  id: id_lv_lab_now_playing_artist_name
+                  bg_opa: TRANSP
+                  align: TOP_LEFT
+                  x: 214
+                  y: 90
+                  height: 24
+                  width: 440
+                  long_mode: SCROLL
+                  text_font: lato_18
+                  text_color: color_white
+                  text_align: LEFT
+                  text: ""
+              - button:
+                  x: 0
+                  y: 190
+                  height: 100
+                  width: 100
+                  bg_opa: TRANSP
+                  shadow_opa: TRANSP
+                  align: TOP_LEFT
+                  widgets:
+                      - label:
+                          x: -10
+                          text_font: mdi_icons_72
+                          text_color: color_white
+                          text: ${skip_previous_icon}
+                  on_press:
+                      then:
+                      - homeassistant.action:
+                          action: media_player.media_previous_track
+                          data:
+                            entity_id: ${media_player_garage_entity_id}
+              - button:
+                  x: 100
+                  y: 190
+                  height: 100
+                  width: 100
+                  bg_opa: TRANSP
+                  shadow_opa: TRANSP
+                  align: TOP_LEFT
+                  widgets:
+                      - label:
+                          text_font: mdi_icons_72
+                          text_color: color_white
+                          text: ${skip_next_icon}
+                  on_press:
+                      then:
+                      - homeassistant.action:
+                          action: media_player.media_next_track
+                          data:
+                            entity_id: ${media_player_garage_entity_id}
+              - button:
+                  x: 26
+                  y: 290
+                  height: 55
+                  width: 54
+                  bg_opa: TRANSP
+                  shadow_opa: TRANSP
+                  align: TOP_LEFT
+                  widgets:
+                      - label:
+                          align: CENTER
+                          y: -10
+                          id: id_label_media_player_repeat
+                          text_font: mdi_icons_32
+                          text_color: color_gray
+                          text: ${repeat_off_icon}
+                  on_press:
+                      then:
+                      - homeassistant.action:
+                          action: media_player.repeat_set
+                          data:
+                            entity_id: ${media_player_garage_entity_id}
+                            repeat: !lambda |-
+                              if(id(id_media_player_repeat).state == "all")
+                                  return "off";
+                              else if(id(id_media_player_repeat).state == "one")
+                                  return "all";
+                              else
+                                  return "one";
+              - button:
+                  x: 126
+                  y: 290
+                  height: 55
+                  width: 54
+                  bg_opa: TRANSP
+                  shadow_opa: TRANSP
+                  align: TOP_LEFT
+                  widgets:
+                      - label:
+                          align: CENTER
+                          y: -10
+                          id: id_label_media_player_shuffle
+                          text_font: mdi_icons_32
+                          text_color: color_gray
+                          text: ${shuffle_disabled_icon}
+                  on_press:
+                      then:
+                      - homeassistant.action:
+                          action: media_player.shuffle_set
+                          data:
+                            entity_id: ${media_player_garage_entity_id}
+                            shuffle: !lambda |-
+                              if(id(id_media_player_shuffle).state == "on")
+                                  return "false";
+                              else
+                                  return "true";
+        - button:
             x: 0
             y: 0
-            height: 200
-            width: 200
-            radius: 11
-            clip_corner: true
-        - label:
-            id: id_lv_lab_now_playing_track_name
-            bg_opa: TRANSP
-            align: TOP_LEFT
-            x: 214
-            y: 10
-            height: 30
-            width: 440
-            long_mode: SCROLL
-            text_font: lato_24
-            text_color: color_white
-            text_align: LEFT
-            text: ""
-        - label:
-            id: id_lv_lab_now_playing_album_name
-            bg_opa: TRANSP
-            align: TOP_LEFT
-            x: 214
-            y: 60
-            height: 24
-            width: 440
-            long_mode: SCROLL
-            text_font: lato_18
-            text_color: color_white
-            text_align: LEFT
-            text: ""
-        - label:
-            id: id_lv_lab_now_playing_artist_name
-            bg_opa: TRANSP
-            align: TOP_LEFT
-            x: 214
-            y: 90
-            height: 24
-            width: 440
-            long_mode: SCROLL
-            text_font: lato_18
-            text_color: color_white
-            text_align: LEFT
-            text: ""
-        - button:
-            x: 0
-            y: 190
-            height: 100
-            width: 100
+            width: 80
+            height: 50
             bg_opa: TRANSP
             shadow_opa: TRANSP
-            align: TOP_LEFT
+            radius: 0
+            align: BOTTOM_LEFT
             widgets:
-                - label:
-                    x: -10
-                    text_font: mdi_icons_72
-                    text_color: color_white
-                    text: ${skip_previous_icon}
+              - label:
+                  x: 5
+                  y: -5
+                  pad_all: 0
+                  text_font: montserrat_22
+                  text_color: color_dark_gray
+                  text: "\uF015"
             on_press:
-                then:
-                - homeassistant.action:
-                    action: media_player.media_previous_track
-                    data:
-                      entity_id: ${media_player_garage_entity_id}
-        - button:
-            x: 100
-            y: 190
-            height: 100
-            width: 100
-            bg_opa: TRANSP
-            shadow_opa: TRANSP
-            align: TOP_LEFT
-            widgets:
-                - label:
-                    text_font: mdi_icons_72
-                    text_color: color_white
-                    text: ${skip_next_icon}
-            on_press:
-                then:
-                - homeassistant.action:
-                    action: media_player.media_next_track
-                    data:
-                      entity_id: ${media_player_garage_entity_id}
-        - button:
-            x: 26
-            y: 290
-            height: 55
-            width: 54
-            bg_opa: TRANSP
-            shadow_opa: TRANSP
-            align: TOP_LEFT
-            widgets:
-                - label:
-                    align: CENTER
-                    y: -10
-                    id: id_label_media_player_repeat
-                    text_font: mdi_icons_32
-                    text_color: color_gray
-                    text: ${repeat_off_icon}
-            on_press:
-                then:
-                - homeassistant.action:
-                    action: media_player.repeat_set
-                    data:
-                      entity_id: ${media_player_garage_entity_id}
-                      repeat: !lambda |-
-                        if(id(id_media_player_repeat).state == "all")
-                            return "off";
-                        else if(id(id_media_player_repeat).state == "one")
-                            return "all";
-                        else
-                            return "one";
-        - button:
-            x: 126
-            y: 290
-            height: 55
-            width: 54
-            bg_opa: TRANSP
-            shadow_opa: TRANSP
-            align: TOP_LEFT
-            widgets:
-                - label:
-                    align: CENTER
-                    y: -10
-                    id: id_label_media_player_shuffle
-                    text_font: mdi_icons_32
-                    text_color: color_gray
-                    text: ${shuffle_disabled_icon}
-            on_press:
-                then:
-                - homeassistant.action:
-                    action: media_player.shuffle_set
-                    data:
-                      entity_id: ${media_player_garage_entity_id}
-                      shuffle: !lambda |-
-                        if(id(id_media_player_shuffle).state == "on")
-                            return "false";
-                        else
-                            return "true";
-  - button:
-      x: 0
-      y: 0
-      width: 80
-      height: 50
-      bg_opa: TRANSP
-      shadow_opa: TRANSP
-      radius: 0
-      align: BOTTOM_LEFT
-      widgets:
-        - label:
-            x: 5
-            y: -5
-            pad_all: 0
-            text_font: montserrat_22
-            text_color: color_dark_gray
-            text: "\uF015"
-      on_press:
-        then:
-          - lvgl.page.show: 
-              id: page_home
-              animation: OUT_RIGHT
-              time: 300ms
-#on_swipe_up:
-#  then:
-#    - lvgl.page.show: 
-#        id: page_home
-#        animation: FADE_IN
-#        time: 300ms
-#on_swipe_left:
-#  then:
-#    - lvgl.page.next: 
-#        animation: MOVE_LEFT
-#        time: 300ms
-#on_swipe_right:
-#  then:
-#    - lvgl.page.previous: 
-#        animation: MOVE_RIGHT
-#        time: 300ms
+              then:
+                - lvgl.page.show: 
+                    id: page_home
+                    animation: OUT_RIGHT
+                    time: 300ms
+      #on_swipe_up:
+      #  then:
+      #    - lvgl.page.show: 
+      #        id: page_home
+      #        animation: FADE_IN
+      #        time: 300ms
+      #on_swipe_left:
+      #  then:
+      #    - lvgl.page.next: 
+      #        animation: MOVE_LEFT
+      #        time: 300ms
+      #on_swipe_right:
+      #  then:
+      #    - lvgl.page.previous: 
+      #        animation: MOVE_RIGHT
+      #        time: 300ms

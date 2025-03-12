@@ -1,16 +1,126 @@
-id: page_light_garage_ss
-<<: !include  { file: ../templates/light_auto_sub_page_body.yaml, 
-                vars: { light_name: "Sous-Sol Garage", 
-                        light_ha_entity_id: '${garage_ss_lights_ha_entity_id}', 
-                        id_lvgl_switch_freeze_toggle: id_lvgl_switch_gs_freeze_toggle, 
-                        light_freeze_toggle_ha_entity_id: '${garage_ss_light_automation_freeze_toggle}', 
-                        id_lv_lab_freeze_end_time: id_lv_lab_gs_freeze_end_time, 
-                        id_lv_lab_freeze_initial_time: id_lv_lab_gs_freeze_init_time, 
-                        id_button_freeze_add_hour: '${garage_ss_light_automation_freeze_add_hour}', 
-                        id_button_freeze_add_minutes: '${garage_ss_light_automation_freeze_add_minutes}', 
-                        id_button_freeze_sub_hour: '${garage_ss_light_automation_freeze_sub_hour}', 
-                        id_button_freeze_sub_minutes: '${garage_ss_light_automation_freeze_sub_minutes}', 
-                        id_lvgl_widget_button: id_lv_but_page_gs, 
-                        id_lvgl_widget_icon: id_lv_lab_gs_ico 
-                      } 
-              }
+binary_sensor:
+ # Garage SS Lights #
+  - platform: homeassistant
+    id: id_bin_gs_light_state
+    entity_id: ${garage_ss_lights_ha_entity_id}
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_gs
+            shadow_color: color_blue
+            shadow_spread: 3
+            shadow_width: 35
+        - lvgl.label.update:
+            id: id_lv_lab_gs
+            text_color: color_bright_white
+        - lvgl.button.update: 
+            id: id_lv_but_page_gs
+            shadow_color: color_bright_white
+            shadow_spread: 5
+            shadow_width: 75 
+        - lvgl.label.update:
+            id: id_lv_lab_gs_ico
+            text_color: color_bright_white
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_gs
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_gs
+            text_color: color_gray
+        - lvgl.button.update: 
+            id: id_lv_but_page_gs
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_gs_ico
+            text_color: color_gray
+  - platform: homeassistant
+    id: id_text_gs_light_freeze_active
+    entity_id: ${garage_ss_light_automation_freeze_toggle}
+    internal: true
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_end_time
+            hidden: False
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_init_time
+            hidden: True
+    on_release:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_end_time
+            hidden: True
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_init_time
+            hidden: False
+    on_state:
+      then:
+        - lvgl.widget.update:
+            id: id_lvgl_switch_gs_freeze_toggle
+            state: 
+              checked: !lambda return id(id_text_gs_light_freeze_active).state;
+
+text_sensor:
+  - platform: homeassistant
+    id: id_text_gs_freeze_end_time
+    entity_id: ${garage_ss_light_automation_freeze_timer_end_time}
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_end_time
+            text: !lambda |-
+              return ("Réactivation à " + id(id_text_gs_freeze_end_time).state).c_str();
+  - platform: homeassistant
+    id: id_text_gs_freeze_start_time
+    entity_id: ${garage_ss_light_automation_freeze_timer_value_on_start}
+    internal: true
+    filters:
+      - lambda: >
+          size_t idx = 0;
+          for(size_t i = 0; i <= x.length(); i++)
+          {
+            if(x.c_str()[i] == ':')  
+            {
+                idx = i;
+            }
+          }
+          if(idx < x.length())
+          {
+            return str_truncate(x, idx);
+          }
+
+          return x;
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gs_freeze_init_time
+            text: !lambda |-
+                return ("Désactiver durant " + id(id_text_gs_freeze_start_time).state).c_str();
+                
+lvgl:
+  pages:
+    - id: page_light_garage_ss
+      <<: !include  { file: ../templates/light_auto_sub_page_body.yaml, 
+                      vars: { light_name: "Sous-Sol Garage", 
+                              light_ha_entity_id: '${garage_ss_lights_ha_entity_id}', 
+                              id_lvgl_switch_freeze_toggle: id_lvgl_switch_gs_freeze_toggle, 
+                              light_freeze_toggle_ha_entity_id: '${garage_ss_light_automation_freeze_toggle}', 
+                              id_lv_lab_freeze_end_time: id_lv_lab_gs_freeze_end_time, 
+                              id_lv_lab_freeze_initial_time: id_lv_lab_gs_freeze_init_time, 
+                              id_button_freeze_add_hour: '${garage_ss_light_automation_freeze_add_hour}', 
+                              id_button_freeze_add_minutes: '${garage_ss_light_automation_freeze_add_minutes}', 
+                              id_button_freeze_sub_hour: '${garage_ss_light_automation_freeze_sub_hour}', 
+                              id_button_freeze_sub_minutes: '${garage_ss_light_automation_freeze_sub_minutes}', 
+                              id_lvgl_widget_button: id_lv_but_page_gs, 
+                              id_lvgl_widget_icon: id_lv_lab_gs_ico 
+                            } 
+                    }

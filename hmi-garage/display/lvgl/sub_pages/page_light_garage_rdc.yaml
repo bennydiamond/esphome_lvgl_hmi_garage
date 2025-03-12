@@ -1,16 +1,128 @@
-id: page_light_garage_rdc
-<<: !include  { file: ../templates/light_auto_sub_page_body.yaml, 
-                vars: { light_name: "Garage", 
-                        light_ha_entity_id: '${garage_rdc_lights_ha_entity_id}', 
-                        id_lvgl_switch_freeze_toggle: id_lv_switch_gr_freeze_toggle, 
-                        light_freeze_toggle_ha_entity_id: '${garage_light_automation_freeze_toggle}', 
-                        id_lv_lab_freeze_end_time: id_lv_lab_gr_freeze_time_end, 
-                        id_lv_lab_freeze_initial_time: id_lv_lab_gr_freeze_init_time, 
-                        id_button_freeze_add_hour: '${garage_light_automation_freeze_add_hour}', 
-                        id_button_freeze_add_minutes: '${garage_light_automation_freeze_add_minutes}', 
-                        id_button_freeze_sub_hour: '${garage_light_automation_freeze_sub_hour}', 
-                        id_button_freeze_sub_minutes: '${garage_light_automation_freeze_sub_minutes}', 
-                        id_lvgl_widget_button: id_lv_but_gr, 
-                        id_lvgl_widget_icon: id_lv_lab_gr_icon 
-                      } 
-              }
+binary_sensor:
+  # Garage RDC Lights #
+  - platform: homeassistant
+    id: id_bin_gr_light_state
+    internal: True
+    entity_id: ${garage_rdc_lights_ha_entity_id}
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_gr_light
+            shadow_color: color_bright_white
+            shadow_spread: 3
+            shadow_width: 35
+        - lvgl.label.update:
+            id: id_lv_lab_gr_light
+            text_color: color_bright_white
+        - lvgl.button.update: 
+            id: id_lv_but_gr
+            shadow_color: color_bright_white
+            shadow_spread: 5
+            shadow_width: 75 
+        - lvgl.label.update:
+            id: id_lv_lab_gr_icon
+            text_color: color_bright_white
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_gr_light
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_gr_light
+            text_color: color_gray
+        - lvgl.button.update: 
+            id: id_lv_but_gr
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_gr_icon
+            text_color: color_gray
+            
+  - platform: homeassistant
+    id: id_text_gr_freeze_active
+    entity_id: ${garage_light_automation_freeze_toggle}
+    internal: true
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_time_end
+            hidden: False
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_init_time
+            hidden: True
+    on_release:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_time_end
+            hidden: True
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_init_time
+            hidden: False
+    on_state:
+      then:
+        - lvgl.widget.update:
+            id: id_lv_switch_gr_freeze_toggle
+            state: 
+              checked: !lambda return id(id_text_gr_freeze_active).state;
+
+text_sensor:
+  - platform: homeassistant
+    id: id_text_gr_freeze_end_time
+    entity_id: ${garage_light_automation_freeze_timer_end_time}
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_time_end
+            text: !lambda |-
+              return ("Réactivation à " + id(id_text_gr_freeze_end_time).state).c_str();
+  - platform: homeassistant
+    id: id_text_gr_freeze_start_time
+    entity_id: ${garage_light_automation_freeze_timer_value_on_start}
+    internal: true
+    filters:
+      - lambda: >
+          size_t idx = 0;
+          for(size_t i = 0; i <= x.length(); i++)
+          {
+            if(x.c_str()[i] == ':')  
+            {
+                idx = i;
+            }
+          }
+          if(idx < x.length())
+          {
+            return str_truncate(x, idx);
+          }
+
+          return x;
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_gr_freeze_init_time
+            text: !lambda |-
+                return ("Désactiver durant " + id(id_text_gr_freeze_start_time).state).c_str();
+
+lvgl:
+  pages:
+    - id: page_light_garage_rdc
+      <<: !include  { file: ../templates/light_auto_sub_page_body.yaml, 
+                      vars: { light_name: "Garage", 
+                              light_ha_entity_id: '${garage_rdc_lights_ha_entity_id}', 
+                              id_lvgl_switch_freeze_toggle: id_lv_switch_gr_freeze_toggle, 
+                              light_freeze_toggle_ha_entity_id: '${garage_light_automation_freeze_toggle}', 
+                              id_lv_lab_freeze_end_time: id_lv_lab_gr_freeze_time_end, 
+                              id_lv_lab_freeze_initial_time: id_lv_lab_gr_freeze_init_time, 
+                              id_button_freeze_add_hour: '${garage_light_automation_freeze_add_hour}', 
+                              id_button_freeze_add_minutes: '${garage_light_automation_freeze_add_minutes}', 
+                              id_button_freeze_sub_hour: '${garage_light_automation_freeze_sub_hour}', 
+                              id_button_freeze_sub_minutes: '${garage_light_automation_freeze_sub_minutes}', 
+                              id_lvgl_widget_button: id_lv_but_gr, 
+                              id_lvgl_widget_icon: id_lv_lab_gr_icon 
+                            } 
+                    }

@@ -1,17 +1,1 @@
-online_image:
-  - url: ${default_music_cover_png_url}
-    id: id_online_img_now_playing
-    format: png
-    resize: 200x200
-    type: RGB565
-    placeholder: music_note
-    on_download_finished:
-      then:
-        - lvgl.image.update:
-            id: id_lvgl_image_now_playing
-            src: id_online_img_now_playing
-    on_error:
-      then:
-        - online_image.set_url:
-            id: id_online_img_now_playing
-            url: ${default_music_cover_png_url}
+# Intentionally left empty

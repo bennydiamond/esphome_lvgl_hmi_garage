@@ -233,3 +233,9 @@ obj: # Main Screen buttons Grid widget
                   id: page_music
                   animation: OUT_RIGHT
                   time: 300ms
+        on_long_press:
+          then:
+              - lvgl.page.show: 
+                  id: page_music
+                  animation: OUT_RIGHT
+                  time: 300ms

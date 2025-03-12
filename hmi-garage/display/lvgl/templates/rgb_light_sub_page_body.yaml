@@ -62,8 +62,23 @@ widgets:
                   arc_width: 20
                   indicator:
                     arc_width: 20
-                  #knob:
+                  knob:
                   #  arc_width: 10
+                    shadow_opa: COVER
+                    shadow_color: color_dark_gray
+                    shadow_width: 20
+                  on_change:
+                    - lvgl.button.update:
+                        id: ${id_lvgl_widget_button}
+                        shadow_spread: !lambda |-
+                          uint8_t result = 2;
+                          result += (uint8_t)(x / 255 * 20); // Swing from 3 to 21
+                          return result;
+                        shadow_width: !lambda |-
+                          uint8_t result = 20;
+                          result += (uint8_t)(float(x) / 2.55); // Swing from 21 to 120
+                          return result;
+                        shadow_color: !lambda "return id(${id_global_color});"
                   on_release:
                       - homeassistant.action:
                           action: light.turn_on
@@ -282,6 +297,9 @@ widgets:
                   radius: 20
                   bg_color: color_warmest_white
                   border_color: color_warmest_white
+                  shadow_opa: COVER
+                  shadow_color: color_warmest_white
+                  shadow_width: 20
                   on_click:
                     - homeassistant.action:
                         action: light.turn_on
@@ -300,6 +318,9 @@ widgets:
                   radius: 20
                   bg_color: color_bright_white
                   border_color: color_bright_white
+                  shadow_opa: COVER
+                  shadow_color: color_bright_white
+                  shadow_width: 20
                   on_click:
                     - homeassistant.action:
                         action: light.turn_on
@@ -318,6 +339,9 @@ widgets:
                   radius: 20
                   bg_color: color_bulb_blue
                   border_color: color_bulb_blue
+                  shadow_opa: COVER
+                  shadow_color: color_bulb_blue
+                  shadow_width: 20
                   on_click:
                     - homeassistant.action:
                         action: script.esphome_rgb_light_set
@@ -338,6 +362,9 @@ widgets:
                   radius: 20
                   bg_color: color_bulb_sunset
                   border_color: color_bulb_sunset
+                  shadow_opa: COVER
+                  shadow_color: color_bulb_sunset
+                  shadow_width: 20
                   on_click:
                     - homeassistant.action:
                         action: script.esphome_rgb_light_set

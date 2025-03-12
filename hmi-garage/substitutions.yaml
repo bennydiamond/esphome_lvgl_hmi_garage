@@ -7,7 +7,6 @@ lights:             "\U000F0335" # lights
 motion:             "\U000F0D91" # motion, presence
 heating:            "\U000F0438" # heating
 ha:                 "\U000F07D0" # home assistant
-color_temp:         "\U0000e90c" # color_temp
 ventilation:        "\U0000e90d" # ventilation
 wifi_25:            "\U000F091F" # wifi signal from 25% to 1%
 wifi_50:            "\U000F0922" # wifi signal from 50% to 25%

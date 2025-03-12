@@ -2,6 +2,8 @@ bg_opa: TRANSP
 border_opa: TRANSP
 shadow_opa: TRANSP
 pad_all: 0
+pad_left: 24
+pad_right: 5
 grid_cell_column_pos: 2
 grid_cell_row_pos: 1
 grid_cell_x_align: STRETCH
@@ -14,57 +16,53 @@ layout:
   pad_row: 0
   type: GRID
   grid_columns: [100%]
-  grid_rows: [FR(8), FR(48), FR(8)]
+  grid_rows: [FR(25), FR(12), FR(28), FR(12), FR(23)]
 widgets:
-  - button:
+  - label:
       bg_opa: TRANSP
       border_opa: TRANSP
       shadow_opa: TRANSP
       pad_all: 0
+      pad_bottom: 20
       grid_cell_column_pos: 0
-      grid_cell_row_pos: 0
+      grid_cell_row_pos: 1
       grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
+      grid_cell_y_align: CENTER
       grid_cell_column_span: 1
       grid_cell_row_span: 1
-      widgets:
-        - label:
-            id: ${id_lv_lab_kelvin}
-            align: TOP_MID
-            text_font: lato_18
-            text_color: color_white
+      text_font: lato_18
+      text_color: color_white
+      text_align: CENTER
+      text: Température de couleur
+        
 
   - slider:
       id: ${id_lv_slid_kelvin}
       bg_opa: COVER
       bg_color: color_orange
       bg_grad_color: color_white
-      bg_grad_dir: VER
+      bg_grad_dir: HOR
       border_opa: 50%
       border_width: 1
       border_color: color_dark_gray
       shadow_opa: TRANSP
       pad_all: 0
       grid_cell_column_pos: 0
-      grid_cell_row_pos: 1
-      grid_cell_x_align: CENTER
+      grid_cell_row_pos: 2
+      grid_cell_x_align: STRETCH
       grid_cell_y_align: STRETCH
       grid_cell_column_span: 1
       grid_cell_row_span: 1
       radius: 20
-      align: CENTER
-      width: 60
-      height: 160
       min_value: ${value_min_kelvin}
       max_value: ${value_max_kelvin}
       indicator:
-        #radius: 20
         opa: TRANSP
       knob:
         bg_opa: COVER
         radius: 3
-        pad_top: -20
-        pad_bottom: -23
+        pad_left: -30
+        pad_right: -30
         #bg_color: color_white
         shadow_opa: COVER
         shadow_color: color_dark_gray
@@ -74,21 +72,23 @@ widgets:
               action: light.turn_on
               data:
                 entity_id: ${light_ha_entity_id}
-                color_temp_kelvin: !lambda return -int(x) + (${value_min_kelvin} + ${value_max_kelvin});
-              
+                # Cast return value to int because HA doesn't like float inputs on this field.
+                color_temp_kelvin: !lambda return int(x);
+           
   - label:
+      id: ${id_lv_lab_kelvin}
       bg_opa: TRANSP
       border_opa: TRANSP
       shadow_opa: TRANSP
       pad_all: 0
+      pad_top: 20
       grid_cell_column_pos: 0
-      grid_cell_row_pos: 2
+      grid_cell_row_pos: 3
       grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
+      grid_cell_y_align: CENTER
       grid_cell_column_span: 1
       grid_cell_row_span: 1
       align: BOTTOM_MID
-      text_font: icons_36
+      text_font: lato_18
       text_color: color_white
       text_align: CENTER
-      text: "${color_temp}"

@@ -215,7 +215,7 @@
   glyphs: [
 #    "\U0000e901", # Thermostat
 #    "\U0000e908", # heating
-    "\U0000e90c", # color_temp
+#    "\U0000e90c", # color_temp
 #    "\U0000e90d", # ventilation
     "\U0000e912", # humidity
     "\U0000e915", # temperature

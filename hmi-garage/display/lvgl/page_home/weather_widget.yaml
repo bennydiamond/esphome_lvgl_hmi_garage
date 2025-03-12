@@ -239,7 +239,7 @@ obj: # Outdoor Weather widget
                     text: ""
     - obj: # WEATHER WIND SPEED
         align: TOP_LEFT
-        width: 100
+        width: 110
         height: 36
         x: 97
         y: 74
@@ -258,7 +258,7 @@ obj: # Outdoor Weather widget
               text: "${wind_speed}"
           # Wind speed text
           - button:
-              width: 80
+              width: 90
               height: 24
               x: 20
               y: 4

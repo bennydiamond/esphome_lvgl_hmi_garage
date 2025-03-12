@@ -1,26 +1,309 @@
-id: page_light_exterieur_garage
-<<: !include  { file: ../templates/rgb_light_sub_page_body.yaml, 
-                vars: { light_name: "Corniche Garage", 
-                        light_ha_entity_id: '${exterieur_garage_lights_ha_entity_id}', 
-                        id_lvgl_widget_arc: id_lv_arc_extg_bright, 
-                        id_lvgl_widget_button: id_lv_but_page_extg, 
-                        id_lvgl_widget_icon: id_lv_lab_extg_ico, 
-                        id_txt_bright_percent: id_lv_lab_extg_bright_percent, 
-                        id_lv_lab_kelvin: id_lv_lab_extg_kelvin, 
-                        id_lv_slid_kelvin: id_lv_slid_extg_kelvin, 
-                        id_lv_obj_color_kelvin: id_lv_obj_extg_color_kelvin, 
-                        id_lv_obj_color_rgb: id_lv_obj_extg_color_rgb, 
-                        id_lvgl_dropdown_effects: id_lv_drop_extg_effects, 
-                        id_select_dropdown_effects: id_select_drop_extg_effects, 
-                        id_light_active_light_effect: exterieur_garage_active_effect, 
-                        id_lv_but_ctemp: id_lv_but_extg_ctemp, 
-                        id_lv_but_crgb: id_lv_but_extg_crgb, 
-                        id_global_kelvin: id_global_extg_kelvin, 
-                        id_lv_slid_hue: id_lv_slid_extg_hue,
-                        id_lv_slid_sat: id_lv_slid_extg_satu,
-                        id_global_hue: id_global_extg_hue,
-                        id_global_satu: id_global_extg_satu,
-                        value_min_kelvin: '${exterieur_garage_min_kelvin}',
-                        value_max_kelvin: '${exterieur_garage_max_kelvin}'
-                      } 
-              }
+globals:
+  - id: id_global_extg_color
+    type: lv_color_t
+    restore_value: no
+    initial_value: "lv_color_make(0xff, 0xcc, 0x66)"
+  - id: id_global_extg_hue
+    type: float
+    restore_value: no
+    initial_value: "120"
+  - id: id_global_extg_satu
+    type: float
+    restore_value: no
+    initial_value: "100"
+  - id: id_global_extg_kelvin
+    type: int
+    restore_value: no
+    initial_value: "2000"
+
+select:
+  - platform: lvgl
+    id: id_select_drop_extg_effects
+    internal: True
+    widget: id_lv_drop_extg_effects
+
+binary_sensor:
+  # Extérieur Garage #
+  - platform: homeassistant
+    id: id_bin_extg_state
+    internal: True
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    publish_initial_state: True
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: id_lv_but_extg
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.button.update: 
+            id: id_lv_but_page_extg
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_extg
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_extg_ico
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_extg_bright_percent
+            text: "Éteint"
+        - lvgl.arc.update:
+                id: id_lv_arc_extg_bright
+                value: 0
+
+sensor:
+  - platform: homeassistant
+    id: id_extg_bright
+    internal: true
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    attribute: brightness
+    on_value:
+      - if:
+          condition:
+            - lambda: 'return id(id_extg_bright).state > 0;' 
+          then: 
+            - lvgl.label.update:
+                id: id_lv_lab_extg_bright_percent
+                text:
+                    format: "%.0f %%"
+                    args: [id(id_extg_bright).state / 2.55]
+            - lvgl.arc.update:
+                id: id_lv_arc_extg_bright
+                value: !lambda return x;
+            - lvgl.button.update: 
+                id: id_lv_but_page_extg
+                shadow_spread: !lambda |-
+                  uint8_t result = 2;
+                  result += (uint8_t)(id(id_extg_bright).state / 255 * 20); // Swing from 3 to 21
+                  return result;
+                shadow_width: !lambda |-
+                  uint8_t result = 20;
+                  result += (uint8_t)(id(id_extg_bright).state / 2.55); // Swing from 21 to 120
+                  return result;
+  # Light Extérieur Garage Kelvin
+  - platform: homeassistant
+    id: id_extg_kelvin
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    internal: true
+    attribute: color_temp_kelvin
+    on_value:
+      - globals.set:
+          id: id_global_extg_kelvin
+          value: !lambda |-
+            if(std::isnan(x))
+              return id(id_global_extg_kelvin);
+            return static_cast<int>(x);
+      - lvgl.slider.update:
+          id: id_lv_slid_extg_kelvin
+          value: !lambda return x;
+      - lvgl.label.update:
+          id: id_lv_lab_extg_kelvin
+          text:
+              format: "%.0f K"
+              args: [id(id_extg_kelvin).state]
+
+text_sensor:
+  - platform: homeassistant
+    id: extg_rgb
+    internal: true
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    attribute: rgb_color
+    on_value:
+      then:
+        - if:
+            condition:
+              - binary_sensor.is_on: id_bin_extg_state
+            then:
+              - globals.set:
+                  id: id_global_extg_color
+                  value: !lambda |-
+                    uint8_t rgb[3] = {UINT8_MAX, UINT8_MAX, UINT8_MAX};
+                    char const * str = x.c_str();
+                    size_t len = strlen(str);
+                    size_t i = 0;
+                    while (len && i < 3)
+                    {
+                      if(isdigit(*str))
+                      {
+                        char * end;
+                        rgb[i] = strtoul(str, &end, 10);
+                        i++;
+                        len -= (end - str);
+                        str += (end - str);
+                      }
+                      else
+                      {
+                        str++;
+                        len--;
+                      }
+                    }
+                    // Default 'light ON' color
+                    lv_color_t color = lv_color_make(0xff, 0xcc, 0x66);
+                    if(i == 3)
+                    {
+                      color = lv_color_make(rgb[0], rgb[1], rgb[2]);
+                    }
+               
+                    return color;
+              - lvgl.button.update: 
+                  id: id_lv_but_extg
+                  shadow_spread: 3
+                  shadow_width: 35
+                  shadow_color: !lambda "return id(id_global_extg_color);"
+              - lvgl.label.update:
+                  id: id_lv_lab_extg
+                  text_color: !lambda "return id(id_global_extg_color);"
+              - lvgl.button.update: 
+                  id: id_lv_but_page_extg
+                  shadow_color: !lambda "return id(id_global_extg_color);"
+              - lvgl.label.update:
+                  id: id_lv_lab_extg
+                  text_color: !lambda "return id(id_global_extg_color);"
+              - lvgl.label.update:
+                  id: id_lv_lab_extg_ico
+                  text_color: !lambda "return id(id_global_extg_color);"
+  - platform: homeassistant
+    id: extg_hs
+    internal: true
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    attribute: hs_color
+    on_value:
+      then:
+        - if:
+            condition:
+              - binary_sensor.is_on: id_bin_extg_state
+            then:
+              - globals.set:
+                  id: id_global_extg_hue
+                  value: !lambda |-
+                    double hs[2] = {0.0, 0.0};
+                    char const * str = x.c_str();
+                    size_t len = strlen(str);
+                    size_t i = 0;
+                    while (len && i < 2)
+                    {
+                      if(isdigit(*str))
+                      {
+                        char * end;
+                        hs[i] = strtof(str, &end);
+                        i++;
+                        len -= (end - str);
+                        str += (end - str);
+                      }
+                      else
+                      {
+                        str++;
+                        len--;
+                      }
+                    }
+                    if(i == 2)
+                    {
+                      id(id_global_extg_satu) = hs[1];
+                      return hs[0];
+                    }
+
+                    id(id_global_extg_satu) = 0.0;
+                    return 0.0;
+              - lvgl.slider.update:
+                  id: id_lv_slid_extg_hue
+                  value:  !lambda return id(id_global_extg_hue);
+              - lvgl.slider.update:
+                  id: id_lv_slid_extg_satu
+                  value:  !lambda return id(id_global_extg_satu);
+  # Light Extérieur Garage Color mode
+  - platform: homeassistant
+    id: id_extg_color_mode
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    internal: true
+    attribute: color_mode
+    on_value:
+      - delay: 20ms
+      - if:
+          condition:
+            text_sensor.state:
+              id: id_extg_color_mode
+              state: "color_temp"
+          then:
+            - lvgl.widget.update:
+                id: id_lv_obj_extg_color_kelvin
+                hidden: False
+            - lvgl.widget.update:
+                id: id_lv_obj_extg_color_rgb
+                hidden: True
+            - lvgl.button.update:
+                id: id_lv_but_extg_ctemp
+                border_opa: COVER
+            - lvgl.button.update:
+                id: id_lv_but_extg_crgb
+                border_opa: TRANSP
+          else:
+            - lvgl.slider.update:
+                id: id_lv_slid_extg_kelvin
+                value: 0.0
+            - lvgl.widget.update:
+                id: id_lv_obj_extg_color_kelvin
+                hidden: True
+            - lvgl.button.update:
+                id: id_lv_but_extg_ctemp
+                border_opa: TRANSP
+            - if:
+                condition:
+                  text_sensor.state:
+                    id: id_extg_color_mode
+                    state: "hs"
+                then: 
+                  - lvgl.widget.update:
+                      id: id_lv_obj_extg_color_rgb
+                      hidden: False
+                  - lvgl.button.update:
+                      id: id_lv_but_extg_crgb
+                      border_opa: COVER
+                else:
+                  - lvgl.widget.update:
+                      id: id_lv_obj_extg_color_rgb
+                      hidden: True
+                  - lvgl.button.update:
+                      id: id_lv_but_extg_crgb
+                      border_opa: TRANSP
+  - platform: homeassistant
+    id: exterieur_garage_active_effect
+    entity_id: ${exterieur_garage_lights_ha_entity_id}
+    internal: true
+    attribute: effect
+    on_value:
+      - lvgl.dropdown.update:
+          id: id_lv_drop_extg_effects
+          selected_text: !lambda "return x.c_str();"  
+
+lvgl:
+  pages:
+    - id: page_light_exterieur_garage
+      <<: !include  { file: ../templates/rgb_light_sub_page_body.yaml, 
+                      vars: { light_name: "Corniche Garage", 
+                              light_ha_entity_id: '${exterieur_garage_lights_ha_entity_id}', 
+                              id_lvgl_widget_arc: id_lv_arc_extg_bright, 
+                              id_lvgl_widget_button: id_lv_but_page_extg, 
+                              id_lvgl_widget_icon: id_lv_lab_extg_ico, 
+                              id_txt_bright_percent: id_lv_lab_extg_bright_percent, 
+                              id_lv_lab_kelvin: id_lv_lab_extg_kelvin, 
+                              id_lv_slid_kelvin: id_lv_slid_extg_kelvin, 
+                              id_lv_obj_color_kelvin: id_lv_obj_extg_color_kelvin, 
+                              id_lv_obj_color_rgb: id_lv_obj_extg_color_rgb, 
+                              id_lvgl_dropdown_effects: id_lv_drop_extg_effects, 
+                              id_select_dropdown_effects: id_select_drop_extg_effects, 
+                              id_light_active_light_effect: exterieur_garage_active_effect, 
+                              id_lv_but_ctemp: id_lv_but_extg_ctemp, 
+                              id_lv_but_crgb: id_lv_but_extg_crgb, 
+                              id_global_kelvin: id_global_extg_kelvin, 
+                              id_lv_slid_hue: id_lv_slid_extg_hue,
+                              id_lv_slid_sat: id_lv_slid_extg_satu,
+                              id_global_hue: id_global_extg_hue,
+                              id_global_satu: id_global_extg_satu,
+                              value_min_kelvin: '${exterieur_garage_min_kelvin}',
+                              value_max_kelvin: '${exterieur_garage_max_kelvin}',
+                              id_global_color: id_global_extg_color
+                            } 
+                    }
