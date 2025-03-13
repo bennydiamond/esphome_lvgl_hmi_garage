@@ -262,9 +262,7 @@ lvgl:
       widgets:
         - <<: !include datetime_widget.yaml
         - <<: !include weather_widget.yaml
-        - <<: !include garage_rdc_widget.yaml
-        - <<: !include garage_ss_widget.yaml
-        - <<: !include button_grid.yaml
+        - <<: !include main_tileview.yaml
         - obj:
                   id: id_widget_but_all
                   bg_opa: TRANSP
@@ -307,28 +305,3 @@ lvgl:
                               text_font: mdi_icons_72
                               text_color: color_bright_white
                               text: "${lights}"
-
-
-        - button:
-            x: 0
-            y: 0
-            width: 80
-            height: 50
-            bg_opa: TRANSP
-            shadow_opa: TRANSP
-            radius: 0
-            align: BOTTOM_LEFT
-            widgets:
-              - label:
-                  x: 1
-                  y: -7
-                  pad_all: 0
-                  text_font: mdi_icons_32
-                  text_color: color_dark_gray
-                  text: ${settings}
-            on_press:
-              then:
-                - lvgl.page.show: 
-                    id: page_settings
-                    animation: OUT_RIGHT
-                    time: 300ms

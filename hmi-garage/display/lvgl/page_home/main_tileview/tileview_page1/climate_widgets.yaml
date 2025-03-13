@@ -1,0 +1,22 @@
+id: id_lv_obj_side1
+bg_opa: TRANSP
+border_opa: TRANSP
+#radius: 0
+layout:
+  type: GRID
+  grid_columns: [100%]
+  grid_rows: [FR(45), FR(45), FR(10)]
+#scrollable: "OFF"
+widgets:
+  - obj:
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 0
+      grid_cell_x_align: STRETCH
+      grid_cell_y_align: STRETCH
+      <<: !include "garage_rdc_widget.yaml"
+  - obj:
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 1
+      grid_cell_x_align: STRETCH
+      grid_cell_y_align: STRETCH
+      <<: !include "garage_ss_widget.yaml"

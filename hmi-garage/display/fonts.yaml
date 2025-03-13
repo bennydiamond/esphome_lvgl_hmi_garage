@@ -81,7 +81,7 @@
   bpp: 4
   glyphs: [
     "\U000F07D0", # mdi-home-assistant
-    "\U000F0493", # mdi-cog
+#    "\U000F0493", # mdi-cog
     "\U000F092F", # mdi-wifi-strength-outline
     "\U000F091F", # mdi-wifi-strength-1
     "\U000F0922", # mdi-wifi-strength-2
@@ -113,7 +113,7 @@
   bpp: 4
   glyphs: [
 #    "\U000F07D0", # mdi-home-assistant
-#    "\U000F0493", # mdi-cog
+    "\U000F0493", # mdi-cog
 #    "\U000F092F", # mdi-wifi-strength-outline
 #    "\U000F091F", # mdi-wifi-strength-1
 #    "\U000F0922", # mdi-wifi-strength-2

@@ -93,11 +93,11 @@ lvgl:
                         text_color: color_white
                         text: "${illumination}"
                     # Comment when using SDL simulator
-                  on_change:
-                    then:
-                      - light.turn_on:
-                          id: id_light_backlight_brightness
-                          brightness: !lambda return x / 100.0;
+#                  on_change:
+#                    then:
+#                      - light.turn_on:
+#                          id: id_light_backlight_brightness
+#                          brightness: !lambda return x / 100.0;
 
         - button:
             align: TOP_LEFT
