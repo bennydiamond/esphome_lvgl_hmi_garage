@@ -55,6 +55,7 @@ color: !include hmi-garage/display/colors.yaml
 
 lvgl:
   gradients: !include hmi-garage/display/gradients.yaml
+  disp_bg_image: none
 
   top_layer: # Top Screen Status bar. Visible on all pages, except Boot Screen
     widgets:
