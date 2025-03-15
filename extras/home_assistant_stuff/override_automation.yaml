@@ -1,0 +1,227 @@
+alias: Garage - Démarrer timer de figer l'état des lumières
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - input_boolean.figer_l_etat_des_lumieres_du_garage
+    id: trigger_id_start_stop
+  - trigger: state
+    entity_id:
+      - timer.timer_de_figer_les_lumieres_du_garage
+    to: idle
+    id: trigger_id_timer_expired
+  - trigger: state
+    entity_id:
+      - input_button.figer_les_lumieres_garage_ajouter_1_heure
+      - input_button.figer_les_lumieres_garage_soustraire_1_heure
+      - input_button.figer_les_lumieres_garage_ajouter_10_minutes
+      - input_button.figer_les_lumieres_garage_soustraire_10_minutes
+    alias: Lorsqu'on ajoute/soustrait du temps durant l'éxécution
+    id: trigger_id_add_sub_time
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id:
+              - trigger_id_start_stop
+            alias: Si déclenché par un changement de l'activation du mode "figer".
+        sequence:
+          - alias: >-
+              Activer le timer si le mode "figer" est actif. Sinon désactiver le
+              timer.
+            if:
+              - condition: state
+                entity_id: input_boolean.figer_l_etat_des_lumieres_du_garage
+                state: "on"
+            then:
+              - action: timer.start
+                metadata: {}
+                data:
+                  duration: >-
+                    {{
+                    state_attr('input_datetime.temps_pour_figer_les_lumieres_du_garage',
+                    'timestamp' ) | int }}
+                target:
+                  entity_id: timer.timer_de_figer_les_lumieres_du_garage
+            else:
+              - action: timer.finish
+                metadata: {}
+                data: {}
+                target:
+                  entity_id: timer.timer_de_figer_les_lumieres_du_garage
+      - conditions:
+          - alias: Si le timer est maintenant inactif
+            condition: trigger
+            id:
+              - trigger_id_timer_expired
+        sequence:
+          - action: input_boolean.turn_off
+            metadata: {}
+            data: {}
+            target:
+              entity_id: input_boolean.figer_l_etat_des_lumieres_du_garage
+            alias: Désactiver le mode figer
+      - conditions:
+          - condition: trigger
+            id:
+              - trigger_id_add_sub_time
+        sequence:
+          - alias: >-
+              Modifier le temps d'éxécution si le timer est actif. Sinon
+              modifier le temps total d'éxécution.
+            if:
+              - condition: state
+                entity_id: timer.timer_de_figer_les_lumieres_du_garage
+                state: active
+                enabled: true
+            then:
+              - choose:
+                  - conditions:
+                      - condition: template
+                        value_template: >-
+                          {{ trigger.entity_id ==
+                          'input_button.figer_les_lumieres_garage_ajouter_1_heure'
+                          }}
+                        alias: Le bouton "Ajouter 1 heure" à été activé.
+                    sequence:
+                      - action: timer.start
+                        metadata: {}
+                        data:
+                          duration: >-
+                            {{
+                            (state_attr('timer.timer_de_figer_les_lumieres_du_garage',
+                            'finishes_at') | as_datetime - now() +
+                            timedelta(hours=1)).total_seconds() | round(0) }}
+                        target:
+                          entity_id: timer.timer_de_figer_les_lumieres_du_garage
+                    alias: Si on veut ajouter 1 heure
+                  - conditions:
+                      - condition: template
+                        value_template: >-
+                          {{ trigger.entity_id ==
+                          'input_button.figer_les_lumieres_garage_soustraire_1_heure'
+                          }}
+                        alias: Le bouton soustraire 1 heure à été activé.
+                    sequence:
+                      - action: timer.change
+                        metadata: {}
+                        data:
+                          duration: "-3600"
+                        target:
+                          entity_id: timer.timer_de_figer_les_lumieres_du_garage
+                    alias: Si on veut soustraire 1 heure
+                  - conditions:
+                      - alias: Le bouton "Ajouter 10 minutes" à été activé.
+                        condition: template
+                        value_template: >-
+                          {{ trigger.entity_id ==
+                          'input_button.figer_les_lumieres_garage_ajouter_10_minutes'
+                          }}
+                    sequence:
+                      - action: timer.start
+                        metadata: {}
+                        data:
+                          duration: >-
+                            {{
+                            (state_attr('timer.timer_de_figer_les_lumieres_du_garage',
+                            'finishes_at') | as_datetime - now() +
+                            timedelta(minutes=10)).total_seconds() | round(0) }}
+                        target:
+                          entity_id: timer.timer_de_figer_les_lumieres_du_garage
+                    alias: Si on veut ajouter 10 minutes
+                  - conditions:
+                      - alias: Le bouton soustraire 10 minutes à été activé.
+                        condition: template
+                        value_template: >-
+                          {{ trigger.entity_id ==
+                          'input_button.figer_les_lumieres_garage_soustraire_10_minutes'
+                          }}
+                    sequence:
+                      - action: timer.change
+                        metadata: {}
+                        data:
+                          duration: "-600"
+                        target:
+                          entity_id: timer.timer_de_figer_les_lumieres_du_garage
+                    alias: Si on veut soustraire 10 minutes
+            else:
+              - choose:
+                  - conditions:
+                      - condition: template
+                        value_template: >-
+                          {{ trigger.entity_id ==
+                          'input_button.figer_les_lumieres_garage_ajouter_1_heure'
+                          }}
+                        alias: Le bouton "Ajouter 1 heure" à été activé.
+                    sequence:
+                      - action: input_datetime.set_datetime
+                        metadata: {}
+                        data:
+                          time: >
+                            {{
+                            (today_at(states('input_datetime.temps_pour_figer_les_lumieres_du_garage'))
+                            + timedelta(hours=1)).strftime('%H:%M') }}
+                        target:
+                          entity_id: >-
+                            input_datetime.temps_pour_figer_les_lumieres_du_garage
+                    alias: Si on veut ajouter 1 heure
+                  - conditions:
+                      - condition: template
+                        value_template: >-
+                          {{ trigger.entity_id ==
+                          'input_button.figer_les_lumieres_garage_soustraire_1_heure'
+                          }}
+                        alias: Le bouton soustraire 1 heure à été activé.
+                    sequence:
+                      - action: input_datetime.set_datetime
+                        metadata: {}
+                        data:
+                          time: >
+                            {{
+                            (today_at(states('input_datetime.temps_pour_figer_les_lumieres_du_garage'))
+                            - timedelta(hours=1)).strftime('%H:%M') }}
+                        target:
+                          entity_id: >-
+                            input_datetime.temps_pour_figer_les_lumieres_du_garage
+                    alias: Si on veut soustraire 1 heure
+                  - conditions:
+                      - alias: Le bouton "Ajouter 10 minutes" à été activé.
+                        condition: template
+                        value_template: >-
+                          {{ trigger.entity_id ==
+                          'input_button.figer_les_lumieres_garage_ajouter_10_minutes'
+                          }}
+                    sequence:
+                      - action: input_datetime.set_datetime
+                        metadata: {}
+                        data:
+                          time: >
+                            {{
+                            (today_at(states('input_datetime.temps_pour_figer_les_lumieres_du_garage'))
+                            + timedelta(minutes=10)).strftime('%H:%M') }}
+                        target:
+                          entity_id: >-
+                            input_datetime.temps_pour_figer_les_lumieres_du_garage
+                    alias: Si on veut ajouter 10 minutes
+                  - conditions:
+                      - alias: Le bouton soustraire 10 minutes à été activé.
+                        condition: template
+                        value_template: >-
+                          {{ trigger.entity_id ==
+                          'input_button.figer_les_lumieres_garage_soustraire_10_minutes'
+                          }}
+                    sequence:
+                      - action: input_datetime.set_datetime
+                        metadata: {}
+                        data:
+                          time: >
+                            {{
+                            (today_at(states('input_datetime.temps_pour_figer_les_lumieres_du_garage'))
+                            - timedelta(minutes=10)).strftime('%H:%M') }}
+                        target:
+                          entity_id: >-
+                            input_datetime.temps_pour_figer_les_lumieres_du_garage
+                    alias: Si on veut soustraire 10 minutes
+        alias: Si on ajoute/soustrait du temps pendant que le timer est actif
+mode: single

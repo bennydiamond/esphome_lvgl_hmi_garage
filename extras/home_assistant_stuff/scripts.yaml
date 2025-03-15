@@ -1,3 +1,17 @@
+alias: ESPHome HueSaturation light set
+sequence:
+  - action: light.turn_on
+    data_template:
+      entity_id: "{{ light_name }}"
+      hs_color:
+        - "{{ hue }}"
+        - "{{ saturation }}"
+description: >-
+  Helper to receiver Color light turn on request with "hs_color" command from
+  ESPHome devices
+
+
+# Not needed but kept as reference
 alias: ESPHome RGB light set
 sequence:
   - action: light.turn_on
@@ -9,16 +23,4 @@ sequence:
         - "{{ blue }}"
 description: >-
   Helper to receiver Color light turn on request with "rgb_color" command from 
-  ESPHome devices
-
-alias: ESPHome HueSaturation light set
-sequence:
-  - action: light.turn_on
-    data_template:
-      entity_id: "{{ light_name }}"
-      hs_color:
-        - "{{ hue }}"
-        - "{{ saturation }}"
-description: >-
-  Helper to receiver Color light turn on request with "hs_color" command from
   ESPHome devices

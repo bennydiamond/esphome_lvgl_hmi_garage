@@ -1,0 +1,1 @@
+{{ as_timestamp(state_attr('timer.timer_de_figer_les_lumieres_du_garage', 'finishes_at'), default=as_timestamp(utcnow())) | timestamp_custom("%H:%M") }}
