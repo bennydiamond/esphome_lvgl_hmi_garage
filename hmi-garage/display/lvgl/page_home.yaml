@@ -1,0 +1,72 @@
+packages:
+  datetime_widget: !include page_home/datetime_widget.yaml
+  weather_widget: !include page_home/weather_widget.yaml
+  main_tileview: !include page_home/main_tileview.yaml
+
+binary_sensor:
+  # Whole Home Lights #
+  - platform: homeassistant
+    id: id_bin_all_light_state
+    internal: True
+    entity_id: light.toutes_les_lumieres_sauf_eclairage_exterieur
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.widget.update: 
+            id: id_widget_but_all
+            hidden: False
+    on_release:
+      then:
+        - lvgl.widget.update: 
+            id: id_widget_but_all
+            hidden: True
+
+lvgl:
+  pages:
+    - id: page_home
+      skip: True
+      bg_color: color_black
+      scrollable: False
+      widgets:
+        - obj:
+            id: id_widget_but_all
+            bg_opa: TRANSP
+            border_opa: TRANSP
+            shadow_opa: TRANSP
+            pad_all: 0
+            align: TOP_MID
+            x: -50
+            y: 44
+            width: 150
+            height: 140
+            hidden: False
+            widgets:
+              - label:
+                  align: TOP_MID
+                  text_font: lato_24
+                  text_color: color_white
+                  text: "Tout éteindre"
+              - button:
+                  #id: ${id_lvgl_widget_button}
+                  width: 90
+                  height: 90
+                  y: 10
+                  align: CENTER
+                  bg_opa: TRANSP
+                  shadow_opa: 100%
+                  shadow_color: color_bright_white
+                  shadow_spread: 4
+                  shadow_width: 30
+                  border_width: 2
+                  radius: 50
+                  on_press:
+                    - homeassistant.action:
+                        action: light.turn_off
+                        data:
+                          entity_id: light.toutes_les_lumieres_sauf_eclairage_exterieur
+                  widgets:
+                    - label:
+                        align: CENTER
+                        text_font: mdi_icons_72
+                        text_color: color_bright_white
+                        text: "${lights}"

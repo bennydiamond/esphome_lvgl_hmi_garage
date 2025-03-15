@@ -1,0 +1,110 @@
+binary_sensor:
+  # Garage Motion Sensor from HA #  
+  - platform: homeassistant
+    id: id_ha_motion_garage
+    entity_id: binary_sensor.presence_dans_le_garage
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_motion_status
+            text_color: color_red
+    on_release:
+      then:
+      - lvgl.label.update: 
+          id: id_lv_lab_motion_status
+          text_color: color_dark_gray
+
+  # Garage SS Motion Sensor from HA #
+  - platform: homeassistant
+    id: id_ha_motion_garage_ss
+    entity_id: binary_sensor.presence_dans_le_sous_sol_garage
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_motion_ss_status
+            text_color: color_red
+    on_release:
+      then:
+      - lvgl.label.update: 
+          id: id_lv_lab_motion_ss_status
+          text_color: color_dark_gray
+
+  # Garage inside door to basement from HA #
+  - platform: homeassistant
+    id: id_ha_indoor_basement
+    entity_id: binary_sensor.ademcointerposer_interieur_garage_ss
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_basement_door_status
+            text_color: color_green
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_basement_door_status
+            text_color: color_dark_gray
+
+  # Garage inside door to ground floor from HA #
+  - platform: homeassistant
+    id: id_ha_indoor_rdc
+    entity_id: binary_sensor.ademcointerposer_interieur_garage_rdc
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_groundfloor_door_status
+            text_color: color_green
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_groundfloor_door_status
+            text_color: color_dark_gray
+
+sensor:
+  - platform: homeassistant
+    id: gr_temp
+    internal: True
+    entity_id: sensor.yaris_remote_temperature
+    on_value:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_temperature_garage_rdc
+            text:
+              format: "%.1f°C"
+              args: x
+  - platform: homeassistant
+    id: gr_hum
+    internal: True
+    entity_id: sensor.yaris_remote_humidty
+    on_value:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_humidity_garage_rdc
+            text:
+              format: "%.0f%%"
+              args: x
+  - platform: homeassistant
+    id: gs_temp
+    internal: True
+    entity_id: sensor.acurite_tower_c_241_temperature
+    on_value:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_temperature_garage_ss
+            text:
+              format: "%.1f°C"
+              args: x
+  - platform: homeassistant
+    id: gs_hum
+    internal: True
+    entity_id: sensor.acurite_tower_c_241_humidity
+    on_value:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_humidity_garage_ss
+            text:
+              format: "%.0f%%"
+              args: x

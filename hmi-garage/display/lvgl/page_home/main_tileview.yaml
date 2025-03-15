@@ -1,56 +1,63 @@
-tileview: # Main Screen buttons Grid widget
-  width: 712
-  height: 300
-  align: TOP_LEFT
-  x: 0
-  y: 180
-  bg_opa: TRANSP
-  scrollbar:
-    width: 11
-    bg_opa: 25%
-    bg_color: color_blue
-  tiles:
-    - id: id_lv_tile_page0
-      pad_all: 0
-      row: 0
-      column: 0
-      dir: BOTTOM
-      layout:
-        type: GRID
-        grid_columns: [FR(200), FR(500), FR(12)]
-        grid_rows: [100%]
+packages:
+  page1_climate_widgets_sensors: !include main_tileview/tileview_page1/climate_widgets_sensors.yaml
+
+lvgl:
+  pages:
+    - id: !extend page_home
       widgets:
-        - obj:
-              grid_cell_column_pos: 0
-              grid_cell_row_pos: 0
-              grid_cell_x_align: STRETCH
-              grid_cell_y_align: STRETCH
-              pad_all: 0
-              pad_left: 12
-              pad_top: 6
-              <<: !include main_tileview/tileview_page1/climate_widgets.yaml
-        - obj:
-              grid_cell_column_pos: 1
-              grid_cell_row_pos: 0
-              grid_cell_x_align: STRETCH
-              grid_cell_y_align: STRETCH
-              pad_top: 20
-              <<: !include "main_tileview/tileview_page1/button_grid.yaml"
-    - id: id_lv_tile_page1
-      pad_all: 0
-      row: 1
-      column: 0
-      dir: TOP
-      layout:
-        type: GRID
-        grid_columns: [FR(200), FR(500), FR(12)]
-        grid_rows: [100%]
-      widgets:
-        - obj:
-              grid_cell_column_pos: 1
-              grid_cell_row_pos: 0
-              grid_cell_x_align: STRETCH
-              grid_cell_y_align: STRETCH
-              pad_top: 20
-              <<: !include "main_tileview/tileview_page2/button_grid.yaml"
+        - tileview: # Main Screen buttons Grid widget
+            width: 712
+            height: 300
+            align: TOP_LEFT
+            x: 0
+            y: 180
+            bg_opa: TRANSP
+            scrollbar:
+              width: 11
+              bg_opa: 25%
+              bg_color: color_blue
+            tiles:
+              - id: id_lv_tile_page0
+                pad_all: 0
+                row: 0
+                column: 0
+                dir: BOTTOM
+                layout:
+                  type: GRID
+                  grid_columns: [FR(200), FR(500), FR(12)]
+                  grid_rows: [100%]
+                widgets:
+                  - obj:
+                        grid_cell_column_pos: 0
+                        grid_cell_row_pos: 0
+                        grid_cell_x_align: STRETCH
+                        grid_cell_y_align: STRETCH
+                        pad_all: 0
+                        pad_left: 12
+                        pad_top: 6
+                        <<: !include main_tileview/tileview_page1/climate_widgets.yaml
+                  - obj:
+                        grid_cell_column_pos: 1
+                        grid_cell_row_pos: 0
+                        grid_cell_x_align: STRETCH
+                        grid_cell_y_align: STRETCH
+                        pad_top: 20
+                        <<: !include "main_tileview/tileview_page1/button_grid.yaml"
+              - id: id_lv_tile_page1
+                pad_all: 0
+                row: 1
+                column: 0
+                dir: TOP
+                layout:
+                  type: GRID
+                  grid_columns: [FR(200), FR(500), FR(12)]
+                  grid_rows: [100%]
+                widgets:
+                  - obj:
+                        grid_cell_column_pos: 1
+                        grid_cell_row_pos: 0
+                        grid_cell_x_align: STRETCH
+                        grid_cell_y_align: STRETCH
+                        pad_top: 20
+                        <<: !include "main_tileview/tileview_page2/button_grid.yaml"
 

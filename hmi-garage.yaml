@@ -14,91 +14,9 @@ packages:
   switch: !include hmi-garage/components/switch.yaml
   online_image: !include hmi-garage/components/online_image.yaml
   select: !include hmi-garage/components/select.yaml
+  lvgl: !include hmi-garage/display/lvgl.yaml
 
-  # LVGL
-  page_home: !include hmi-garage/display/lvgl/page_home/page_home.yaml
-  page_settings: !include hmi-garage/display/lvgl/sub_pages/page_settings.yaml
-  page_music: !include hmi-garage/display/lvgl/sub_pages/page_music.yaml
-  page_light_garage_rdc: !include 
-    file: hmi-garage/display/lvgl/templates/template.page_light_automation.yaml
-    vars:
-      light_friendly_name: "Garage"
-      light_ha_entity: ${garage_rdc_lights_ha_entity_id}
-      lvgl_page_id: page_light_garage_rdc
-      light_button_grid_button_id: id_lv_but_gr_light
-      light_button_grid_label_id: id_lv_lab_gr_light
-      input_bool_freeze_active_ha_entity: ${garage_light_automation_freeze_toggle}
-      button_add_hour_ha_entity: ${garage_light_automation_freeze_add_hour}
-      button_add_minutes_ha_entity: ${garage_light_automation_freeze_add_minutes}
-      button_sub_hour_ha_entity: ${garage_light_automation_freeze_sub_hour}
-      button_sub_minutes_ha_entity: ${garage_light_automation_freeze_sub_minutes}
-      sensor_freeze_end_time: ${garage_light_automation_freeze_timer_end_time}
-      input_datetime_freeze_value_on_start: ${garage_light_automation_freeze_timer_value_on_start}
-
-  page_light_garage_ss: !include
-    file: hmi-garage/display/lvgl/templates/template.page_light_automation.yaml
-    vars:
-      light_friendly_name: "Sous-Sol Garage"
-      light_ha_entity: ${garage_ss_lights_ha_entity_id}
-      lvgl_page_id: page_light_garage_ss
-      light_button_grid_button_id: id_lv_but_gs
-      light_button_grid_label_id: id_lv_lab_gs
-      input_bool_freeze_active_ha_entity: ${garage_ss_light_automation_freeze_toggle}
-      button_add_hour_ha_entity: ${garage_ss_light_automation_freeze_add_hour}
-      button_add_minutes_ha_entity: ${garage_ss_light_automation_freeze_add_minutes}
-      button_sub_hour_ha_entity: ${garage_ss_light_automation_freeze_sub_hour}
-      button_sub_minutes_ha_entity: ${garage_ss_light_automation_freeze_sub_minutes}
-      sensor_freeze_end_time: ${garage_ss_light_automation_freeze_timer_end_time}
-      input_datetime_freeze_value_on_start: ${garage_ss_light_automation_freeze_timer_value_on_start}
-
-  page_light_lampadaire_avant: !include
-    file: hmi-garage/display/lvgl/templates/template.page_light_rgbct.yaml
-    vars:
-      light_friendly_name: "Lampadaire Avant"
-      light_ha_entity: ${lampadaire_avant_lights_ha_entity_id}
-      lvgl_page_id: page_lamp
-      light_button_grid_button_id: id_lv_but_lamp
-      light_button_grid_label_id: id_lv_lab_lamp
-      light_ha_min_kelvin: ${lampadaire_avant_min_kelvin}
-      light_ha_max_kelvin: ${lampadaire_avant_max_kelvin}
-
-  page_light_exterieur_garage: !include 
-    file: hmi-garage/display/lvgl/templates/template.page_light_rgbct.yaml
-    vars:
-      light_friendly_name: "Corniche Garage"
-      light_ha_entity: ${exterieur_garage_lights_ha_entity_id}
-      lvgl_page_id: page_light_exterieur_garage
-      light_button_grid_button_id: id_lv_but_extg
-      light_button_grid_label_id: id_lv_lab_extg
-      light_ha_min_kelvin: ${exterieur_garage_min_kelvin}
-      light_ha_max_kelvin: ${exterieur_garage_max_kelvin}
-
-  page_light_exterieur_cote: !include
-    file: hmi-garage/display/lvgl/templates/template.page_light_rgbct.yaml
-    vars:
-      light_friendly_name: "Corniche Coté"
-      light_ha_entity: ${exterieur_cote_lights_ha_entity_id}
-      lvgl_page_id: page_light_exterieur_cote
-      light_button_grid_button_id: id_lv_but_extc
-      light_button_grid_label_id: id_lv_lab_extc
-      light_ha_min_kelvin: ${exterieur_cote_min_kelvin}
-      light_ha_max_kelvin: ${exterieur_cote_max_kelvin}
-  
 api:
 
 http_request:
   verify_ssl: false
-
-font: !include hmi-garage/display/fonts.yaml
-image: !include hmi-garage/display/images.yaml
-color: !include hmi-garage/display/colors.yaml
-
-lvgl:
-  gradients: !include hmi-garage/display/gradients.yaml  
-  disp_bg_image: none
-            
-  top_layer: # Top Screen Status bar. Visible on all pages.
-    widgets:
-      - <<: !include hmi-garage/display/lvgl/top_layer/media_control_side_widget.yaml
-      # Top notification area delimiter line
-      - <<: !include hmi-garage/display/lvgl/top_layer/notification_area.yaml
