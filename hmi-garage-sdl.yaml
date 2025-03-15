@@ -20,11 +20,38 @@ packages:
   page_home: !include hmi-garage/display/lvgl/page_home/page_home.yaml
   page_settings: !include hmi-garage/display/lvgl/sub_pages/page_settings.yaml
   page_music: !include hmi-garage/display/lvgl/sub_pages/page_music.yaml
-  page_light_lampadaire_avant: !include hmi-garage/display/lvgl/sub_pages/page_light_lampadaire_avant.yaml
   page_light_garage_rdc: !include hmi-garage/display/lvgl/sub_pages/page_light_garage_rdc.yaml
   page_light_garage_ss: !include hmi-garage/display/lvgl/sub_pages/page_light_garage_ss.yaml
-  page_light_exterieur_garage: !include hmi-garage/display/lvgl/sub_pages/page_light_exterieur_garage.yaml
-  page_light_exterieur_cote: !include hmi-garage/display/lvgl/sub_pages/page_light_exterieur_cote.yaml
+  page_light_lampadaire_avant: !include
+    file: hmi-garage/display/lvgl/templates/template.page_light_rgbct.yaml
+    vars:
+      light_friendly_name: "Lampadaire Avant"
+      light_ha_entity: ${lampadaire_avant_lights_ha_entity_id}
+      lvgl_page_id: page_lamp
+      light_button_grid_button_id: id_lv_but_lamp
+      light_button_grid_label_id: id_lv_lab_lamp
+      light_ha_min_kelvin: ${lampadaire_avant_min_kelvin}
+      light_ha_max_kelvin: ${lampadaire_avant_max_kelvin}
+  page_light_exterieur_garage: !include 
+    file: hmi-garage/display/lvgl/templates/template.page_light_rgbct.yaml
+    vars:
+      light_friendly_name: "Corniche Garage"
+      light_ha_entity: ${exterieur_garage_lights_ha_entity_id}
+      lvgl_page_id: page_light_exterieur_garage
+      light_button_grid_button_id: id_lv_but_extg
+      light_button_grid_label_id: id_lv_lab_extg
+      light_ha_min_kelvin: ${exterieur_garage_min_kelvin}
+      light_ha_max_kelvin: ${exterieur_garage_max_kelvin}
+  page_light_exterieur_cote: !include
+    file: hmi-garage/display/lvgl/templates/template.page_light_rgbct.yaml
+    vars:
+      light_friendly_name: "Corniche Coté"
+      light_ha_entity: ${exterieur_cote_lights_ha_entity_id}
+      lvgl_page_id: page_light_exterieur_cote
+      light_button_grid_button_id: id_lv_but_extc
+      light_button_grid_label_id: id_lv_lab_extc
+      light_ha_min_kelvin: ${exterieur_cote_min_kelvin}
+      light_ha_max_kelvin: ${exterieur_cote_max_kelvin}
 
 api:
 

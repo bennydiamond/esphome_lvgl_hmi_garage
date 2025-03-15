@@ -1,0 +1,311 @@
+globals:
+  - id: id_global_${light_ha_entity}_color
+    type: lv_color_t
+    restore_value: no
+    initial_value: "lv_color_make(0xff, 0xcc, 0x66)"
+  - id: id_global_${light_ha_entity}_hue
+    type: float
+    initial_value: "120"
+    restore_value: no
+  - id: id_global_${light_ha_entity}_satu
+    type: float
+    restore_value: no
+    initial_value: "100"
+  - id: id_global_${light_ha_entity}_kelvin
+    type: int
+    restore_value: no
+    initial_value: ${light_ha_min_kelvin}
+
+select:
+  - platform: lvgl
+    id: id_lv_dropselect_drop_${light_ha_entity}_effects
+    internal: True
+    widget: id_lv_drop_${light_ha_entity}_effects
+
+binary_sensor:
+  - platform: homeassistant
+    id: id_bin_${light_ha_entity}_state
+    internal: True
+    entity_id: light.${light_ha_entity}
+    publish_initial_state: True
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: ${light_button_grid_button_id}
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.button.update: 
+            id: id_lv_but_page_${light_ha_entity}
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: ${light_button_grid_label_id}
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_icon
+            text_color: color_gray
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_bright_percent
+            text: "Éteint"
+        - lvgl.arc.update:
+                id: id_lv_arc_${light_ha_entity}_bright
+                value: 0
+
+sensor:
+  - platform: homeassistant
+    id: id_${light_ha_entity}_bright
+    internal: true
+    entity_id: light.${light_ha_entity}
+    attribute: brightness
+    on_value:
+      - if:
+          condition:
+            - lambda: 'return id(id_${light_ha_entity}_bright).state > 0;' 
+          then: 
+            - lvgl.label.update:
+                id: id_lv_lab_${light_ha_entity}_bright_percent
+                text:
+                    format: "%.0f %%"
+                    args: ['id(id_${light_ha_entity}_bright).state / 2.55']
+            - lvgl.arc.update:
+                id: id_lv_arc_${light_ha_entity}_bright
+                value: !lambda return x;
+            - lvgl.button.update: 
+                id: id_lv_but_page_${light_ha_entity}
+                shadow_spread: !lambda |-
+                  uint8_t result = 2;
+                  result += (uint8_t)(id(id_${light_ha_entity}_bright).state / 255 * 20); // Swing from 3 to 21
+                  return result;
+                shadow_width: !lambda |-
+                  uint8_t result = 20;
+                  result += (uint8_t)(id(id_${light_ha_entity}_bright).state / 2.55); // Swing from 21 to 120
+                  return result;
+  - platform: homeassistant
+    id: id_${light_ha_entity}_kelvin
+    entity_id: light.${light_ha_entity}
+    internal: true
+    attribute: color_temp_kelvin
+    on_value:
+      - globals.set:
+          id: id_global_${light_ha_entity}_kelvin
+          value: !lambda |-
+            if(std::isnan(x))
+              return id(id_global_${light_ha_entity}_kelvin);
+            return static_cast<int>(x);
+      - lvgl.slider.update:
+          id: id_lv_slid_${light_ha_entity}_kelvin
+          value: !lambda return x;
+      - lvgl.label.update:
+          id: id_lv_lab_${light_ha_entity}_kelvin
+          text:
+              format: "%.0f K"
+              args: ['id(id_${light_ha_entity}_kelvin).state']
+
+text_sensor:
+  - platform: homeassistant
+    id: ${light_ha_entity}_rgb
+    internal: true
+    entity_id: light.${light_ha_entity}
+    attribute: rgb_color
+    on_value:
+      then:
+        - if:
+            condition:
+              - binary_sensor.is_on: id_bin_${light_ha_entity}_state
+            then:
+              - globals.set:
+                  id: id_global_${light_ha_entity}_color
+                  value: !lambda |-
+                    uint8_t rgb[3] = {UINT8_MAX, UINT8_MAX, UINT8_MAX};
+                    char const * str = x.c_str();
+                    size_t len = strlen(str);
+                    size_t i = 0;
+                    while (len && i < 3)
+                    {
+                      if(isdigit(*str))
+                      {
+                        char * end;
+                        rgb[i] = strtoul(str, &end, 10);
+                        i++;
+                        len -= (end - str);
+                        str += (end - str);
+                      }
+                      else
+                      {
+                        str++;
+                        len--;
+                      }
+                    }
+                    // Default 'light ON' color
+                    lv_color_t color = lv_color_make(0xff, 0xcc, 0x66);
+                    if(i == 3)
+                    {
+                      color = lv_color_make(rgb[0], rgb[1], rgb[2]);
+                    }
+               
+                    return color;
+              - lvgl.button.update: 
+                  id: ${light_button_grid_button_id}
+                  shadow_spread: 3
+                  shadow_width: 35
+                  shadow_color: !lambda |-
+                    return id(id_global_${light_ha_entity}_color);
+              - lvgl.label.update:
+                  id: ${light_button_grid_label_id}
+                  text_color: !lambda |-
+                    return id(id_global_${light_ha_entity}_color);
+              - lvgl.button.update: 
+                  id: id_lv_but_page_${light_ha_entity}
+                  shadow_color: !lambda |-
+                    return id(id_global_${light_ha_entity}_color);
+              - lvgl.label.update:
+                  id: ${light_button_grid_label_id}
+                  text_color: !lambda |-
+                    return id(id_global_${light_ha_entity}_color);
+              - lvgl.label.update:
+                  id: id_lv_lab_${light_ha_entity}_icon
+                  text_color: !lambda |-
+                    return id(id_global_${light_ha_entity}_color);
+  - platform: homeassistant
+    id: ${light_ha_entity}_hs
+    internal: true
+    entity_id: light.${light_ha_entity}
+    attribute: hs_color
+    on_value:
+      then:
+        - if:
+            condition:
+              - binary_sensor.is_on: id_bin_${light_ha_entity}_state
+            then:
+              - globals.set:
+                  id: id_global_${light_ha_entity}_hue
+                  value: !lambda |-
+                    double hs[2] = {0.0, 0.0};
+                    char const * str = x.c_str();
+                    size_t len = strlen(str);
+                    size_t i = 0;
+                    while (len && i < 2)
+                    {
+                      if(isdigit(*str))
+                      {
+                        char * end;
+                        hs[i] = strtof(str, &end);
+                        i++;
+                        len -= (end - str);
+                        str += (end - str);
+                      }
+                      else
+                      {
+                        str++;
+                        len--;
+                      }
+                    }
+                    if(i == 2)
+                    {
+                      id(id_global_${light_ha_entity}_satu) = hs[1];
+                      return hs[0];
+                    }
+
+                    id(id_global_${light_ha_entity}_satu) = 0.0;
+                    return 0.0;
+              - lvgl.slider.update:
+                  id: id_lv_slid_${light_ha_entity}_hue
+                  value:  !lambda 'return id(id_global_${light_ha_entity}_hue);'
+              - lvgl.slider.update:
+                  id: id_lv_slid_${light_ha_entity}_satu
+                  value:  !lambda 'return id(id_global_${light_ha_entity}_satu);'
+  - platform: homeassistant
+    id: id_${light_ha_entity}_color_mode
+    entity_id: light.${light_ha_entity}
+    internal: true
+    attribute: color_mode
+    on_value:
+      - delay: 20ms
+      - if:
+          condition:
+            text_sensor.state:
+              id: id_${light_ha_entity}_color_mode
+              state: "color_temp"
+          then:
+            - lvgl.widget.update:
+                id: id_lv_obj_${light_ha_entity}_color_kelvin
+                hidden: False
+            - lvgl.widget.update:
+                id: id_lv_obj_${light_ha_entity}_color_rgb
+                hidden: True
+            - lvgl.button.update:
+                id: id_lv_but_${light_ha_entity}_ctemp
+                border_opa: COVER
+            - lvgl.button.update:
+                id: id_lv_but_${light_ha_entity}_crgb
+                border_opa: TRANSP
+          else:
+            - lvgl.slider.update:
+                id: id_lv_slid_${light_ha_entity}_kelvin
+                value: 0.0
+            - lvgl.widget.update:
+                id: id_lv_obj_${light_ha_entity}_color_kelvin
+                hidden: True
+            - lvgl.button.update:
+                id: id_lv_but_${light_ha_entity}_ctemp
+                border_opa: TRANSP
+            - if:
+                condition:
+                  text_sensor.state:
+                    id: id_${light_ha_entity}_color_mode
+                    state: "hs"
+                then: 
+                  - lvgl.widget.update:
+                      id: id_lv_obj_${light_ha_entity}_color_rgb
+                      hidden: False
+                  - lvgl.button.update:
+                      id: id_lv_but_${light_ha_entity}_crgb
+                      border_opa: COVER
+                else:
+                  - lvgl.widget.update:
+                      id: id_lv_obj_${light_ha_entity}_color_rgb
+                      hidden: True
+                  - lvgl.button.update:
+                      id: id_lv_but_${light_ha_entity}_crgb
+                      border_opa: TRANSP
+  - platform: homeassistant
+    id: id_${light_ha_entity}_active_effect
+    entity_id: light.${light_ha_entity}
+    internal: true
+    attribute: effect
+    on_value:
+      - lvgl.dropdown.update:
+          id: id_lv_drop_${light_ha_entity}_effects
+          selected_text: !lambda "return x.c_str();"
+
+lvgl:
+  pages:
+    - id: ${lvgl_page_id}
+      <<: !include  { file: template.page_light_rgbct/rgb_light_sub_page_body.yaml, 
+                      vars: { light_name: '${light_friendly_name}', 
+                              light_ha_entity_id: 'light.${light_ha_entity}', 
+                              id_lvgl_widget_arc: 'id_lv_arc_${light_ha_entity}_bright', 
+                              id_lvgl_widget_button: 'id_lv_but_page_${light_ha_entity}', 
+                              id_lvgl_widget_icon: 'id_lv_lab_${light_ha_entity}_icon', 
+                              id_txt_bright_percent: 'id_lv_lab_${light_ha_entity}_bright_percent', 
+                              id_lv_lab_kelvin: 'id_lv_lab_${light_ha_entity}_kelvin', 
+                              id_lv_slid_kelvin: 'id_lv_slid_${light_ha_entity}_kelvin', 
+                              id_lv_obj_color_kelvin: 'id_lv_obj_${light_ha_entity}_color_kelvin', 
+                              id_lv_obj_color_rgb: 'id_lv_obj_${light_ha_entity}_color_rgb', 
+                              id_lvgl_dropdown_effects: 'id_lv_drop_${light_ha_entity}_effects', 
+                              id_select_dropdown_effects: 'id_lv_dropselect_drop_${light_ha_entity}_effects', 
+                              id_light_active_light_effect: 'id_${light_ha_entity}_active_effect', 
+                              id_lv_but_ctemp: 'id_lv_but_${light_ha_entity}_ctemp', 
+                              id_lv_but_crgb: 'id_lv_but_${light_ha_entity}_crgb', 
+                              id_global_kelvin: 'id_global_${light_ha_entity}_kelvin', 
+                              id_lv_slid_hue: 'id_lv_slid_${light_ha_entity}_hue',
+                              id_lv_slid_sat: 'id_lv_slid_${light_ha_entity}_satu',
+                              id_global_hue: 'id_global_${light_ha_entity}_hue',
+                              id_global_satu: 'id_global_${light_ha_entity}_satu',
+                              value_min_kelvin: '${light_ha_min_kelvin}',
+                              value_max_kelvin: '${light_ha_max_kelvin}',
+                              id_global_color: 'id_global_${light_ha_entity}_color'
+                            } 
+                      }

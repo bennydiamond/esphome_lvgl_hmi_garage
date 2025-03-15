@@ -109,7 +109,7 @@ widgets:
 #          - homeassistant.action:
 #              action: light.toggle
 #              data:
-#                entity_id: ${exterieur_cote_lights_ha_entity_id}
+#                entity_id: light.${exterieur_cote_lights_ha_entity_id}
 #                kelvin: "2000"
 #                brightness_pct: "65"
 #        on_long_press:
@@ -148,7 +148,7 @@ widgets:
 #          - homeassistant.action:
 #              action: light.toggle
 #              data:
-#                entity_id: ${exterieur_garage_lights_ha_entity_id}
+#                entity_id: light.${exterieur_garage_lights_ha_entity_id}
 #                kelvin: "2000"
 #                brightness_pct: "65"
 #        on_long_press:
@@ -187,7 +187,7 @@ widgets:
 #          - homeassistant.action:
 #              action: light.toggle
 #              data:
-#                entity_id: ${lampadaire_avant_lights_ha_entity_id}
+#                entity_id: light.${lampadaire_avant_lights_ha_entity_id}
 #                kelvin: "2000"
 #                brightness_pct: "65"
 #        on_long_press:
