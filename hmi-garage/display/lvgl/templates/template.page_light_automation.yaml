@@ -1,0 +1,129 @@
+binary_sensor:
+  # Garage RDC Lights #
+  - platform: homeassistant
+    id: id_bin_${light_ha_entity}_light_state
+    internal: True
+    entity_id: light.${light_ha_entity}
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.button.update: 
+            id: ${light_button_grid_button_id}
+            shadow_color: color_bright_white
+            shadow_spread: 3
+            shadow_width: 35
+        - lvgl.label.update:
+            id: ${light_button_grid_label_id}
+            text_color: color_bright_white
+        - lvgl.button.update: 
+            id: id_lv_but_${light_ha_entity}
+            shadow_color: color_bright_white
+            shadow_spread: 5
+            shadow_width: 75 
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_icon
+            text_color: color_bright_white
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: ${light_button_grid_button_id}
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: ${light_button_grid_label_id}
+            text_color: color_gray
+        - lvgl.button.update: 
+            id: id_lv_but_${light_ha_entity}
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_icon
+            text_color: color_gray
+            
+  - platform: homeassistant
+    id: id_text_${light_ha_entity}_freeze_active
+    entity_id: ${input_bool_freeze_active_ha_entity}
+    internal: true
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_freeze_time_end
+            hidden: False
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_freeze_init_time
+            hidden: True
+    on_release:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_freeze_time_end
+            hidden: True
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_freeze_init_time
+            hidden: False
+    on_state:
+      then:
+        - lvgl.widget.update:
+            id: id_lv_switch_${light_ha_entity}_freeze_toggle
+            state: 
+              checked: !lambda |-
+                return id(id_text_${light_ha_entity}_freeze_active).state;
+
+text_sensor:
+  - platform: homeassistant
+    id: id_text_${light_ha_entity}_freeze_end_time
+    entity_id: ${sensor_freeze_end_time}
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_freeze_time_end
+            text: !lambda |-
+              return ("Réactivation à " + id(id_text_${light_ha_entity}_freeze_end_time).state).c_str();
+  - platform: homeassistant
+    id: id_text_${light_ha_entity}_freeze_start_time
+    entity_id: ${input_datetime_freeze_value_on_start}
+    internal: true
+    filters:
+      - lambda: >
+          size_t idx = 0;
+          for(size_t i = 0; i <= x.length(); i++)
+          {
+            if(x.c_str()[i] == ':')  
+            {
+                idx = i;
+            }
+          }
+          if(idx < x.length())
+          {
+            return str_truncate(x, idx);
+          }
+
+          return x;
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_freeze_init_time
+            text: !lambda |-
+                return ("Désactiver durant " + id(id_text_${light_ha_entity}_freeze_start_time).state).c_str();
+
+lvgl:
+  pages:
+    - id: ${lvgl_page_id}
+      <<: !include  { file: template.page_light_automation/light_auto_sub_page_body.yaml, 
+                      vars: { light_name: '${light_friendly_name}', 
+                              light_ha_entity_id: 'light.${light_ha_entity}', 
+                              id_lvgl_switch_freeze_toggle: 'id_lv_switch_${light_ha_entity}_freeze_toggle', 
+                              light_freeze_toggle_ha_entity_id: '${input_bool_freeze_active_ha_entity}', 
+                              id_lv_lab_freeze_end_time: 'id_lv_lab_${light_ha_entity}_freeze_time_end', 
+                              id_lv_lab_freeze_initial_time: 'id_lv_lab_${light_ha_entity}_freeze_init_time', 
+                              id_button_freeze_add_hour: '${button_add_hour_ha_entity}', 
+                              id_button_freeze_add_minutes: '${button_add_minutes_ha_entity}', 
+                              id_button_freeze_sub_hour: '${button_sub_hour_ha_entity}', 
+                              id_button_freeze_sub_minutes: '${button_sub_minutes_ha_entity}', 
+                              id_lvgl_widget_button: 'id_lv_but_${light_ha_entity}', 
+                              id_lvgl_widget_icon: 'id_lv_lab_${light_ha_entity}_icon' 
+                            } 
+                    }
