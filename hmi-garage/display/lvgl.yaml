@@ -2,6 +2,7 @@ packages:
   page_home: !include lvgl/page_home.yaml
   page_settings: !include lvgl/sub_pages/page_settings.yaml
   page_music: !include lvgl/sub_pages/page_music.yaml
+  notification_area_sensors: !include notification_area_sensors.yaml
 
   page_light_garage_rdc: !include 
     file: lvgl/templates/template.page_light_automation.yaml

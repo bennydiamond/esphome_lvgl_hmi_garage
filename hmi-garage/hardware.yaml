@@ -350,4 +350,4 @@ display:
         - 47        #g6
         - 21        #g7
 
-script: !include display/script.yaml
+script: !include display/lvgl/page_home/datetime_widget_scripts.yaml
