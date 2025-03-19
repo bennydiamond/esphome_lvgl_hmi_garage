@@ -68,6 +68,48 @@ packages:
       light_button_grid_label_id: id_lv_lab_extc
       light_ha_min_kelvin: ${exterieur_cote_min_kelvin}
       light_ha_max_kelvin: ${exterieur_cote_max_kelvin}
+  
+  page_light_exterieur_avant: !include
+    file: lvgl/templates/template.page_light_rgbct.yaml
+    vars:
+      light_friendly_name: "Extérieur Avant"
+      light_ha_entity: ${exterieur_avant_lights_ha_entity_id}
+      lvgl_page_id: page_light_exterieur_avant
+      light_button_grid_button_id: id_lv_but_exta_light
+      light_button_grid_label_id: id_lv_lab_exta_light
+      light_ha_min_kelvin: ${exterieur_avant_min_kelvin}
+      light_ha_max_kelvin: ${exterieur_avant_max_kelvin}
+
+#  page_light_exterieur_avant_maison: !include
+#    file: lvgl/templates/template.page_light_rgbct.yaml
+#    vars:
+#      light_friendly_name: "Corniches Avant"
+#      light_ha_entity: ${exterieur_avant_maison_lights_ha_entity_id}
+#      lvgl_page_id: page_light_exterieur_avant_maison
+#      light_button_grid_button_id: id_lv_but_extm
+#      light_button_grid_label_id: id_lv_lab_extm
+#      light_ha_min_kelvin: ${exterieur_avant_maison_min_kelvin}
+#      light_ha_max_kelvin: ${exterieur_avant_maison_max_kelvin}
+  
+#  page_light_portique_avant: !include
+#    file: lvgl/templates/template.page_light_rgbct.yaml
+#    vars:
+#      light_friendly_name: "Portique"
+#      light_ha_entity: ${portique_avant_lights_ha_entity_id}
+#      lvgl_page_id: page_light_portique_avant
+#      light_button_grid_button_id: id_lv_but_portique_light
+#      light_button_grid_label_id: id_lv_lab_portique_light
+#      light_ha_min_kelvin: ${portique_avant_min_kelvin}
+#      light_ha_max_kelvin: ${portique_avant_max_kelvin}
+
+#  page_light_sous_sol: !include
+#    file: lvgl/templates/template.page_light_dimmer.yaml
+#    vars:
+#      light_friendly_name: "Tout le Sous-Sol"
+#      light_ha_entity: ${tout_le_sous_sol_lights_ha_entity_id}
+#      lvgl_page_id: page_light_sous_sol
+#      light_button_grid_button_id: id_lv_but_all_ss
+#      light_button_grid_label_id: id_lv_lab_all_ss
 
 font: !include fonts.yaml
 image: !include images.yaml

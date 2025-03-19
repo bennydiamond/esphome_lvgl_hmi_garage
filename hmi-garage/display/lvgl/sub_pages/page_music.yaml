@@ -4,7 +4,7 @@ online_image:
     format: png
     resize: 200x200
     type: RGB565
-    placeholder: music_note
+    placeholder: id_img_music_note
     on_download_finished:
       then:
         - lvgl.image.update:
@@ -192,7 +192,7 @@ lvgl:
             scrollable: False
             widgets:
               - image:
-                  src: music_note #id_online_img_now_playing
+                  src: id_img_music_note #id_online_img_now_playing
                   id: id_lvgl_image_now_playing
                   bg_opa: TRANSP
                   align: TOP_LEFT

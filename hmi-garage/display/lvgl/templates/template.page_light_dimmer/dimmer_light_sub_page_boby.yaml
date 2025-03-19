@@ -1,0 +1,161 @@
+bg_color: color_black
+widgets:
+  - obj:
+      bg_opa: TRANSP
+      border_opa: TRANSP
+      shadow_opa: TRANSP
+      pad_all: 0
+      width: 800
+      height: 438
+      y: 42
+      align: TOP_MID
+      layout:
+        pad_column: 0
+        pad_row: 0
+        type: GRID
+        grid_columns: [FR(40), FR(5), FR(42), FR(13)]
+        grid_rows: [FR(8), FR(8), FR(48), FR(8), FR(30)]
+      widgets:
+        # MAIN LIGHT
+        - obj:
+            bg_opa: TRANSP
+            border_opa: TRANSP
+            shadow_opa: TRANSP
+            pad_all: 0
+            align: CENTER
+            grid_cell_column_pos: 0
+            grid_cell_row_pos: 0
+            grid_cell_x_align: STRETCH
+            grid_cell_y_align: STRETCH
+            grid_cell_column_span: 1
+            grid_cell_row_span: 1
+            widgets:
+              - label:
+                    align: BOTTOM_MID
+                    text_font: lato_24
+                    text_color: color_white
+                    text_decor: UNDERLINE
+                    text: ${light_name}
+        - obj:
+            bg_opa: TRANSP
+            border_opa: TRANSP
+            shadow_opa: TRANSP
+            pad_all: 0
+            grid_cell_column_pos: 0
+            grid_cell_row_pos: 1
+            grid_cell_x_align: STRETCH
+            grid_cell_y_align: STRETCH
+            grid_cell_column_span: 1
+            grid_cell_row_span: 3
+            scrollable: False
+            widgets:
+              - arc:
+                  id: ${id_lvgl_widget_arc}
+                  align: TOP_MID
+                  x: 0
+                  y: 33
+                  height: 230
+                  width: 230
+                  min_value: 0
+                  max_value: 255
+                  adjustable: True
+                  arc_width: 20
+                  indicator:
+                    arc_width: 20
+                  knob:
+                  #  arc_width: 10
+                    shadow_opa: COVER
+                    shadow_color: color_dark_gray
+                    shadow_width: 20
+                  on_change:
+                    - lvgl.button.update:
+                        id: ${id_lvgl_widget_button}
+                        shadow_spread: !lambda |-
+                          uint8_t result = 2;
+                          result += (uint8_t)(x / 255 * 20); // Swing from 3 to 21
+                          return result;
+                        shadow_width: !lambda |-
+                          uint8_t result = 20;
+                          result += (uint8_t)(float(x) / 2.55); // Swing from 21 to 120
+                          return result;
+                        shadow_color: color_bright_white
+                  on_release:
+                      - homeassistant.action:
+                          action: light.turn_on
+                          data:
+                            entity_id: ${light_ha_entity_id}
+                            brightness: !lambda return int(x);
+                  widgets: 
+                    - button:
+                        id: ${id_lvgl_widget_button}
+                        y: -14
+                        width: 90
+                        height: 90
+                        align: CENTER
+                        bg_opa: TRANSP
+                        shadow_opa: 100%
+                        shadow_spread: 2
+                        shadow_width: 20
+                        border_color: color_dark_gray
+                        border_width: 2
+                        radius: 50
+                        on_press:
+                          - homeassistant.action:
+                              action: light.toggle
+                              data:
+                                entity_id: ${light_ha_entity_id}
+                        widgets:
+                          - label:
+                              id: ${id_lvgl_widget_icon}
+                              align: CENTER
+                              text_font: mdi_icons_72
+                              text_color: color_dark_gray
+                              text: "${lights}"
+                    - label:
+                        y: -10
+                        align: BOTTOM_MID
+                        pad_all: 0
+                        text_font: icons_36
+                        text_color: color_white
+                        text: "${illumination}"
+
+  # Back button
+  - button:
+      x: 0
+      y: 0
+      width: 80
+      height: 50
+      bg_opa: TRANSP
+      shadow_opa: TRANSP
+      radius: 0
+      align: BOTTOM_LEFT
+      widgets:
+        - label:
+            x: 5
+            y: -5
+            pad_all: 0
+            text_font: montserrat_22
+            text_color: color_dark_gray
+            text: "\uF015"
+      on_press:
+        then:
+          - lvgl.page.show: 
+              id: page_home
+              animation: OUT_RIGHT
+              time: 300ms
+#on_swipe_up:
+#  then:
+#    - lvgl.page.show: 
+#        id: page_home
+#        animation: FADE_IN
+#        time: 300ms
+#on_swipe_left:
+#  then:
+#    - lvgl.page.next: 
+#        animation: MOVE_LEFT
+#        time: 300ms
+#on_swipe_right:
+#  then:
+#    - lvgl.page.previous: 
+#        animation: MOVE_RIGHT
+#        time: 300ms                        

@@ -1,6 +1,6 @@
 - file: 'hmi-garage/music_note_cover.png'
   type: RGB565
-  id: music_note
+  id: id_img_music_note
 
   # FOG ANIMATION
 - file: 'hmi-garage/weather/fog/fog0.png'

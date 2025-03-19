@@ -16,7 +16,8 @@
         û,
         É,
         Ç,
-        ñ
+        ñ,
+        ³
       ]
 
 #- file: "hmi-garage/fonts/Lato-Regular.ttf"
@@ -100,11 +101,15 @@
     "\U000F058E", # mdi-water-percent
     "\U000F059D", # mdi-weather-windy
     "\U000F0C02", # mdi-alpha-h-circle-outline
+    "\U000F1A71", # mdi-snowflake-thermometer
+    "\U000F0510", # mdi-thermometer-lines
     "\U000F0457", # mdi-repeat-off
     "\U000F0458", # mdi-repeat-once
     "\U000F0456", # mdi-repeat
     "\U000F049E", # mdi-shuffle-disabled
     "\U000F049D", # mdi-shuffle
+    "\U000F1859", # mdi-waves-arrow-left
+    "\U000F185B", # mdi-waves-arrow-up
   ]
 
 - file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
@@ -126,6 +131,8 @@
     "\U000F179B", # mdi-light-recessed
     "\U000F0769", # mdi-ceiling-light
     "\U000F0335", # mdi-lightbulb
+    "\U000F1251", # mdi-home-lightbulb
+    "\U000F1253", # mdi-lightbulb-group
 #    "\U000F0E66", # mdi-sprout
 #    "\U000F1481", # mdi-watering-can
 #    "\U000F050F", # mdi-thermometer

@@ -3,7 +3,9 @@ uname: "HMI Garage"
 
 settings:           "\U000F0493" # settings
 thermostat:         "\U0000e901" # thermostat
-lights:             "\U000F0335" # lights
+lights:             "\U000F0335" # lightbulb
+home_lightbulb:     "\U000F1251" # mdi-home-lightbulb
+lightbulb_group:    "\U000F1253" # mdi-lightbulb-group
 motion:             "\U000F0D91" # motion, presence
 heating:            "\U000F0438" # heating
 ha:                 "\U000F07D0" # home assistant
@@ -25,6 +27,8 @@ light_recessed:     "\U000F179B" # mdi-light-recessed
 lamp_post:          "\U000F1A60" # mdi-post-lamp
 music_note:         "\U000F075A" # mdi-music
 h_circle_outline:   "\U000F0C02" # mdi-alpha-h-circle-outline
+hvac_cooling:       "\U000F1A71" # mdi-snowflake-thermometer
+hvac_heating:       "\U000F0510" # mdi-thermometer-lines
 volume_high:        "\U000F057E" # mdi-volume-high
 volume_medium:      "\U000F0580" # mdi-volume-medium
 volume_low:         "\U000F057F" # mdi-volume-low
@@ -38,10 +42,15 @@ repeat_once_icon:   "\U000F0458" # mdi-repeat-once
 repeat_icon:        "\U000F0456" # mdi-repeat
 shuffle_disabled_icon: "\U000F049E" # mdi-shuffle-disabled
 shuffle_icon:       "\U000F049D" # mdi-shuffle
+waves_arrow_left:   "\U000F1859" # mdi-waves-arrow-left
+waves_arrow_up:     "\U000F185B" # mdi-waves-arrow-up
 
 ha_instance_url: "http://192.168.0.250:8123"
 # token is valid for 10 years (2025-02-15)
-default_music_cover_png_url:  "http://192.168.0.250:8123/local/music_note_cover.png?authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI3MjQ0MTJiZDFmNDY0ODFlYmQ4OTcyZmJhZWIwMDJkZSIsImlhdCI6MTczOTcxNTY2OSwiZXhwIjoyMDU1MDc1NjY5fQ.buqT9ik8AmWTGIcsiS5o3DjkqUT8UGjxLJbAoQgHA30"
+ha_auth_token: !secret ha_long_term_auth_token
+default_music_cover_png_url: 'http://192.168.0.250:8123/local/music_note_cover.png?authToken=${ha_auth_token}'
+default_music_cover_jpg_url: 'http://192.168.0.250:8123/local/music_note_cover.jpg?authToken=${ha_auth_token}'
+
 
 
 default_min_kelvin: "2000"
@@ -58,6 +67,19 @@ lampadaire_avant_lights_ha_entity_id: "ampoule_cagibi" #"light.lampadaire_avant"
 lampadaire_avant_min_kelvin: "${default_min_kelvin}"
 lampadaire_avant_mid_kelvin: "4000"
 lampadaire_avant_max_kelvin: "${default_max_kelvin}"
+exterieur_avant_lights_ha_entity_id: "exterieur_avant"
+exterieur_avant_min_kelvin: "${default_min_kelvin}"
+exterieur_avant_mid_kelvin: "4000"
+exterieur_avant_max_kelvin: "${default_max_kelvin}"
+exterieur_avant_maison_lights_ha_entity_id: "exterieur_avant_corniches"
+exterieur_avant_maison_min_kelvin: "${default_min_kelvin}"
+exterieur_avant_maison_mid_kelvin: "4000"
+exterieur_avant_maison_max_kelvin: "${default_max_kelvin}"
+portique_avant_lights_ha_entity_id: "portique_avant"
+portique_avant_min_kelvin: "${default_min_kelvin}"
+portique_avant_mid_kelvin: "4000"
+portique_avant_max_kelvin: "${default_max_kelvin}"
+tout_le_sous_sol_lights_ha_entity_id: "tout_le_sous_sol"
 media_player_garage_entity_id: "media_player.mass_garage"
 
 garage_rdc_lights_ha_entity_id: "switch_garage_ss_relay"

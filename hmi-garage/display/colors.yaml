@@ -26,8 +26,8 @@
   hex: f07c40
 #- id: color_deep_orange
 #  hex: ff6600
-#- id: color_violet
-#  hex: 9670d6
+- id: color_violet
+  hex: 9670d6
 - id: color_dark_blue
   hex: 4867aa
 #- id: color_bulb_light

@@ -198,7 +198,7 @@ lvgl:
                         align: TOP_LEFT
                         src: [ snowy0, snowy1, snowy2, snowy3, snowy4, snowy5, snowy6, snowy7, snowy8, snowy9, snowy10, snowy11 ]
                         duration: 1200ms
-                    - button:
+                    - image:
                         id: weather_sunny
                         hidden: true
                         pad_all: 0
@@ -208,10 +208,8 @@ lvgl:
                         y: 0
                         bg_opa: TRANSP
                         shadow_opa: TRANSP
-                        widgets:
-                          - image:
-                              src: sunny
-                    - button:
+                        src: sunny
+                    - image:
                         id: weather_clear_night
                         hidden: true
                         pad_all: 0
@@ -221,9 +219,7 @@ lvgl:
                         y: 0
                         bg_opa: TRANSP
                         shadow_opa: TRANSP
-                        widgets:
-                          - image:
-                              src: clear_night
+                        src: clear_night
                     - animimg:
                         id: weather_hail
                         hidden: true
@@ -320,21 +316,19 @@ lvgl:
                         text_color: color_green
                         text: "${temperature}"
                     # Temperature text
-                    - button:
+                    - label:
                         width: 119
                         height: 36
-                        x: 26
+                        x: 46
                         y: 4
                         bg_opa: TRANSP
                         shadow_opa: TRANSP
                         align: TOP_LEFT
-                        widgets:          
-                          - label:
-                              align: LEFT_MID
-                              id: id_lv_lab_weather_temperature
-                              text_font: lato_30
-                              text_color: color_white
-                              text: ""
+                        text_align: LEFT
+                        id: id_lv_lab_weather_temperature
+                        text_font: lato_30
+                        text_color: color_white
+                        text: ""
               - obj: # WEATHER HUMIDITY
                   align: TOP_LEFT
                   width: 100
@@ -355,21 +349,19 @@ lvgl:
                         text_color: color_dark_blue
                         text: "${humidity}"
                     # Humidity Text
-                    - button:
+                    - label:
                         width: 80
                         height: 24
-                        x: 22
-                        y: 5
+                        x: 42
+                        y: 6
                         bg_opa: TRANSP
                         shadow_opa: TRANSP
                         align: TOP_LEFT
-                        widgets:          
-                          - label:
-                              align: LEFT_MID
-                              id: id_lv_lab_weather_humidity
-                              text_font: lato_18
-                              text_color: color_white
-                              text: ""
+                        text_align: LEFT
+                        id: id_lv_lab_weather_humidity
+                        text_font: lato_18
+                        text_color: color_white
+                        text: ""
               - obj: # WEATHER WIND SPEED
                   align: TOP_LEFT
                   width: 110
@@ -390,18 +382,16 @@ lvgl:
                         text_color: color_yellow
                         text: "${wind_speed}"
                     # Wind speed text
-                    - button:
+                    - label:
                         width: 90
                         height: 24
-                        x: 20
-                        y: 4
+                        x: 41
+                        y: 5
                         bg_opa: TRANSP
                         shadow_opa: TRANSP
                         align: TOP_LEFT
-                        widgets:          
-                          - label:
-                              align: LEFT_MID
-                              id: id_lv_lab_weather_wind_speed
-                              text_font: lato_18
-                              text_color: color_white
-                              text: ""
+                        text_align: LEFT
+                        id: id_lv_lab_weather_wind_speed
+                        text_font: lato_18
+                        text_color: color_white
+                        text: ""

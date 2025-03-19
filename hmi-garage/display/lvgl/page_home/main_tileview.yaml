@@ -1,5 +1,6 @@
 packages:
   page1_climate_widgets_sensors: !include main_tileview/tileview_page1/climate_widgets_sensors.yaml
+  page2_widgets_sensors: !include main_tileview/tileview_page2/widgets_sensors.yaml
 
 lvgl:
   pages:
@@ -53,6 +54,15 @@ lvgl:
                   grid_columns: [FR(200), FR(500), FR(12)]
                   grid_rows: [100%]
                 widgets:
+                  - obj:
+                        grid_cell_column_pos: 0
+                        grid_cell_row_pos: 0
+                        grid_cell_x_align: STRETCH
+                        grid_cell_y_align: STRETCH
+                        pad_all: 0
+                        pad_left: 12
+                        pad_top: 6
+                        <<: !include main_tileview/tileview_page2/climate_widgets.yaml
                   - obj:
                         grid_cell_column_pos: 1
                         grid_cell_row_pos: 0

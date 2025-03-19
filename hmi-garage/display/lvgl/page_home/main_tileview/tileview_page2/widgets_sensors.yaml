@@ -1,0 +1,166 @@
+globals:
+  - id: id_riv_crit_blink
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
+binary_sensor:
+  - platform: homeassistant
+    id: id_bin_riv_lvl_crit
+    internal: True
+    entity_id: binary_sensor.niveau_de_la_riviere_elevee
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_riv_lvl_crit
+            hidden: false
+        - lvgl.label.update:  # Label in notification area
+            id: id_lv_lab_riv_lvl_crit_notif
+            hidden: false
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_riv_lvl_crit
+            hidden: true
+        - lvgl.label.update: 
+            id: id_lv_lab_riv_lvl_crit_notif
+            hidden: true
+
+sensor:
+  - platform: homeassistant
+    id: rdc_temp
+    internal: True
+    entity_id: sensor.thermostat_current_temperature
+    on_value:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_temperature_rdc
+            text:
+              format: "%.1f°C"
+              args: x
+  - platform: homeassistant
+    id: rdc_hum
+    internal: True
+    entity_id: sensor.thermostat_current_humidity
+    on_value:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_humidity_rdc
+            text:
+              format: "%.0f%%"
+              args: x
+
+  - platform: homeassistant
+    id: id_sens_riv_height
+    internal: True
+    entity_id: sensor.riviere_noire_niveau
+    on_value:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_riv_height
+            text:
+              format: "%.2fm"
+              args: x
+  - platform: homeassistant
+    id: id_sens_riv_flow
+    internal: True
+    entity_id: sensor.riviere_noire_debit
+    on_value:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_riv_flow
+            text:
+              format: "%.1fm³/s"
+              args: x
+
+text_sensor:
+  - platform: homeassistant
+    id: id_txt_thermostat_action
+    internal: true
+    entity_id: climate.thermostat
+    attribute: hvac_action
+    on_value:
+      then:
+        - if:
+            condition:
+              text_sensor.state:
+                id: id_txt_thermostat_action
+                state: "cooling"
+            then:
+              - lvgl.label.update:
+                  id: id_lv_hvac_status
+                  hidden: False
+                  text: ${hvac_cooling}
+                  text_color: color_blue
+            else:
+              - if:
+                  condition:
+                    - text_sensor.state:
+                        id: id_txt_thermostat_action
+                        state: "heating"
+                  then:
+                    - lvgl.label.update:
+                        id: id_lv_hvac_status
+                        hidden: False
+                        text: ${hvac_heating}
+                        text_color: color_orange
+                  else:
+                    - lvgl.label.update:
+                        id: id_lv_hvac_status
+                        hidden: True
+
+  - platform: homeassistant
+    id: id_txt_riv_lvl
+    internal: true
+    entity_id: sensor.etat_niveau_de_la_riviere
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_riv_height_ico
+            text_color: !lambda |-
+              if(id(id_txt_riv_lvl).state == "high")
+                return lv_color_make(id(color_red).red, id(color_red).green, id(color_red).blue);
+              if(id(id_txt_riv_lvl).state == "medium")
+                return lv_color_make(id(color_orange).red, id(color_orange).green, id(color_orange).blue);
+              if(id(id_txt_riv_lvl).state == "low")
+                return lv_color_make(id(color_violet).red, id(color_violet).green, id(color_violet).blue);
+              return lv_color_make(id(color_green).red, id(color_green).green, id(color_green).blue);
+
+  - platform: homeassistant
+    id: id_txt_riv_flow
+    internal: true
+    entity_id: sensor.etat_debit_de_la_riviere
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_riv_flow_ico
+            text_color: !lambda |-
+              if(id(id_txt_riv_flow).state == "high")
+                return lv_color_make(id(color_red).red, id(color_red).green, id(color_red).blue);
+              if(id(id_txt_riv_flow).state == "medium")
+                return lv_color_make(id(color_orange).red, id(color_orange).green, id(color_orange).blue);
+              return lv_color_make(id(color_green).red, id(color_green).green, id(color_green).blue);
+
+
+interval:
+  - interval: 800ms
+    startup_delay: 0s
+    then:
+      - if:
+          condition: 
+            - lambda: "return id(id_riv_crit_blink) == false;"
+          then:
+            - lvgl.label.update: 
+                id: id_lv_lab_riv_lvl_crit
+                text_color: color_red
+            - globals.set:
+                id: id_riv_crit_blink
+                value: "true"
+          else:
+            - lvgl.label.update: 
+                id: id_lv_lab_riv_lvl_crit
+                text_color: color_dark_gray
+            - globals.set:
+                id: id_riv_crit_blink
+                value: "false"

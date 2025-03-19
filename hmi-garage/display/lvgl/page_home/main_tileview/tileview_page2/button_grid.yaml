@@ -8,7 +8,7 @@ layout:
   grid_rows: [FR(1), FR(1), FR(1)]
 widgets:
   - button:
-#        id: id_lv_but_gr_light
+      id: id_lv_but_exta_light
       bg_color: color_black
       shadow_color: color_gray
       shadow_spread: 2
@@ -20,91 +20,91 @@ widgets:
       grid_cell_y_align: STRETCH
       widgets:
         - label:
-#              id: id_lv_lab_gr_light
+            id: id_lv_lab_exta_light
             align: LEFT_MID
             x: 0
             text_font: mdi_icons_48
             text_color: color_gray
-            text: "${ceiling_light}"
+            text: "${lightbulb_group}"
         - label:
             align: LEFT_MID
             x: 60
             text_font: lato_24
             text_color: color_white
-            text: "button1"
-#        on_short_click:
-#          - homeassistant.action:
-#              action: light.toggle
-#              data:
-#                entity_id: light.${garage_rdc_lights_ha_entity_id}
-#        on_long_press:
-#          then:
-#              - lvgl.page.show: 
-#                  id: page_light_garage_rdc
-#                  animation: OUT_RIGHT
-#                  time: 300ms
-  - button:
-#        id: id_lv_but_gs
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
-      grid_cell_column_pos: 1
-      grid_cell_row_pos: 0
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
-      widgets:
-        - label:
-#              id: id_lv_lab_gs
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
-            text: "${lights}"
-        - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
-            text: "button2"
-#        on_short_click:
-#          - homeassistant.action:
-#              action: light.toggle
-#              data:
-#                entity_id: light.${garage_ss_lights_ha_entity_id}
-#        on_long_press:
-#          then:
-#              - lvgl.page.show: 
-#                  id: page_light_garage_ss
-#                  animation: OUT_RIGHT
-#                  time: 300ms
+            text: "Extérieur\n   Avant"
+      on_short_click:
+        - homeassistant.action:
+            action: light.toggle
+            data:
+              entity_id: light.${exterieur_avant_lights_ha_entity_id}
+      on_long_press:
+        then:
+            - lvgl.page.show: 
+                id: page_light_exterieur_avant
+                animation: OUT_RIGHT
+                time: 300ms
+#  - button:
+#      id: id_lv_but_extm
+#      bg_color: color_black
+#      shadow_color: color_gray
+#      shadow_spread: 2
+#      shadow_width: 20
+#      shadow_opa: 100%
+#      grid_cell_column_pos: 1
+#      grid_cell_row_pos: 0
+#      grid_cell_x_align: STRETCH
+#      grid_cell_y_align: STRETCH
+#      widgets:
+#        - label:
+#            id: id_lv_lab_extm
+#            align: LEFT_MID
+#            x: 0
+#            text_font: mdi_icons_48
+#            text_color: color_gray
+#            text: "${home_lightbulb}"
+#        - label:
+#            align: LEFT_MID
+#            x: 60
+#            text_font: lato_24
+#            text_color: color_white
+#            text: "Corniches\n    avant"
+#      on_short_click:
+#        - homeassistant.action:
+#            action: light.toggle
+#            data:
+#              entity_id: light.${exterieur_avant_maison_lights_ha_entity_id}
+#      on_long_press:
+#        then:
+#            - lvgl.page.show: 
+#                id: page_light_exterieur_avant_maison
+#                animation: OUT_RIGHT
+#                time: 300ms
 
-  - button:
+#  - button:
 #        id: id_lv_but_extc
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
-      grid_cell_column_pos: 0
-      grid_cell_row_pos: 1
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
-      widgets:
-        - label:
+#      bg_color: color_black
+#      shadow_color: color_gray
+#      shadow_spread: 2
+#      shadow_width: 20
+#      shadow_opa: 100%
+#      grid_cell_column_pos: 0
+#      grid_cell_row_pos: 1
+#      grid_cell_x_align: STRETCH
+#      grid_cell_y_align: STRETCH
+#      widgets:
+#        - label:
 #              id: id_lv_lab_extc
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
-            text: "${light_recessed}"
-        - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
-            text: "button3"
+#            align: LEFT_MID
+#            x: 0
+#            text_font: mdi_icons_48
+#            text_color: color_gray
+#            text: "${light_recessed}"
+#        - label:
+#            align: LEFT_MID
+#            x: 60
+#            text_font: lato_24
+#            text_color: color_white
+#            text: "button3"
 #        on_short_click:
 #          - homeassistant.action:
 #              action: light.toggle
@@ -119,83 +119,82 @@ widgets:
 #                  animation: OUT_RIGHT
 #                  time: 300ms
 
-  - button:
-#        id: id_lv_but_extg
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
-      grid_cell_column_pos: 1
-      grid_cell_row_pos: 1
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
-      widgets:
-        - label:
-#              id: id_lv_lab_extg
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
-            text: "${light_recessed}"
-        - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
-            text: "button4"
-#        on_short_click:
-#          - homeassistant.action:
-#              action: light.toggle
-#              data:
-#                entity_id: light.${exterieur_garage_lights_ha_entity_id}
-#                kelvin: "2000"
-#                brightness_pct: "65"
-#        on_long_press:
-#          then:
-#              - lvgl.page.show: 
-#                  id: page_light_exterieur_garage
-#                  animation: OUT_RIGHT
-#                  time: 300ms
+#  - button:
+#      id: id_lv_but_portique_light
+#      bg_color: color_black
+#      shadow_color: color_gray
+#      shadow_spread: 2
+#      shadow_width: 20
+#      shadow_opa: 100%
+#      grid_cell_column_pos: 1
+#      grid_cell_row_pos: 1
+#      grid_cell_x_align: STRETCH
+#      grid_cell_y_align: STRETCH
+#      widgets:
+#        - label:
+#            id: id_lv_lab_portique_light
+#            align: LEFT_MID
+#            x: 0
+#            text_font: mdi_icons_48
+#            text_color: color_gray
+#            text: "${light_recessed}"
+#        - label:
+#            align: LEFT_MID
+#            x: 60
+#            text_font: lato_24
+#            text_color: color_white
+#            text: "Portique"
+#      on_short_click:
+#        - homeassistant.action:
+#            action: light.toggle
+#            data:
+#              entity_id: light.${portique_avant_lights_ha_entity_id}
+#              kelvin: "2000"
+#              brightness_pct: "65"
+#      on_long_press:
+#        then:
+#            - lvgl.page.show: 
+#                id: page_light_exterieur_garage
+#                animation: OUT_RIGHT
+#                time: 300ms
 
-  - button:
-#        id: id_lv_but_lamp
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
-      grid_cell_column_pos: 0
-      grid_cell_row_pos: 2
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
-      widgets:
-        - label:
-#              id: id_lv_lab_lamp
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
-            text: "${lamp_post}"
-        - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
-            text: "button5"
-#        on_short_click:
+#  - button:
+#      id: id_lv_but_all_ss
+#      bg_color: color_black
+#      shadow_color: color_gray
+#      shadow_spread: 2
+#      shadow_width: 20
+#      shadow_opa: 100%
+#      grid_cell_column_pos: 0
+#      grid_cell_row_pos: 2
+#      grid_cell_x_align: STRETCH
+#      grid_cell_y_align: STRETCH
+#      widgets:
+#        - label:
+#            id: id_lv_lab_all_ss
+#            align: LEFT_MID
+#            x: 0
+#            text_font: mdi_icons_48
+#            text_color: color_gray
+#            text: "${light_recessed}"
+#        - label:
+#            align: LEFT_MID
+#            x: 60
+#            text_font: lato_24
+#            text_color: color_white
+#            text: " Tout le\nsous-sol"
+#      on_short_click:
+#        then:
 #          - homeassistant.action:
-#              action: light.toggle
+#              action: light.turn_off
 #              data:
-#                entity_id: light.${lampadaire_avant_lights_ha_entity_id}
-#                kelvin: "2000"
-#                brightness_pct: "65"
-#        on_long_press:
-#          then:
-#              - lvgl.page.show: 
-#                  id: page_lamp
-#                  animation: OUT_RIGHT
-#                  time: 300ms
+#                entity_id: light.${tout_le_sous_sol_lights_ha_entity_id}
+#      on_long_press:
+#        then:
+#            - lvgl.page.show: 
+#                id: page_light_sous_sol
+#                animation: OUT_RIGHT
+#                time: 300ms
 
   - button:
       bg_color: color_black

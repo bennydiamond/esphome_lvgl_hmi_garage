@@ -1,0 +1,83 @@
+
+align: TOP_LEFT
+width: 180
+height: 102
+pad_all: 0
+bg_opa: TRANSP
+border_opa: TRANSP
+scrollable: "OFF"
+widgets:
+# Garage RDC Climate #
+- label:
+    id: id_lvgl_lab_riv_name
+    x: 10
+    y: 2
+    align: TOP_LEFT
+    text_font: lato_18
+    text_color: color_white
+    text: "Rivière Noire"
+
+#- label:
+#    id: id_lv_lab_basement_door_status
+#    align: TOP_LEFT
+#    x: 110
+#    y: 0
+#    text: "${door_open}"
+#    text_color: color_dark_gray
+#    text_font: mdi_icons_32
+
+# River Critical Level
+- label:
+    id: id_lv_lab_riv_lvl_crit
+    align: TOP_LEFT
+    x: 150
+    y: 0
+    text: "${waves_arrow_up}"
+    text_color: color_red
+    text_font: mdi_icons_32
+
+- line:
+    points:
+        - 0, 31
+        - 180, 31
+    line_width: 2
+    line_color: color_white
+    line_rounded: true
+
+# River level height icon
+- label:
+    id: id_lv_lab_riv_height_ico
+    x: 4
+    y: 38 # y = 260 in absolute
+    align: TOP_LEFT
+    text_font: mdi_icons_32
+    text_color: color_green
+    text: "${waves_arrow_up}"
+# River level height value
+- label:
+    id: id_lv_lab_riv_height
+    x: 40
+    y: 42
+    align: TOP_LEFT
+    text_font: lato_18
+    text_color: color_white
+    text: ""
+
+# River flow icon
+- label:
+    id: id_lv_lab_riv_flow_ico
+    x: 3
+    y: 74
+    align: TOP_LEFT
+    text_font: mdi_icons_32
+    text_color: color_green
+    text: "${waves_arrow_left}"
+# River flow value
+- label:
+    id: id_lv_lab_riv_flow
+    x: 40
+    y: 80
+    align: TOP_LEFT
+    text_font: lato_18
+    text_color: color_white
+    text: ""

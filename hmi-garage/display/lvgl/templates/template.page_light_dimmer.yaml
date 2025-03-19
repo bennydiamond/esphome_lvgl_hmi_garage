@@ -1,0 +1,79 @@
+binary_sensor:
+  - platform: homeassistant
+    id: id_bin_${light_ha_entity}_light_state
+    internal: True
+    entity_id: light.${light_ha_entity}
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.button.update: 
+            id: ${light_button_grid_button_id}
+            shadow_color: color_bright_white
+            shadow_spread: 3
+            shadow_width: 35
+        - lvgl.label.update:
+            id: ${light_button_grid_label_id}
+            text_color: color_bright_white
+        - lvgl.button.update: 
+            id: id_lv_but_page_${light_ha_entity}
+            shadow_color: color_bright_white
+            shadow_spread: 5
+            shadow_width: 75 
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_icon
+            text_color: color_bright_white
+    on_release:
+      then:
+        - lvgl.button.update: 
+            id: ${light_button_grid_button_id}
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: ${light_button_grid_label_id}
+            text_color: color_gray
+        - lvgl.button.update: 
+            id: id_lv_but_page_${light_ha_entity}
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_${light_ha_entity}_icon
+            text_color: color_gray
+
+sensor:
+  - platform: homeassistant
+    id: id_${light_ha_entity}_bright
+    internal: true
+    entity_id: light.${light_ha_entity}
+    attribute: brightness
+    on_value:
+      - if:
+          condition:
+            - lambda: 'return id(id_${light_ha_entity}_bright).state > 0;' 
+          then: 
+            - lvgl.arc.update:
+                id: id_lv_arc_${light_ha_entity}_bright
+                value: !lambda return x;
+            - lvgl.button.update: 
+                id: id_lv_but_page_${light_ha_entity}
+                shadow_spread: !lambda |-
+                  uint8_t result = 2;
+                  result += (uint8_t)(id(id_${light_ha_entity}_bright).state / 255 * 20); // Swing from 3 to 21
+                  return result;
+                shadow_width: !lambda |-
+                  uint8_t result = 20;
+                  result += (uint8_t)(id(id_${light_ha_entity}_bright).state / 2.55); // Swing from 21 to 120
+                  return result;
+
+lvgl:
+  pages:
+    - id: ${lvgl_page_id}
+      <<: !include  { file: template.page_light_dimmer/dimmer_light_sub_page_boby.yaml, 
+                      vars: { light_name: '${light_friendly_name}', 
+                              light_ha_entity_id: 'light.${light_ha_entity}', 
+                              id_lvgl_widget_arc: 'id_lv_arc_${light_ha_entity}_bright',
+                              id_lvgl_widget_button: 'id_lv_but_page_${light_ha_entity}',
+                              id_lvgl_widget_icon: 'id_lv_lab_${light_ha_entity}_icon'
+                            } 
+                    }

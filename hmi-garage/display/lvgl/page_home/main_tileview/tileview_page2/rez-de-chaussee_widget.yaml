@@ -1,0 +1,79 @@
+align: TOP_LEFT
+width: 180
+height: 102
+pad_all: 0
+bg_opa: TRANSP
+border_opa: TRANSP
+scrollable: "OFF"
+widgets:
+  # Garage RDC Climate #
+  - label:
+      id: id_lv_lab_climate_rdc
+      x: 10
+      y: 2
+      align: TOP_LEFT
+      text_font: lato_18
+      text_color: color_white
+      text: "Rez-de-chaussée"
+
+#  - label:
+#      id: id_lv_lab_groundfloor_door_status
+#      align: TOP_LEFT
+#      x: 110
+#      y: 0
+#      text: "${door_open}"
+#      text_color: color_dark_gray
+#      text_font: mdi_icons_32
+
+  # HVAC status
+  - label:
+      id: id_lv_hvac_status
+      align: TOP_LEFT
+      x: 150
+      y: 0
+      text_font: mdi_icons_32
+      hidden: True
+
+  - line:
+      points:
+        - 0, 31
+        - 180, 31
+      line_width: 2
+      line_color: color_white
+      line_rounded: true
+
+  # Temperature icon
+  - label:
+      x: 4
+      y: 38 # y = 260 in absolute
+      align: TOP_LEFT
+      text_font: icons_36
+      text_color: color_green
+      text: "${temperature}"
+  # Temperature state
+  - label:
+      id: id_lv_lab_temperature_rdc
+      x: 40
+      y: 42
+      align: TOP_LEFT
+      text_font: lato_18
+      text_color: color_white
+      text: ""
+
+  # Humidity icon
+  - label:
+      x: 3
+      y: 70
+      align: TOP_LEFT
+      text_font: icons_36
+      text_color: color_dark_blue
+      text: "${humidity}"
+  # Humidity state
+  - label:
+      id: id_lv_lab_humidity_rdc
+      x: 40
+      y: 75
+      align: TOP_LEFT
+      text_font: lato_18
+      text_color: color_white
+      text: ""

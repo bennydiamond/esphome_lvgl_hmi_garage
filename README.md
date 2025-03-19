@@ -34,15 +34,11 @@ This HMI is used to:
 
 ## Notes on project
 
-This is still very much in active development. In fact, I will be submitting Pull Requests to ESPHome's main repo to further increase functionnality in LVGL's component.
+This is still very much in active development. In fact, some planned features are disabled due to issues with ESPHome's framework that need to be addressed.
 
 Things are subject to change.
 
 As it stands now, the standard flash partition size is almost full. 
-
-```
-Flash: [==========]  99.6% (used 3915053 bytes from 3932160 bytes)
-```
 
 As the Waveshare's ESP32-S3-Touch-LCD-7 uses a 8MB flash WROOM module, you get a little under 4MB of flash space for your program following standard ESPHome's standard partition scheme.
 
@@ -54,15 +50,29 @@ For the time being, this project still fits in the standard partition scheme.
 
 ## Notes on development
 
-This project is split into multiple files. Usage of an IDE like Visual Studio Code is strongly recommended.
+This project is split into multiple files. Usage of an IDE like Visual Studio Code is strongly recommended, if not downright necessary.
 
 There is a secondary ESPHome project using SDL2 platform to test changes made in LVGL instead of flashing over and over a real device. 
 
 This requires [manually installing ESPHome](https://esphome.io/guides/installing_esphome.html) as well as a few other dependencies.
 More info on how to setup a dev environnement on your PC is coming. In the meantime, check out this forum thread: https://community.home-assistant.io/t/how-to-virtual-esphome-device-and-development-using-windows-work-in-progress/802669/2
 
+# TODO
+
+- Fix online_image to retrieve background
+- Fix online_image to retrieve media cover art from Music Assistant
+- Turn required HA automation into a blueprint
 
 ## Thanks
 
+For the awesome framework to easily create connected devices
+https://esphome.io/
+
 For getting me started and for animated weather effects
 https://github.com/alaltitov/display/tree/main
+
+For the info on how to set-up a PC simulator environment:
+https://community.home-assistant.io/t/how-to-virtual-esphome-device-and-development-using-windows-work-in-progress/802669
+
+Dimmable backlight mod using a GPIO on the ESP32-S3
+https://community.home-assistant.io/t/esp32-s3-7inch-capacitive-touch-display-adjust-brightness/771030/17

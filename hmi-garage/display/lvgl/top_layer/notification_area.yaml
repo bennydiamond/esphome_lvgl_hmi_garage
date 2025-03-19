@@ -97,6 +97,13 @@ obj:
                 text_color: color_red
                 text_font: mdi_icons_32
                 hidden: true
+            - label:
+                # Bound sensor in tileview_page2/widget_sensors.yaml
+                id: id_lv_lab_riv_lvl_crit_notif 
+                text: "${waves_arrow_up}"
+                text_color: color_red
+                text_font: mdi_icons_32
+                hidden: true
             # Hibiscus watering
             - label:
                 id: id_lv_lab_hibiscus_watering
