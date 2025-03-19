@@ -81,7 +81,7 @@ widgets:
 #                time: 300ms
 
 #  - button:
-#        id: id_lv_but_extc
+#      id: id_lv_but_extc
 #      bg_color: color_black
 #      shadow_color: color_gray
 #      shadow_spread: 2
@@ -154,7 +154,7 @@ widgets:
 #      on_long_press:
 #        then:
 #            - lvgl.page.show: 
-#                id: page_light_exterieur_garage
+#                id: page_light_portique_avant
 #                animation: OUT_RIGHT
 #                time: 300ms
 
