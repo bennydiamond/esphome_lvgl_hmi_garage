@@ -3,10 +3,24 @@ packages:
   page2_widgets_sensors: !include main_tileview/tileview_page2/widgets_sensors.yaml
 
 lvgl:
+  on_idle:
+    - timeout: 2min
+      then:
+        - if:
+            condition:
+              - not:
+                  - lvgl.page.is_showing: page_music
+            then:
+              - lvgl.tileview.select:
+                  id: id_lv_tile_main
+                  tile_id: id_lv_tile_page0
+                  animated: true
+              - lvgl.page.show: page_home
   pages:
     - id: !extend page_home
       widgets:
         - tileview: # Main Screen buttons Grid widget
+            id: id_lv_tile_main
             width: 712
             height: 300
             align: TOP_LEFT
