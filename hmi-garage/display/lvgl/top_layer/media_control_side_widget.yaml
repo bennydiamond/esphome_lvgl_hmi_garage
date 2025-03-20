@@ -46,7 +46,7 @@ obj: # Speaker Volume control
           text_font: mdi_icons_48
           text_color: color_white
           text_align: CENTER
-          text: ${volume_high}
+          text: ${volume_low}
       
           
       - slider:
