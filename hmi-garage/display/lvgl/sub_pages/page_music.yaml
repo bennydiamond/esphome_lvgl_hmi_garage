@@ -1,20 +1,20 @@
-online_image:
-  - url: ${default_music_cover_png_url}
-    id: id_online_img_now_playing
-    format: png
-    resize: 200x200
-    type: RGB565
-    placeholder: id_img_music_note
-    on_download_finished:
-      then:
-        - lvgl.image.update:
-            id: id_lvgl_image_now_playing
-            src: id_online_img_now_playing
-    on_error:
-      then:
-        - online_image.set_url:
-            id: id_online_img_now_playing
-            url: ${default_music_cover_png_url}
+#online_image:
+#  - url: ${default_music_cover_png_url}
+#    id: id_online_img_now_playing
+#    format: png
+#    resize: 200x200
+#    type: RGB565
+#    placeholder: id_img_music_note
+#    on_download_finished:
+#      then:
+#        - lvgl.image.update:
+#            id: id_lvgl_image_now_playing
+#            src: id_online_img_now_playing
+#    on_error:
+#      then:
+#        - online_image.set_url:
+#            id: id_online_img_now_playing
+#            url: ${default_music_cover_png_url}
 
 binary_sensor:
   # Used by media control widget in LVGL's top_layer
@@ -66,13 +66,13 @@ text_sensor:
             - lvgl.label.update:
                 id: id_lv_lab_music_playpause_icon
                 text: ${play_icon}
-  - platform: homeassistant
-    id: id_media_now_playing_ico
-    entity_id: ${media_player_garage_entity_id}
-    attribute: entity_picture
-    filters:
-      - prepend: ${ha_instance_url}
-    internal: true
+#  - platform: homeassistant
+#    id: id_media_now_playing_ico
+#    entity_id: ${media_player_garage_entity_id}
+#    attribute: entity_picture
+#    filters:
+#      - prepend: ${ha_instance_url}
+#    internal: true
 # TODO online_image re-enable once PNG decoder error is fixed
 #    on_value:
 #      then:
@@ -95,6 +95,12 @@ text_sensor:
         - lvgl.label.update:
             id: id_lv_lab_now_playing_track_name
             text: !lambda "return x.c_str();"
+        - lvgl.label.update:
+            id: id_lv_lab_now_playing_album_name
+            text: " "
+        - lvgl.label.update:
+            id: id_lv_lab_now_playing_artist_name
+            text: " "
   - platform: homeassistant
     id: id_media_now_playing_album
     entity_id: ${media_player_garage_entity_id}
@@ -102,6 +108,7 @@ text_sensor:
     internal: true
     on_value:
       then:
+        - delay: 80ms # Delay to let field get pre-wiped when receiving track name
         - lvgl.label.update:
             id: id_lv_lab_now_playing_album_name
             text: !lambda "return x.c_str();"
@@ -112,6 +119,7 @@ text_sensor:
     internal: true
     on_value:
       then:
+        - delay: 80ms # Delay to let field get pre-wiped when receiving track name
         - lvgl.label.update:
             id: id_lv_lab_now_playing_artist_name
             text: !lambda "return x.c_str();"
@@ -176,9 +184,9 @@ lvgl:
     - id: page_music
       bg_color: color_black
       # TODO online_image re-enable once PNG decoder error is fixed
-      #on_load:
-      #  then:
-      #    - component.update: id_online_img_now_playing
+#      on_load:
+#        then:
+#          - component.update: id_online_img_now_playing
       widgets:
         - obj:
             id: id_lvgl_music_player
@@ -214,7 +222,7 @@ lvgl:
                   text_font: lato_24
                   text_color: color_white
                   text_align: LEFT
-                  text: ""
+                  text: " "
               - label:
                   id: id_lv_lab_now_playing_album_name
                   bg_opa: TRANSP
@@ -227,7 +235,7 @@ lvgl:
                   text_font: lato_18
                   text_color: color_white
                   text_align: LEFT
-                  text: ""
+                  text: " "
               - label:
                   id: id_lv_lab_now_playing_artist_name
                   bg_opa: TRANSP
@@ -240,7 +248,7 @@ lvgl:
                   text_font: lato_18
                   text_color: color_white
                   text_align: LEFT
-                  text: ""
+                  text: " "
               - button:
                   x: 0
                   y: 190
@@ -351,7 +359,7 @@ lvgl:
                   y: -5
                   pad_all: 0
                   text_font: montserrat_22
-                  text_color: color_dark_gray
+                  text_color: color_gray
                   text: "\uF015"
             on_press:
               then:

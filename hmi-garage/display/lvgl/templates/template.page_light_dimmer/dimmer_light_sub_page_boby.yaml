@@ -135,7 +135,7 @@ widgets:
             y: -5
             pad_all: 0
             text_font: montserrat_22
-            text_color: color_dark_gray
+            text_color: color_gray
             text: "\uF015"
       on_press:
         then:
