@@ -110,6 +110,7 @@
     "\U000F049D", # mdi-shuffle
     "\U000F1859", # mdi-waves-arrow-left
     "\U000F185B", # mdi-waves-arrow-up
+    "\U000F0D85", # mdi-home-floor-g
   ]
 
 - file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
@@ -145,6 +146,7 @@
     "\U000F0581", # mdi-volume-off
     "\U000F03E4", # mdi-pause
     "\U000F040A", # mdi-play
+    "\U000F0D85", # mdi-home-floor-g
   ]
 
 - file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"

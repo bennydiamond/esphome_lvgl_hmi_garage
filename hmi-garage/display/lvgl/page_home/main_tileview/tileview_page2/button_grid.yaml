@@ -7,6 +7,41 @@ layout:
   grid_columns: [FR(1), FR(1)]
   grid_rows: [FR(1), FR(1), FR(1)]
 widgets:
+  - button:
+      id: id_lv_but_attic_light
+      bg_color: color_black
+      shadow_color: color_gray
+      shadow_spread: 2
+      shadow_width: 20
+      shadow_opa: 100%
+      grid_cell_column_pos: 0
+      grid_cell_row_pos: 0
+      grid_cell_x_align: STRETCH
+      grid_cell_y_align: STRETCH
+      widgets:
+        - label:
+            id: id_lv_lab_attic_light
+            align: LEFT_MID
+            x: 0
+            text_font: mdi_icons_48
+            text_color: color_gray
+            text: "${home_floor_g}"
+        - label:
+            align: LEFT_MID
+            x: 60
+            text_font: lato_24
+            text_color: color_white
+            text: "Grenier"
+      on_short_click:
+        - homeassistant.action:
+            action: light.toggle
+            data:
+              entity_id: light.${grenier_light_ha_entity_id}
+      on_long_press:
+        - homeassistant.action:
+            action: light.toggle
+            data:
+              entity_id: light.${grenier_light_ha_entity_id}
 #  - button:
 #      id: id_lv_but_exta_light
 #      bg_color: color_black

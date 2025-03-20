@@ -103,6 +103,11 @@ obj:
                 text: "${waves_arrow_up}"
                 text_color: color_red
                 text_font: mdi_icons_32
+            - label:
+                id: id_lv_lab_attic 
+                text: "${home_floor_g}"
+                text_color: color_warmest_white
+                text_font: mdi_icons_32
                 hidden: true
             # Hibiscus watering
             - label:

@@ -44,6 +44,7 @@ shuffle_disabled_icon: "\U000F049E" # mdi-shuffle-disabled
 shuffle_icon:       "\U000F049D" # mdi-shuffle
 waves_arrow_left:   "\U000F1859" # mdi-waves-arrow-left
 waves_arrow_up:     "\U000F185B" # mdi-waves-arrow-up
+home_floor_g:       "\U000F0D85" # mdi-home-floor-g
 
 ha_instance_url: "http://192.168.0.250:8123"
 # token is valid for 10 years (2025-02-15)
@@ -67,6 +68,7 @@ lampadaire_avant_lights_ha_entity_id: "lampadaire_avant"
 lampadaire_avant_min_kelvin: "${default_min_kelvin}"
 lampadaire_avant_mid_kelvin: "4000"
 lampadaire_avant_max_kelvin: "${default_max_kelvin}"
+grenier_light_ha_entity_id: "switch_lumieres_grenier_relay"
 exterieur_avant_lights_ha_entity_id: "exterieur_avant"
 exterieur_avant_min_kelvin: "${default_min_kelvin}"
 exterieur_avant_mid_kelvin: "4000"

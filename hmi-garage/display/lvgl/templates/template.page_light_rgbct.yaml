@@ -19,7 +19,7 @@ globals:
 select:
   - platform: lvgl
     id: id_lv_dropselect_drop_${light_ha_entity}_effects
-    internal: True
+    internal: False
     widget: id_lv_drop_${light_ha_entity}_effects
 
 binary_sensor:

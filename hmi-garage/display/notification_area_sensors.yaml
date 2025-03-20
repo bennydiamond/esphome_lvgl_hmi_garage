@@ -111,6 +111,38 @@ binary_sensor:
             id: id_lv_lab_defi_hilo
             hidden: true
 
+    # Attic light state #
+  - platform: homeassistant
+    id: id_attic_light
+    entity_id: light.switch_lumieres_grenier_relay
+    publish_initial_state: True
+    on_press:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_attic
+            hidden: false
+        - lvgl.button.update: 
+            id: id_lv_but_attic_light
+            shadow_color: color_warmest_white
+            shadow_spread: 3
+            shadow_width: 35
+        - lvgl.label.update:
+            id: id_lv_lab_attic_light
+            text_color: color_warmest_white
+    on_release:
+      then:
+        - lvgl.label.update: 
+            id: id_lv_lab_attic
+            hidden: true
+        - lvgl.button.update: 
+            id: id_lv_but_attic_light
+            shadow_color: color_gray
+            shadow_spread: 2
+            shadow_width: 20
+        - lvgl.label.update:
+            id: id_lv_lab_attic_light
+            text_color: color_gray
+
 interval:
   - interval: 800ms
     startup_delay: 0s
