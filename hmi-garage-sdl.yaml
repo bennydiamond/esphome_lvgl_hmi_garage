@@ -44,3 +44,15 @@ button:
     name: "Device Restart (fake safe mode)"
     id: id_button_device_restart_safe_mode
     internal: True
+
+light:
+  - platform: lvgl
+    id: id_light_backlight_brightness
+    widget: fake_led_id
+    name: fake backlight stub
+
+lvgl:
+  widgets:
+    - led:
+        id: fake_led_id
+        hidden: true

@@ -93,15 +93,34 @@ lvgl:
                         text_color: color_white
                         text: "${illumination}"
                     # Comment when using SDL simulator
-#                  on_change:
-#                    then:
-#                      - light.turn_on:
-#                          id: id_light_backlight_brightness
-#                          brightness: !lambda return x / 100.0;
+                  on_change:
+                    then:
+                      - light.turn_on:
+                          id: id_light_backlight_brightness
+                          brightness: !lambda return x / 100.0;
 
         - button:
             align: TOP_LEFT
             x: 30
+            y: 330
+            height: 60
+            shadow_opa: COVER
+            shadow_color: color_dark_gray
+            shadow_width: 20
+            widgets:
+              - label:
+                  align: CENTER
+                  text_font: lato_18
+                  text_align: CENTER
+                # text_color: color_dark_gray
+                  text: "Redémarrer"
+            on_press:
+              then:
+                - button.press: id_button_device_restart
+
+        - button:
+            align: TOP_LEFT
+            x: 160
             y: 330
             shadow_opa: COVER
             shadow_color: color_dark_gray
@@ -119,8 +138,8 @@ lvgl:
 
         - button:
             align: TOP_LEFT
-            x: 220
-            y: 330
+            x: 214
+            y: 400
             shadow_opa: COVER
             shadow_color: color_dark_gray
             shadow_width: 20
@@ -304,7 +323,7 @@ lvgl:
                   y: -5
                   pad_all: 0
                   text_font: montserrat_22
-                  text_color: color_dark_gray
+                  text_color: color_gray
                   text: "\uF015"
             on_press:
               then:
