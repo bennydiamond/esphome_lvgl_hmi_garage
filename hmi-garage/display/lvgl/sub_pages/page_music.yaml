@@ -179,6 +179,19 @@ text_sensor:
                   text: ${shuffle_disabled_icon}
                   text_color: color_gray
 
+event:
+  - platform: template
+    id: id_event_media
+    name: "${uname} Media Events"
+    event_types:
+      - next_track
+      - previous_track
+      - button_radio
+      - button_playlist1
+      - button_playlist2
+      - button_playlist3
+      - button_playlist4
+
 lvgl:
   pages:
     - id: page_music
@@ -265,10 +278,10 @@ lvgl:
                           text: ${skip_previous_icon}
                   on_press:
                       then:
-                      - homeassistant.action:
-                          action: media_player.media_previous_track
-                          data:
-                            entity_id: ${media_player_garage_entity_id}
+                      - event.trigger:
+                          id: id_event_media
+                          event_type: previous_track
+
               - button:
                   x: 100
                   y: 190
@@ -284,10 +297,10 @@ lvgl:
                           text: ${skip_next_icon}
                   on_press:
                       then:
-                      - homeassistant.action:
-                          action: media_player.media_next_track
-                          data:
-                            entity_id: ${media_player_garage_entity_id}
+                      - event.trigger:
+                          id: id_event_media
+                          event_type: next_track
+
               - button:
                   x: 26
                   y: 290
@@ -344,6 +357,68 @@ lvgl:
                                   return "false";
                               else
                                   return "true";
+        - buttonmatrix:
+            id: id_lv_matrix_playlists
+            x: 240
+            y: 200
+            width: 450
+            height: 200
+            bg_opa: TRANSP
+            border_opa: TRANSP
+            shadow_opa: TRANSP
+            items:
+              pressed:
+                bg_color: 0xFFFF00
+            rows:
+              - buttons:
+                - id: id_lv_btnmat_pl1
+                  text: "Playlist1"
+                  control:
+                    recolor: true
+                  on_press:
+                    then:
+                      - event.trigger:
+                          id: id_event_media
+                          event_type: button_playlist1
+                - id: id_lv_btnmat_pl2
+                  text: "Playlist2"
+                  control:
+                    recolor: true
+                  on_press:
+                    then:
+                      - event.trigger:
+                          id: id_event_media
+                          event_type: button_playlist2
+              - buttons:
+                - id: id_lv_btnmat_pl3
+                  text: "Playlist3"
+                  control:
+                    recolor: true
+                  on_press:
+                    then:
+                      - event.trigger:
+                          id: id_event_media
+                          event_type: button_playlist3
+                - id: id_lv_btnmat_pl4
+                  text: "Playlist4"
+                  control:
+                    recolor: true
+                  on_press:
+                    then:
+                      - event.trigger:
+                          id: id_event_media
+                          event_type: button_playlist4
+              - buttons:
+                - id: id_lv_btnmat_radio
+                  text: "Radio"
+                  width: 2
+                  control:
+                    recolor: true
+                  on_press:
+                    then:
+                      - event.trigger:
+                          id: id_event_media
+                          event_type: button_radio
         - button:
             x: 0
             y: 0
