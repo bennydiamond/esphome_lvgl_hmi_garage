@@ -1,16 +1,16 @@
 packages:
-  soilsensor_bac: !include 
+  soilsensor_bibiscus: !include 
     file: template.moisture_sensors.yaml
     vars: 
-      device_disabled_entity_id: binary_sensor.soilsensor_bac_disabled
-      low_batt_entity_id: binary_sensor.soilsensor_bac_low_battery
-      low_batt_label_ico: id_lv_lab_bac_lowbat
-      moisture_value_entity_id: sensor.soilsensor_bac_moisture
-      moisture_value_label: id_lv_label_moist_bac
-      moisture_meter_needle: id_lv_meter_moist_bac
-      low_moisture_entity_id: binary_sensor.soilsensor_bac_low_moisture
-      is_outside_entity_id: binary_sensor.soilsensor_bac_is_outside
-      card_outline_obj: id_lv_card_soilsensor_bac_outline
+      device_disabled_entity_id: binary_sensor.soilsensor_bibiscus_disabled
+      low_batt_entity_id: binary_sensor.soilsensor_bibiscus_battery_low
+      low_batt_label_ico: id_lv_lab_bibiscus_lowbat
+      moisture_value_entity_id: sensor.soilsensor_bibiscus_soil_moisture
+      moisture_value_label: id_lv_label_moist_bibiscus
+      moisture_meter_needle: id_lv_meter_moist_bibiscus
+      low_moisture_entity_id: binary_sensor.soilsensor_bibiscus_low_moisture
+      is_outside_entity_id: binary_sensor.soilsensor_bibiscus_is_outside
+      card_outline_obj: id_lv_card_soilsensor_bibiscus_outline
 
   soilsensor_broccolini: !include 
     file: template.moisture_sensors.yaml
@@ -58,7 +58,7 @@ packages:
       device_disabled_entity_id: binary_sensor.soilsensor_hibiscus_disabled
       low_batt_entity_id: binary_sensor.soilsensor_hibiscus_low_battery
       low_batt_label_ico: id_lv_lab_hibi_lowbat
-      moisture_value_entity_id: sensor.fineoffset_wh51_00db7d_moisture
+      moisture_value_entity_id: sensor.soilsensor_hibiscus_soil_moisture
       moisture_value_label: id_lv_label_moist_hibi
       moisture_meter_needle: id_lv_meter_moist_hibi
       low_moisture_entity_id: binary_sensor.soilsensor_hibiscus_low_moisture

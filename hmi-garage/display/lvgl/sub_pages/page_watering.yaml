@@ -49,11 +49,11 @@ lvgl:
                           flex_align_track: START
                       widgets:
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
-                                          vars: { f_name: "Bette à carde",
-                                                  battery_alert_ico: id_lv_lab_bac_lowbat,
-                                                  meter_needle: id_lv_meter_moist_bac,
-                                                  numeric_value: id_lv_label_moist_bac,
-                                                  moisture_widget_arc: id_lv_card_soilsensor_bac_outline,
+                                          vars: { f_name: "Bibiscus",
+                                                  battery_alert_ico: id_lv_lab_bibiscus_lowbat,
+                                                  meter_needle: id_lv_meter_moist_bibiscus,
+                                                  numeric_value: id_lv_label_moist_bibiscus,
+                                                  moisture_widget_arc: id_lv_card_soilsensor_bibiscus_outline,
                                                 } 
                                         }
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 

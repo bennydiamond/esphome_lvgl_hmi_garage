@@ -89,7 +89,7 @@ sensor:
   - platform: homeassistant
     id: gs_temp
     internal: True
-    entity_id: sensor.acurite_tower_c_241_temperature
+    entity_id: sensor.multisensor_garage_sous_sol_temperature
     on_value:
       then:
         - lvgl.label.update: 
@@ -100,7 +100,7 @@ sensor:
   - platform: homeassistant
     id: gs_hum
     internal: True
-    entity_id: sensor.acurite_tower_c_241_humidity
+    entity_id: sensor.multisensor_garage_sous_sol_humidity
     on_value:
       then:
         - lvgl.label.update: 
