@@ -257,8 +257,6 @@ widgets:
               id: page_home
               animation: OUT_RIGHT
               time: 300ms
-          - delay: 300ms
-          - lvgl.widget.hide: ${lvgl_page_id}
 #on_swipe_up:
 #  then:
 #    - lvgl.page.show: 

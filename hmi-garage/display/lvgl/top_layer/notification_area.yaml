@@ -93,10 +93,10 @@ obj:
                         text_font: mdi_icons_32
                 on_short_click:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_front_door
+                        - lvgl.widget.show: id_lv_popupbox_front_door
                 on_long_press:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_front_door
+                        - lvgl.widget.show: id_lv_popupbox_front_door
             # Patio door
             - button:
                 id: id_lv_but_patio_door
@@ -118,10 +118,10 @@ obj:
                         text_font: mdi_icons_32
                 on_short_click:
                     then:   
-                        - lvgl.widget.show: id_lv_mbox_notify_patio_door
+                        - lvgl.widget.show: id_lv_popupbox_patio_door
                 on_long_press:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_patio_door
+                        - lvgl.widget.show: id_lv_popupbox_patio_door
             # River Level critical
             - button:
                 id: id_lv_but_riv_lvl_crit_notif
@@ -143,10 +143,10 @@ obj:
                         text_font: mdi_icons_32
                 on_short_click:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_riv_lvl_crit
+                        - lvgl.widget.show: id_lv_popupbox_riv_lvl_crit
                 on_long_press:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_riv_lvl_crit
+                        - lvgl.widget.show: id_lv_popupbox_riv_lvl_crit
             # Attic Light ON
             - button:
                 id: id_lv_but_notify_attic_light
@@ -168,10 +168,10 @@ obj:
                         text_font: mdi_icons_32
                 on_short_click:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_attic
+                        - lvgl.widget.show: id_lv_popupbox_attic
                 on_long_press:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_attic
+                        - lvgl.widget.show: id_lv_popupbox_attic
             # HVAC status
             - button:
                 id: id_lv_but_hvac_status
@@ -194,10 +194,10 @@ obj:
                       text_font: mdi_icons_32
                 on_short_click:
                   then:
-                    - lvgl.widget.show: id_lv_mbox_notify_hvac
+                    - lvgl.widget.show: id_lv_popupbox_hvac
                 on_long_press:
                   then:
-                    - lvgl.widget.show: id_lv_mbox_notify_hvac
+                    - lvgl.widget.show: id_lv_popupbox_hvac
             # Miner status
             - button:
                 id: id_lv_but_miner_status
@@ -220,10 +220,10 @@ obj:
                       text_font: mdi_icons_32
                 on_short_click:
                   then:
-                    - lvgl.widget.show: id_lv_mbox_notify_miner
+                    - lvgl.widget.show: id_lv_popupbox_miner
                 on_long_press:
                   then:
-                    - lvgl.widget.show: id_lv_mbox_notify_miner
+                    - lvgl.widget.show: id_lv_popupbox_miner
             # Défi Hilo active
             - button:
                 id: id_lv_but_defi_hilo
@@ -246,10 +246,10 @@ obj:
                       text_font: mdi_icons_32
                 on_short_click:
                   then:
-                    - lvgl.widget.show: id_lv_mbox_notify_defi_hilo
+                    - lvgl.widget.show: id_lv_popupbox_defi_hilo
                 on_long_press:
                   then:
-                    - lvgl.widget.show: id_lv_mbox_notify_defi_hilo
+                    - lvgl.widget.show: id_lv_popupbox_defi_hilo
             # Outside SoilSensors Global Alert
             - button:
                 id: id_lv_but_outside_soil_alert
@@ -346,10 +346,10 @@ obj:
                     text_font: mdi_icons_32
                 on_short_click:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_salt
+                        - lvgl.widget.show: id_lv_popupbox_salt
                 on_long_press:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_notify_salt
+                        - lvgl.widget.show: id_lv_popupbox_salt
             # Irrigation System Active
             - button:
                 id: id_lv_but_watering_active
@@ -413,32 +413,30 @@ obj:
                             condition:
                                 - binary_sensor.is_on: id_ha_compost_day
                             then:
-                                - lvgl.widget.show: id_lv_mbox_notify_compost
+                                - lvgl.widget.show: id_lv_popupbox_compost
                             else:
                                 - if:
                                     condition:
                                         - binary_sensor.is_on: id_ha_recycle_day
                                     then:
-                                        - lvgl.widget.show: id_lv_mbox_notify_recycle
+                                        - lvgl.widget.show: id_lv_popupbox_recycle
                                     else:
-                                        - lvgl.widget.show: id_lv_mbox_notify_trash
-
-                        - lvgl.widget.show: id_lv_mbox_notify_trash
+                                        - lvgl.widget.show: id_lv_popupbox_trash
                 on_long_press:
                     then:
                         - if:
                             condition:
                                 - binary_sensor.is_on: id_ha_compost_day
                             then:
-                                - lvgl.widget.show: id_lv_mbox_notify_compost
+                                - lvgl.widget.show: id_lv_popupbox_compost
                             else:
                                 - if:
                                     condition:
                                         - binary_sensor.is_on: id_ha_recycle_day
                                     then:
-                                        - lvgl.widget.show: id_lv_mbox_notify_recycle
+                                        - lvgl.widget.show: id_lv_popupbox_recycle
                                     else:
-                                        - lvgl.widget.show: id_lv_mbox_notify_trash
+                                        - lvgl.widget.show: id_lv_popupbox_trash
             # Water Softener Salt Level critical
             - button:
                 id: id_lv_but_catstuff_problem
@@ -458,8 +456,8 @@ obj:
                     text_font: mdi_icons_32
                 on_short_click:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_catstuff
+                        - lvgl.widget.show: id_lv_popupbox_catstuff
                 on_long_press:
                     then:
-                        - lvgl.widget.show: id_lv_mbox_catstuff
+                        - lvgl.widget.show: id_lv_popupbox_catstuff
 

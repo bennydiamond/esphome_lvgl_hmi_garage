@@ -21,8 +21,8 @@ text_sensor:
     internal: true
     on_value:
       then:
-        - lambda: |-
-            lv_obj_t * label = lv_msgbox_get_text(id(id_lv_mbox_catstuff));
-            if (label != nullptr) {
-              lv_label_set_text(label, x.c_str());
-            }
+        - lvgl.label.update:
+            id: id_lv_popup_catstuff_text
+            text:
+              format: "%s"
+              args: [ 'x.c_str()' ]

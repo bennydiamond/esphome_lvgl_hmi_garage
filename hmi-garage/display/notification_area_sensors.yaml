@@ -142,7 +142,7 @@ binary_sensor:
         - lvgl.label.update:
             id: id_lv_lab_attic_light
             text_color: color_gray
-        - lvgl.widget.hide: id_lv_mbox_notify_attic
+        - lvgl.widget.hide: id_lv_popupbox_attic
 
   # Water Softener Salt Level Critical from HA #
   - platform: homeassistant

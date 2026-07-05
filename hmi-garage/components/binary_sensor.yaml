@@ -30,16 +30,6 @@ binary_sensor:
                   tile_id: id_lv_tile_page0
                   animated: true
               - lvgl.page.show: page_home
-              - lvgl.widget.hide: page_light_garage_rdc
-              - lvgl.widget.hide: page_light_garage_ss
-              - lvgl.widget.hide: page_lamp
-              - lvgl.widget.hide: page_light_exterieur_garage
-              - lvgl.widget.hide: page_light_exterieur_cote
-              - lvgl.widget.hide: page_watering
-              - lvgl.widget.hide: page_car_lock_yaris
-              - lvgl.widget.hide: page_players_volume
-              - lvgl.widget.hide: page_settings
-              - lvgl.widget.hide: page_river_graph
               - lvgl.tabview.select:
                   id: id_lv_tab_watering
                   index: 0

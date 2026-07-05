@@ -19,7 +19,7 @@ lvgl:
                   x: 2
                   y: -9
                   width: 196
-                  height: 60
+                  height: 82
                   text_font: lato_72
                   text_color: color_white
                   text_align: CENTER
@@ -29,7 +29,7 @@ lvgl:
               - label:
                   id: id_lv_lab_display_day
                   align: BOTTOM_LEFT
-                  x: 6
+                  x: 2
                   y: 0
                   width: 84
                   height: 20

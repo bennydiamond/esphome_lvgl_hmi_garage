@@ -1,0 +1,151 @@
+# lvgl/templates/template.msg_popup.yaml
+- obj:
+    id: ${widget_id}
+    width: 100%
+    height: 100%
+    align: CENTER
+    bg_color: color_black
+    bg_opa: 50%
+    clickable: true
+    hidden: true 
+    pad_all: 0
+    border_width: 0
+
+    widgets:
+      - obj:
+          id: ${widget_id}_window
+          width: 360  
+          height: 280 
+          align: CENTER
+          bg_color: color_white
+          radius: 12
+          clip_corner: true
+          border_width: 1
+          border_color: color_gray
+          pad_all: 0  
+          layout:
+            type: flex
+            flex_flow: column
+
+          widgets:
+            # --- SHARP BOLD TITLE BAR (44px) ---
+            - obj:
+                width: 100%
+                height: 44 
+                bg_color: color_dark_gray
+                border_width: 0
+                radius: 0 
+                pad_all: 0 
+
+                widgets:
+                  - label:
+                      text: "${title_text}"
+                      text_font: ${title_font}
+                      text_color: color_white
+                      align: LEFT_MID   
+                      x: 15
+                  - button:
+                      width: 28
+                      height: 28
+                      radius: 4
+                      bg_color: color_gray
+                      border_width: 0
+                      pad_all: 0
+                      align: RIGHT_MID  
+                      x: -15
+                      shadow_width: 4
+                      shadow_offset_y: 1
+                      shadow_color: color_black
+                      shadow_opa: 40%
+                      widgets:
+                        - label:
+                            text: "X"
+                            align: CENTER
+                            text_color: color_white
+                      on_click:
+                        then:
+                          - lvgl.widget.hide: ${widget_id}
+
+            # --- BODY TEXT AREA ---
+            - obj:
+                width: 100%
+                flex_grow: 1
+                pad_left: 18
+                pad_right: 18
+                pad_top: 20
+                pad_bottom: 10
+                border_width: 0
+                scrollable: true
+                bg_opa: 0%
+                widgets:
+                  - label:
+                      id: ${body_text_id}
+                      text: "${body_text}"
+                      text_font: ${body_font}
+                      text_color: color_black
+                      width: 100%
+                      long_mode: wrap
+
+            # --- UNIFIED FOOTER AREA ---
+            - obj:
+                width: 100%
+                height: 54
+                bg_opa: 0% 
+                border_width: 0
+                pad_top: 0
+                pad_bottom: 15 
+                pad_left: 15
+                pad_right: 15
+                layout:
+                  type: flex
+                  flex_flow: row
+                  flex_align_main: center     
+                  flex_align_cross: center    
+                  pad_column: 12
+                widgets:
+                  # Button 1 (Action Button or Main OK)
+                  - button:
+                      height: 34
+                      width: size_content
+                      pad_left: 24 
+                      pad_right: 24
+                      bg_color: color_blue
+                      border_width: 0
+                      radius: 6
+                      shadow_width: 8       
+                      shadow_offset_y: 2       
+                      shadow_color: color_dark_gray 
+                      shadow_opa: 60%       
+                      widgets:
+                        - label:
+                            text: "${button1_text}"
+                            text_font: ${button1_font}
+                            text_color: color_black
+                            align: CENTER
+                      on_click:
+                        then:
+                          - ${button1_action}: ${button1_target}
+
+                  # Button 2 (Secondary Action - e.g., Close/Cancel)
+                  - button:
+                      height: 34
+                      width: size_content
+                      pad_left: 24 
+                      pad_right: 24
+                      bg_color: color_gray
+                      border_width: 0
+                      radius: 6
+                      shadow_width: 8       
+                      shadow_offset_y: 2       
+                      shadow_color: color_dark_gray 
+                      shadow_opa: 60%       
+                      hidden: ${button2_hidden}
+                      widgets:
+                        - label:
+                            text: "${button2_text}"
+                            text_font: ${button2_font}
+                            text_color: color_white
+                            align: CENTER
+                      on_click:
+                        then:
+                          - ${button2_action}: ${button2_target}

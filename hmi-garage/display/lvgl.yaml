@@ -7,6 +7,8 @@ packages:
   page_car_lock_yaris: !include lvgl/sub_pages/page_car_lock_yaris.yaml
   page_river_graph: !include lvgl/sub_pages/page_river_graph.yaml
   notification_area_sensors: !include notification_area_sensors.yaml
+  popup_message_boxes: !include lvgl/page_home/popup_boxes.yaml
+
 
   page_light_garage_rdc: !include 
     file: lvgl/templates/template.page_light_automation.yaml
@@ -132,6 +134,7 @@ interval:
           - lvgl.widget.show: id_lv_lab_time_notif_area
 
 lvgl:
+  buffer_size: 100%
 #  on_idle:
 #    timeout: ${screen_idle_timeout_seconds}s
 #    then:
@@ -139,137 +142,10 @@ lvgl:
 #          id: id_bin_bl_state
 #          state: False
   gradients: !include lvgl/gradients.yaml  
-  disp_bg_image: none
-
-  on_boot:
-    then:
-      - lvgl.widget.hide: page_light_garage_rdc
-      - lvgl.widget.hide: page_light_garage_ss
-      - lvgl.widget.hide: page_lamp
-      - lvgl.widget.hide: page_light_exterieur_garage
-      - lvgl.widget.hide: page_light_exterieur_cote
-      - lvgl.widget.hide: page_music
-      - lvgl.widget.hide: page_watering
-      - lvgl.widget.hide: page_car_lock_yaris
-      - lvgl.widget.hide: page_players_volume
-      - lvgl.widget.hide: page_settings
-      - lvgl.widget.hide: page_river_graph
 
   top_layer: # Top Screen Status bar. Visible on all pages.
     widgets:
       - <<: !include lvgl/top_layer/media_control_side_widget.yaml
       # Top notification area delimiter line
       - <<: !include lvgl/top_layer/notification_area.yaml
-
-  msgboxes:
-    - id: id_lv_mbox_notify_front_door
-      close_button: false
-      clickable: false
-      title: "Porte d'entrée"
-      text_font: lato_18
-      body:
-        text: "\nLa porte d'entrée est ouverte."
-        text_font: lato_18
-    - id: id_lv_mbox_notify_patio_door
-      close_button: false
-      clickable: false
-      title: "Porte Patio"
-      text_font: lato_18
-      body:
-        text: "\nLa porte patio est ouverte."
-        text_font: lato_18
-    - id: id_lv_mbox_notify_salt
-      close_button: false
-      clickable: false
-      title: "Adoucisseur d'eau"
-      text_font: lato_18
-      body:
-        text: "\nLe niveau de sel est bas dans l'adoucisseur d'eau."
-        text_font: lato_18
-    - id: id_lv_mbox_notify_riv_lvl_crit
-      close_button: false
-      clickable: false
-      title: "Niveau de la rivière"
-      text_font: lato_18
-      body:
-        text: "\nLe niveau de la rivière est élevé."
-        text_font: lato_18
-    - id: id_lv_mbox_notify_attic
-      close_button: false
-      title: "Grenier"
-      text_font: lato_18
-      body:
-        text: "\nLes lumières du grenier sont allumées."
-        text_font: lato_18
-      buttons:
-        - id: msgbox_turn_off_attic
-          text: "Éteindre"
-          on_click:
-            then:
-              - homeassistant.action:
-                  action: light.toggle
-                  data:
-                    entity_id: light.${grenier_light_ha_entity_id}
-              - lvgl.widget.hide: id_lv_mbox_notify_attic
-        - text: "OK"
-          on_click:
-            then:
-              - lvgl.widget.hide: id_lv_mbox_notify_attic
-    - id: id_lv_mbox_notify_trash
-      close_button: false
-      clickable: false
-      title: "Jour des vidanges"
-      text_font: lato_18
-      body:
-        text: "\nC'est le jour des vidanges."
-        text_font: lato_18
-    - id: id_lv_mbox_notify_recycle
-      close_button: false
-      clickable: false
-      title: "Jour du recyclage"
-      text_font: lato_18
-      body:
-        text: "\nC'est le jour du recyclage."
-        text_font: lato_18
-    - id: id_lv_mbox_notify_compost
-      close_button: false
-      clickable: false
-      title: "Jour du bac brun"
-      text_font: lato_18
-      body:
-        text: "\nC'est le jour du composte."
-        text_font: lato_18
-    - id: id_lv_mbox_notify_defi_hilo
-      close_button: false
-      clickable: false
-      title: "Défi Hilo"
-      text_font: lato_18
-      body:
-        text: "\nDéfi Hilo en cours!"
-        text_font: lato_18
-    - id: id_lv_mbox_notify_miner
-      close_button: false
-      clickable: false
-      title: "Statut du Mineur"
-      text_font: lato_18
-      body:
-        text: "\nLe mineur est en fonction."
-        text_font: lato_18
-    - id: id_lv_mbox_notify_hvac
-      close_button: false
-      clickable: false
-      title: "Géothermie"
-      text_font: lato_18
-      body:
-        text: "\nLe géothermie est en fonction."
-        text_font: lato_18
-    - id: id_lv_mbox_catstuff
-      close_button: false
-      clickable: false
-      title: "Problème équipement chats"
-      text_font: lato_18
-      body:
-        text: "\nVérifier la fontaine ou la mangeoire."
-        text_font: lato_18
-    
 

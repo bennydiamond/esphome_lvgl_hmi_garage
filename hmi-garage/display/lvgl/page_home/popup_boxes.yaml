@@ -1,0 +1,253 @@
+lvgl:
+  top_layer:
+    widgets:
+      # --- 1. CATSTUFF ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_catstuff" 
+            title_text: "Problème équipement chats"
+            title_font: lato_18
+            body_text: "Vérifier la fontaine ou la mangeoire."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_catstuff_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_catstuff"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_catstuff"
+
+      # --- 2. HVAC ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_hvac" 
+            title_text: "Géothermie"
+            title_font: lato_18
+            body_text: "La géothermie est en fonction."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_hvac_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_hvac"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_hvac"
+
+      # --- 3. SIDE DOOR ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_front_door" 
+            title_text: "Porte de coté"
+            title_font: lato_18
+            body_text: "La porte de coté est ouverte."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_front_door_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_front_door"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_front_door"
+
+      # --- 4. PATIO DOOR ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_patio_door" 
+            title_text: "Porte Patio"
+            title_font: lato_18
+            body_text: "La porte patio est ouverte."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_patio_door_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_patio_door"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_patio_door"
+
+      # --- 5. WATER SOFTENER SALT ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_salt" 
+            title_text: "Adoucisseur d'eau"
+            title_font: lato_18
+            body_text: "Le niveau de sel est bas dans l'adoucisseur d'eau."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_salt_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_salt"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_salt"
+
+      # --- 6. CRITICAL RIVER LEVEL ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_riv_lvl_crit" 
+            title_text: "Niveau de la rivière"
+            title_font: lato_18
+            body_text: "Le niveau de la rivière est élevé."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_riv_lvl_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_riv_lvl_crit"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_riv_lvl_crit"
+
+      # --- 7. ATTIC (DUBBED MULTI-BUTTON CONFIG) ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_attic" 
+            title_text: "Grenier"
+            title_font: lato_18
+            body_text: "Les lumières du grenier sont allumées."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_attic_text"
+            # Primary Action Button
+            button1_text: "Éteindre"
+            button1_font: lato_18
+            button1_action: "script.execute"
+            button1_target: "script_turn_off_attic"
+            # Secondary Action Button
+            button2_hidden: "false"
+            button2_text: "OK"
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_attic"
+
+      # --- 8. TRASH BIN REMINDER ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_trash" 
+            title_text: "Jour des vidanges"
+            title_font: lato_18
+            body_text: "C'est le jour des vidanges."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_trash_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_trash"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_trash"
+
+      # --- 9. RECYCLE BIN REMINDER ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_recycle" 
+            title_text: "Jour du recyclage"
+            title_font: lato_18
+            body_text: "C'est le jour du recyclage."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_recycle_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_recycle"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_recycle"
+
+      # --- 10. COMPOST REMINDER ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_compost" 
+            title_text: "Jour du bac brun"
+            title_font: lato_18
+            body_text: "C'est le jour du composte."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_compost_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_compost"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_compost"
+
+      # --- 11. DEFI HILO ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_defi_hilo" 
+            title_text: "Défi Hilo"
+            title_font: lato_18
+            body_text: "Défi Hilo en cours!"
+            body_font: lato_18
+            body_text_id: "id_lv_popup_defi_hilo_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_defi_hilo"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_defi_hilo"
+
+      # --- 12. CRYPTO MINER ---
+      - <<: !include 
+          file: ../../lvgl/templates/template.msg_popup.yaml
+          vars:
+            widget_id: "id_lv_popupbox_miner" 
+            title_text: "Statut du Mineur"
+            title_font: lato_18
+            body_text: "Le mineur est en fonction."
+            body_font: lato_18
+            body_text_id: "id_lv_popup_miner_text"
+            button1_text: "OK"
+            button1_font: lato_18
+            button1_action: "lvgl.widget.hide"
+            button1_target: "id_lv_popupbox_miner"
+            button2_hidden: "true"
+            button2_text: ""
+            button2_font: lato_18
+            button2_action: "lvgl.widget.hide"
+            button2_target: "id_lv_popupbox_miner"
+
+script:
+  - id: script_turn_off_attic
+    then:
+      - homeassistant.action:
+          action: light.toggle
+          data:
+            entity_id: light.${grenier_light_ha_entity_id}
+      - lvgl.widget.hide: id_lv_popupbox_attic

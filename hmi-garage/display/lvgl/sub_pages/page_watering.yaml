@@ -50,6 +50,7 @@ lvgl:
                       widgets:
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
                                           vars: { f_name: "Bibiscus",
+                                                  f_id: id_lv_label_title_bibiscus,
                                                   battery_alert_ico: id_lv_lab_bibiscus_lowbat,
                                                   meter_needle: id_lv_meter_moist_bibiscus,
                                                   numeric_value: id_lv_label_moist_bibiscus,
@@ -57,67 +58,75 @@ lvgl:
                                                 } 
                                         }
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
-                                          vars: { f_name: "Broccolini",
-                                                  battery_alert_ico: id_lv_lab_broc_lowbat,
-                                                  meter_needle: id_lv_meter_moist_broc,
-                                                  numeric_value: id_lv_label_moist_broc,
-                                                  moisture_widget_arc: id_lv_card_soilsensor_broccolini_outline,
-                                                } 
-                                        }
-                        - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
-                                          vars: { f_name: "Citronnelle",
-                                                  battery_alert_ico: id_lv_lab_citr_lowbat,
-                                                  meter_needle: id_lv_meter_moist_citr,
-                                                  numeric_value: id_lv_label_moist_citr,
-                                                  moisture_widget_arc: id_lv_card_soilsensor_citronnelle_outline,
-                                                } 
-                                        }
-                        - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
-                                          vars: { f_name: "Curry",
-                                                  battery_alert_ico: id_lv_lab_curry_lowbat,
-                                                  meter_needle: id_lv_meter_moist_curry,
-                                                  numeric_value: id_lv_label_moist_curry,
-                                                  moisture_widget_arc: id_lv_card_soilsensor_curry_outline,
-                                                } 
-                                        }
-                        - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
                                           vars: { f_name: "Hibiscus",
+                                                  f_id: id_lv_label_title_hibi,
                                                   battery_alert_ico: id_lv_lab_hibi_lowbat,
                                                   meter_needle: id_lv_meter_moist_hibi,
                                                   numeric_value: id_lv_label_moist_hibi,
                                                   moisture_widget_arc: id_lv_card_soilsensor_hibiscus_outline,
                                                 } 
                                         }
-
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
-                                          vars: { f_name: "Sésame",
-                                                  battery_alert_ico: id_lv_lab_sesame_lowbat,
-                                                  meter_needle: id_lv_meter_moist_sesame,
-                                                  numeric_value: id_lv_label_moist_sesame,
-                                                  moisture_widget_arc: id_lv_card_soilsensor_sesame_outline,
+                                          vars: { f_name: "F. Herbes Gauche",
+                                                  f_id: id_lv_label_title_fherbgauche,
+                                                  battery_alert_ico: id_lv_lab_fherbgauche_lowbat,
+                                                  meter_needle: id_lv_meter_moist_fherbgauche,
+                                                  numeric_value: id_lv_label_moist_fherbgauche,
+                                                  moisture_widget_arc: id_lv_card_soilsensor_fherbgauche_outline,
+                                                } 
+                                        }
+                        - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
+                                          vars: { f_name: "F. Herbes Droite",
+                                                  f_id: id_lv_label_title_fherbdroite,
+                                                  battery_alert_ico: id_lv_lab_fherbdroite_lowbat,
+                                                  meter_needle: id_lv_meter_moist_fherbdroite,
+                                                  numeric_value: id_lv_label_moist_fherbdroite,
+                                                  moisture_widget_arc: id_lv_card_soilsensor_fherbdroite_outline,
+                                                } 
+                                        }
+                        - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
+                                          vars: { f_name: "Le Oiseau",
+                                                  f_id: id_lv_label_title_le_oiseau,
+                                                  battery_alert_ico: id_lv_lab_le_oiseau_lowbat,
+                                                  meter_needle: id_lv_meter_moist_le_oiseau,
+                                                  numeric_value: id_lv_label_moist_le_oiseau,
+                                                  moisture_widget_arc: id_lv_card_soilsensor_le_oiseau_outline,
                                                 } 
                                         }
 
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
-                                          vars: { f_name: "Tomate Cerise",
-                                                  battery_alert_ico: id_lv_lab_tom_c_lowbat,
-                                                  meter_needle: id_lv_meter_moist_tom_c,
-                                                  numeric_value: id_lv_label_moist_tom_c,
-                                                  moisture_widget_arc: id_lv_card_soilsensor_tom_c_outline,
+                                          vars: { f_name: "WH51-0d48ec",
+                                                  f_id: id_lv_label_title_wh51_0d48ec,
+                                                  battery_alert_ico: id_lv_lab_wh51_0d48ec_lowbat,
+                                                  meter_needle: id_lv_meter_moist_wh51_0d48ec,
+                                                  numeric_value: id_lv_label_moist_wh51_0d48ec,
+                                                  moisture_widget_arc: id_lv_card_soilsensor_wh51_0d48ec_outline,
                                                 } 
                                         }
 
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
-                                          vars: { f_name: "Tomate Petite",
-                                                  battery_alert_ico: id_lv_lab_tom_p_lowbat,
-                                                  meter_needle: id_lv_meter_moist_tom_p,
-                                                  numeric_value: id_lv_label_moist_tom_p,
-                                                  moisture_widget_arc: id_lv_card_soilsensor_tom_p_outline,
+                                          vars: { f_name: "WH51-00db94",
+                                                  f_id: id_lv_label_title_wh51_00db94,
+                                                  battery_alert_ico: id_lv_lab_wh51_00db94_lowbat,
+                                                  meter_needle: id_lv_meter_moist_wh51_00db94,
+                                                  numeric_value: id_lv_label_moist_wh51_00db94,
+                                                  moisture_widget_arc: id_lv_card_soilsensor_wh51_00db94_outline,
+                                                } 
+                                        }
+
+                        - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
+                                          vars: { f_name: "WH51-00dbd9",
+                                                  f_id: id_lv_label_title_wh51_00dbd9,
+                                                  battery_alert_ico: id_lv_lab_wh51_00dbd9_lowbat,
+                                                  meter_needle: id_lv_meter_moist_wh51_00dbd9,
+                                                  numeric_value: id_lv_label_moist_wh51_00dbd9,
+                                                  moisture_widget_arc: id_lv_card_soilsensor_wh51_00dbd9_outline,
                                                 } 
                                         }
 
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
                                           vars: { f_name: "Lys de Paix",
+                                                  f_id: id_lv_label_title_lys,
                                                   battery_alert_ico: id_lv_lab_lys_lowbat,
                                                   meter_needle: id_lv_meter_moist_lys,
                                                   numeric_value: id_lv_label_moist_lys,
@@ -509,5 +518,3 @@ lvgl:
                     id: page_home
                     animation: OUT_RIGHT
                     time: 300ms
-                - delay: 300ms
-                - lvgl.widget.hide: page_watering

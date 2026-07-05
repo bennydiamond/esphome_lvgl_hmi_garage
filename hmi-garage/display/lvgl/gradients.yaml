@@ -1,6 +1,5 @@
 - id: id_gradient_color_bar
   direction: VER
-  dither: none
   stops:
     - color: 0xFF0000
       position: 0
@@ -19,7 +18,6 @@
 
 - id: id_gradient_hue
   direction: HOR
-  dither: none
   stops:
     - color: 0xFF0000
       position: 0
@@ -38,7 +36,6 @@
 
 - id: id_gradient_saturation
   direction: HOR
-  dither: NONE
   stops:
     - color: 0x000000
       position: 0

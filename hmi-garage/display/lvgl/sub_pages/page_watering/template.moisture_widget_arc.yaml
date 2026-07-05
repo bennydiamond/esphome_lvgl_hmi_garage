@@ -49,6 +49,7 @@
           y: -30
       - label:
           text: ${f_name}
+          id: ${f_id}
           text_color: color_white
           text_font: lato_18
           align: BOTTOM_MID
