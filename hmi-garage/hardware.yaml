@@ -11,31 +11,31 @@ esp32:
       CONFIG_FREERTOS_HZ: "1000"
       CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240: y
       CONFIG_ESPTOOLPY_FLASHMODE_QIO: y
-      CONFIG_ESPTOOLPY_FLASHFREQ_80M: y
-#      CONFIG_ESPTOOLPY_FLASHFREQ_120M: y
+      CONFIG_ESPTOOLPY_FLASHFREQ_120M: y
       CONFIG_SPIRAM_MODE_OCT: y
       CONFIG_IDF_EXPERIMENTAL_FEATURES: y
-      CONFIG_SPIRAM_SPEED_80M: y
-#      CONFIG_SPIRAM_SPEED_120M: y
+      CONFIG_SPIRAM_SPEED_120M: y
       CONFIG_SPIRAM_FETCH_INSTRUCTIONS: y
       CONFIG_SPIRAM_RODATA: y
       CONFIG_ESP32S3_DATA_CACHE_LINE_64B: y
-      #CONFIG_COMPILER_OPTIMIZATION_SIZE: y
       CONFIG_COMPILER_OPTIMIZATION_PERF: y
-      #CONFIG_COMPILER_OPTIMIZATION_DEBUG: y
+#      CONFIG_LV_ATTRIBUTE_FAST_MEM_USE_IRAM: y # breaks compile
+      CONFIG_LV_ATTRIBUTE_FAST_MEM: y
+      CONFIG_LV_MEMCPY_MEMSET_STD: y
+      CONFIG_LV_DISP_DEF_REFR_PERIOD: "30"
     advanced:
       loop_task_stack_size: 8704 #pr#10564
-#      enable_idf_experimental_features: False
-#      compiler_optimization: SIZE
+      enable_idf_experimental_features: True
 
 esphome:
   name: ${dname}
-  min_version: 2025.11.0
+  min_version: 2026.6.4
   platformio_options:
     build_unflags: -Werror=all
-    board_build.flash_mode: dio
+    board_build.flash_mode: qio
     build_flags: 
       - -DBOARD_HAS_PSRAM
+      - -DUSE_LOOP_PRIORITY
     board_build.esp-idf.memory_type: qio_opi
     board_upload.maximum_ram_size: 524288
     board_build.flash_size: 8MB
@@ -56,7 +56,7 @@ esphome:
         
 
 logger:
-  level: DEBUG
+  level: INFO
   hardware_uart: UART0
   #baud_rate: 0
   logs: 
@@ -179,7 +179,7 @@ time:
 # Video memory
 psram:
   mode: octal
-  speed: 80MHz
+  speed: 120MHz
 
 ch422g:
   - id: io_ex
@@ -389,12 +389,13 @@ touchscreen:
 
 # Display
 display:
-  - platform: rpi_dpi_rgb
+  - platform: mipi_rgb
+    model: ESP32-S3-TOUCH-LCD-7-800X480
     id: device_display
     update_interval: never
     auto_clear_enabled: false
     color_order: RGB
-    pclk_frequency: 16MHz
+    pclk_frequency: 22MHz
     dimensions:
       width: 800
       height: 480
