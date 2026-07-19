@@ -2,8 +2,17 @@
   then:
     - lambda: |-
         char time_buf[6];
-        auto now = id(sntp_time).now();
-        snprintf(time_buf, sizeof(time_buf), "%02d:%02d", now.hour, now.minute);
+        auto now = id(id_sntp_time).now();
+
+        int hour = now.hour;
+        int minute = now.minute;
+
+        if (hour >= 0 && hour <= 23 &&
+            minute >= 0 && minute <= 59) {
+            snprintf(time_buf, sizeof(time_buf), "%02d:%02d", hour, minute);
+        } else {
+            strcpy(time_buf, "--:--");
+        }
 
         lv_label_set_text(id(id_lv_lab_display_time), time_buf);
         lv_label_set_text(id(id_lv_lab_time_notif_area), time_buf);
@@ -13,7 +22,7 @@
         text: !lambda |-
           static const char * const days_fr[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
           static char date_buf[40];
-          auto now = id(sntp_time).now();
+          auto now = id(id_sntp_time).now();
           if (!now.is_valid()) {
             date_buf[0] = '\0';
             return date_buf;
@@ -30,7 +39,7 @@
         text: !lambda |-
           static const char * const mon_fr[] = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
           static char month_buf[40];
-          auto now = id(sntp_time).now();
+          auto now = id(id_sntp_time).now();
           if (!now.is_valid()) {
             month_buf[0] = '\0';
             return month_buf;

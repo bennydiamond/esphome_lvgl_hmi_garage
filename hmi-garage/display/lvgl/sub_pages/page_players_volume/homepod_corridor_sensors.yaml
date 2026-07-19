@@ -10,8 +10,8 @@ binary_sensor:
             id: id_corridor_speaker_icon
             text: !lambda  |-
               if(x == true) {return "${volume_off}";}
-              else if(x < 25) {return "${volume_low}";}
-              else if (x < 65) {return "${volume_medium}";}
+              else if(id(id_sens_corridor_volume).state < 25) {return "${volume_low}";}
+              else if (id(id_sens_corridor_volume).state < 65) {return "${volume_medium}";}
               else {return "${volume_high}";}
 
 sensor:

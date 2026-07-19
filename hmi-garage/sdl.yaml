@@ -20,7 +20,7 @@ http_request:
 
 text_sensor:
   - platform: template
-    id: sntp_time
+    id: id_sntp_time
 
 display:
   - platform: sdl

@@ -1,5 +1,6 @@
-online_image:
-  - url: ${music_cover_png_url} # Image is expected to be 200x200 pixels
+image:
+  - platform: online_image
+    url: ${music_cover_png_url} # Image is expected to be 200x200 pixels
     id: id_online_img_now_playing
     format: png
     type: RGB565
@@ -27,8 +28,8 @@ binary_sensor:
             id: id_lv_lab_speaker_icon
             text: !lambda  |-
               if(id(id_media_muted).state == true) {return "${volume_off}";}
-              else if(id(id_media_volume).state < 0.25) {return "${volume_low}";}
-              else if (id(id_media_volume).state < 0.65) {return "${volume_medium}";}
+              else if(id(id_media_volume).state < 25) {return "${volume_low}";}
+              else if (id(id_media_volume).state < 65) {return "${volume_medium}";}
               else {return "${volume_high}";}
 
   - platform: homeassistant

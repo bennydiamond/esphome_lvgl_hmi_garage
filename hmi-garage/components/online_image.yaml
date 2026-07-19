@@ -1,5 +1,6 @@
-online_image:
-  - url: "http://192.168.1.250:30315/graphs/latest_graph_compressed.png"
+image:
+  - platform: online_image
+    url: "http://192.168.1.250:30315/graphs/latest_graph_compressed.png"
     id: id_img_river_flow_graph
     format: png
     type: RGB565

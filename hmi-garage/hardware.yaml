@@ -3,6 +3,7 @@ esp32:
   variant: esp32s3
   flash_size: 8MB
   cpu_frequency : 240MHz
+#  partitions: "hmi-garage/custom_partition_no_ota.csv"
   framework:
     type: esp-idf
     sdkconfig_options:
@@ -24,23 +25,12 @@ esp32:
       CONFIG_LV_MEMCPY_MEMSET_STD: y
       CONFIG_LV_DISP_DEF_REFR_PERIOD: "30"
     advanced:
-      loop_task_stack_size: 8704 #pr#10564
+      loop_task_stack_size: 8704
       enable_idf_experimental_features: True
 
 esphome:
   name: ${dname}
-  min_version: 2026.6.4
-  platformio_options:
-    build_unflags: -Werror=all
-    board_build.flash_mode: qio
-    build_flags: 
-      - -DBOARD_HAS_PSRAM
-      - -DUSE_LOOP_PRIORITY
-    board_build.esp-idf.memory_type: qio_opi
-    board_upload.maximum_ram_size: 524288
-    board_build.flash_size: 8MB
-    # No second OTA partition. Must be flashed through serial (hint: ser2net)
-#    board_build.partitions: "../../../hmi-garage/custom_partition_no_ota.csv"
+  min_version: 2026.7.0
   on_boot:
     - priority: 500 # a bit after sensor init
       then:
@@ -163,7 +153,7 @@ mdns:
 
 time:
   - platform: sntp
-    id: sntp_time
+    id: id_sntp_time
     timezone: America/Toronto
     servers:
      - 192.168.0.3
