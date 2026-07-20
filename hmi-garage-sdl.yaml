@@ -1,7 +1,167 @@
 # Based of https://github.com/alaltitov/display/tree/main
 
 # ESP32-S3-Touch-LCD-7
-substitutions: !include hmi-garage/substitutions.yaml
+substitutions:
+  dname: "hmi-garage"
+  uname: "HMI Garage"
+
+  settings:           "\U000F0493" # settings
+  thermostat:         "\U0000e901" # thermostat
+  lights:             "\U000F0335" # lightbulb
+  home_lightbulb:     "\U000F1251" # mdi-home-lightbulb
+  lightbulb_group:    "\U000F1253" # mdi-lightbulb-group
+  motion:             "\U000F0D91" # motion, presence
+  heating:            "\U000F0438" # heating
+  ha:                 "\U000F07D0" # home assistant
+  ventilation:        "\U0000e90d" # ventilation
+  wifi_25:            "\U000F091F" # wifi signal from 25% to 1%
+  wifi_50:            "\U000F0922" # wifi signal from 50% to 25%
+  wifi_75:            "\U000F0925" # wifi signal from 75% to 50%
+  wifi_100:           "\U000F0928" # wifi signal from 100% to 75% or disable
+  humidity:           "\U0000e912" # humidity
+  temperature:        "\U0000e915" # temperature
+  wind_speed:         "\U000F059D" # mdi-weather-windy
+  illumination:       "\U0000e916" # lux
+  empty:              "\U0000e917" # placeholder
+  door_open:          "\U000F081C"
+  patio_door_open:    "\U000F1820"
+  watering_can:       "\U000F1481"
+  ceiling_light:      "\U000F0769" # mdi-ceiling-light
+  light_recessed:     "\U000F179B" # mdi-light-recessed
+  lamp_post:          "\U000F1A60" # mdi-post-lamp
+  music_note:         "\U000F075A" # mdi-music
+  h_circle_outline:   "\U000F0C02" # mdi-alpha-h-circle-outline
+  hvac_cooling:       "\U000F1A71" # mdi-snowflake-thermometer
+  hvac_heating:       "\U000F0510" # mdi-thermometer-lines
+  hvac_fan:           "\U000F0210" # mdi-fan
+  volume_high:        "\U000F057E" # mdi-volume-high
+  volume_medium:      "\U000F0580" # mdi-volume-medium
+  volume_low:         "\U000F057F" # mdi-volume-low
+  volume_off:         "\U000F0581" # mdi-volume-off
+  pause_icon:         "\U000F03E4" # mdi-pause
+  play_icon:          "\U000F040A" # mdi-play
+  skip_next_icon:     "\U000F04AD" # mdi-skip-next
+  skip_previous_icon: "\U000F04AE" # mdi-skip-previous
+  repeat_off_icon:    "\U000F0457" # mdi-repeat-off
+  repeat_once_icon:   "\U000F0458" # mdi-repeat-once
+  repeat_icon:        "\U000F0456" # mdi-repeat
+  shuffle_disabled_icon: "\U000F049E" # mdi-shuffle-disabled
+  shuffle_icon:       "\U000F049D" # mdi-shuffle
+  waves_arrow_left:   "\U000F1859" # mdi-waves-arrow-left
+  waves_arrow_up:     "\U000F185B" # mdi-waves-arrow-up
+  home_floor_g:       "\U000F0D85" # mdi-home-floor-g
+  exit_run:           "\U000F0A48" # mdi-exit-run
+  locked:             "\U000F033E" # mdi-lock
+  unlocked:           "\U000F0FC6" # mdi-lock-open-variant
+  speaker_wireless:   "\U000F071F" # mdi-speaker-wireless
+  salt_shaker:        "\U000F110E" # mdi-shaker
+  sprinkler:          "\U000F1060" # mdi-sprinkler-variant
+  battery_alert:      "\U000F10CC" # mdi-battery-alert-variant
+  car_key:            "\U000F0B6D" # mdi-car-key
+  trash_bin:          "\U000F01B4" # mdi-delete
+  trash_bin_empty:    "\U000F06CC" # mdi-delete-empty
+  cat:                "\U000F011B" # mdi-cat  
+
+  ha_instance_url: "http://192.168.0.250:8123"
+  # token is valid for 10 years (2025-02-15)
+  ha_auth_token: !secret ha_long_term_auth_token
+  music_cover_jpg_url: 'http://192.168.1.191:82/music_cover.jpg'
+  music_cover_png_url: 'http://192.168.1.191:82/music_cover.png'
+  default_music_cover_jpg_url: 'http://192.168.1.191:82/default_cover.jpg'
+  default_music_cover_png_url: 'http://192.168.1.191:82/default_cover.png'
+  fallback_music_cover_jpg_url: 'http://192.168.0.250:8123/local/music_note_cover.jpg?authToken=${ha_auth_token}'
+  fallback_music_cover_png_url: 'http://192.168.0.250:8123/local/music_note_cover.png?authToken=${ha_auth_token}'
+
+  #screen_idle_timeout_seconds: "5"
+  entity_update_debounce_ms: "350"
+
+  default_min_kelvin: "2700"
+  default_max_kelvin: "6500"
+  default_mid_kelvin: "4100"
+
+  weather_ha_entity_id: "weather.pirateweather"
+
+  exterieur_cote_lights_ha_entity_id: "exterieur_cote"
+  exterieur_cote_min_kelvin: "${default_min_kelvin}"
+  exterieur_cote_max_kelvin: "${default_max_kelvin}"
+  exterieur_garage_lights_ha_entity_id: "exterieur_garage"
+  exterieur_garage_min_kelvin: "${default_min_kelvin}"
+  exterieur_garage_max_kelvin: "${default_max_kelvin}"
+  lampadaire_avant_lights_ha_entity_id: "lampadaire_avant"
+  lampadaire_avant_min_kelvin: "${default_min_kelvin}"
+  lampadaire_avant_mid_kelvin: "${default_mid_kelvin}"
+  lampadaire_avant_max_kelvin: "${default_max_kelvin}"
+  grenier_light_ha_entity_id: "switch_lumieres_grenier_relay"
+  exterieur_avant_lights_ha_entity_id: "exterieur_avant"
+  exterieur_avant_min_kelvin: "${default_min_kelvin}"
+  exterieur_avant_mid_kelvin: "${default_mid_kelvin}"
+  exterieur_avant_max_kelvin: "${default_max_kelvin}"
+  exterieur_avant_maison_lights_ha_entity_id: "exterieur_avant_corniches"
+  exterieur_avant_maison_min_kelvin: "${default_min_kelvin}"
+  exterieur_avant_maison_mid_kelvin: "${default_mid_kelvin}"
+  exterieur_avant_maison_max_kelvin: "${default_max_kelvin}"
+  portique_avant_lights_ha_entity_id: "portique_avant"
+  portique_avant_min_kelvin: "${default_min_kelvin}"
+  portique_avant_mid_kelvin: "${default_mid_kelvin}"
+  portique_avant_max_kelvin: "${default_max_kelvin}"
+  tout_le_sous_sol_lights_ha_entity_id: "tout_le_sous_sol"
+
+  volume_control_garage_entity_id: "number.garage_alsa_audio_garage_alsa_audio_volume"
+  mute_state_garage_entity_id: "switch.garage_alsa_audio_garage_alsa_audio_mute"
+  media_player_garage_entity_id: "media_player.garage_ump" # For play/pause/idle state
+  media_player_title_entity_id: "sensor.shairport_garage_media_title_sanitized"
+  media_player_album_entity_id: "sensor.shairport_garage_media_album_sanitized"
+  media_player_artist_entity_id: "sensor.shairport_garage_media_artist_sanitized"
+  mass_garage_entity_id: "media_player.mass_garage" # For repeat and shuffle states
+  media_from_mass_entity_id: "binary_sensor.garage_audio_from_mass"
+  music_playlist1_text: "Playlist1"
+  music_playlist2_text: "Ben - Plex Mix"
+  music_playlist3_text: "Playlist3"
+  music_playlist4_text: "Playlist4"
+
+  garage_rdc_lights_ha_entity_id: "switch_garage_ss_relay"
+  garage_light_automation_freeze_toggle: "input_boolean.figer_l_etat_des_lumieres_du_garage"
+  garage_light_automation_freeze_timer_end_time: "sensor.timer_de_figer_les_lumieres_du_garage_heure_de_fin_pretty_print_localtime"
+  garage_light_automation_freeze_timer_value_on_start: "input_datetime.temps_pour_figer_les_lumieres_du_garage"
+  garage_light_automation_freeze_add_hour: "input_button.figer_les_lumieres_garage_ajouter_1_heure"
+  garage_light_automation_freeze_sub_hour: "input_button.figer_les_lumieres_garage_soustraire_1_heure"
+  garage_light_automation_freeze_add_minutes: "input_button.figer_les_lumieres_garage_ajouter_10_minutes"
+  garage_light_automation_freeze_sub_minutes: "input_button.figer_les_lumieres_garage_soustraire_10_minutes"
+
+  # Replace with real entity IDs once everything is set up in this room
+  garage_ss_lights_ha_entity_id: "lumieres_garage_ss"
+  garage_ss_light_automation_freeze_toggle: "input_boolean.figer_l_etat_des_lumieres_du_garage_ss"
+  garage_ss_light_automation_freeze_timer_end_time: "sensor.timer_de_figer_les_lumieres_du_garage_ss_heure_de_fin_pretty_print_localtime"
+  garage_ss_light_automation_freeze_timer_value_on_start: "input_datetime.temps_initial_pour_figer_les_lumieres_du_garage_ss"
+  garage_ss_light_automation_freeze_add_hour: "input_button.figer_les_lumieres_garage_ss_ajouter_1_heure"
+  garage_ss_light_automation_freeze_sub_hour: "input_button.figer_les_lumieres_garage_ss_soustraire_1_heure"
+  garage_ss_light_automation_freeze_add_minutes: "input_button.figer_les_lumieres_garage_ss_ajouter_10_minutes"
+  garage_ss_light_automation_freeze_sub_minutes: "input_button.figer_les_lumieres_garage_ss_soustraire_10_minutes"
+
+  cuisine_volume_control_entity_id: "number.homepod_cuisine_volume"
+  cuisine_mute_state_entity_id: "switch.homepod_cuisine_virtual_mute"
+  cuisine_media_player_entity_id: "media_player.cuisine_ump"
+
+  corridor_volume_control_entity_id: "number.homepod_corridor_volume"
+  corridor_mute_state_entity_id: "switch.homepod_corridor_virtual_mute"
+  corridor_media_player_entity_id: "media_player.corridor_ump"
+
+  bureau_bianka_volume_control_entity_id: "number.homepod_bureau_de_bianka_volume"
+  bureau_bianka_mute_state_entity_id: "switch.homepod_bureau_de_bianka_virtual_mute"
+  bureau_bianka_media_player_entity_id: "media_player.bureau_bianka_ump"
+
+  atelier_volume_control_entity_id: "number.atelier_alsa_audio_atelier_alsa_audio_volume"
+  atelier_mute_state_entity_id: "switch.atelier_alsa_audio_atelier_alsa_audio_mute"
+  atelier_media_player_entity_id: "media_player.shairport_sync_atelier"
+
+  trash_bin_day_entity_id: binary_sensor.jour_de_poubelles
+  trash_bin_location_alert_entity_id: binary_sensor.rappel_bac_vidanges
+
+  recycle_bin_day_entity_id: binary_sensor.jour_de_recyclage
+  recycle_bin_location_alert_entity_id: binary_sensor.rappel_bac_recyclage
+
+  compost_bin_day_entity_id: binary_sensor.jour_de_residus_organiques
+  compost_bin_location_alert_entity_id: binary_sensor.rappel_bac_residus_organiques
 
 packages:
   hardware: !include hmi-garage/sdl.yaml

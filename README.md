@@ -36,14 +36,31 @@ This HMI is used to:
 
 ![Music page](images/sub_music.png)
 
+## ESPHome Dashboard Integration
+
+To integrate this device into your ESPHome web dashboard in Home Assistant, you no longer need a local checkout on the Home Assistant node. Simply create a new YAML file in your ESPHome Dashboard (e.g., `hmi-garage.yaml`) with the minimal config:
+
+```yaml
+packages:
+  remote_package_files:
+    url: https://github.com/bennydiamond/esphome_lvgl_hmi_garage
+    files: [hmi-garage.yaml]
+    ref: main
+    refresh: 1d
+
+wifi:
+  use_address: 192.168.1.139
+```
+
 ## Project structure
 
-- hmi-garage.yaml: top-level ESPHome project for the Waveshare ESP32-S3-Touch-LCD-7
+- hmi-garage.yaml: top-level ESPHome project package for the Waveshare ESP32-S3-Touch-LCD-7
 - hmi-garage-sdl.yaml: top-level ESPHome project running on [Host platform](https://esphome.io/components/host.html)
 - hmi-garage folder: ESPHome code for the HMI
 - case folder: design for 3D printed wall-mountable case
 - extras/home_assistant_stuff folder: Home assistant-related automations, scripts and entities. See [README](extras/home_assistant_stuff/README.md).
 - extras/ser2net folder: ESPHome Yaml config for a ser2net device to interface the LCD's uart port. Script for socat. See [README](extras/ser2net/README.md).
+
 
 ## Notes on project
 

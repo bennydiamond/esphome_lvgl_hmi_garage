@@ -1,478 +1,478 @@
 #- platform: file
-#  file: 'hmi-garage/music_note_cover.png'
+#  file: '../music_note_cover.png'
 #  type: RGB565
 #  id: id_img_music_note
 
   # FOG ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/fog/fog0.png'
+  file: '../weather/fog/fog0.png'
   type: RGB565
   id: fog0
 - platform: file
-  file: 'hmi-garage/weather/fog/fog1.png'
+  file: '../weather/fog/fog1.png'
   type: RGB565
   id: fog1
 - platform: file
-  file: 'hmi-garage/weather/fog/fog2.png'
+  file: '../weather/fog/fog2.png'
   type: RGB565
   id: fog2
 - platform: file
-  file: 'hmi-garage/weather/fog/fog3.png'
+  file: '../weather/fog/fog3.png'
   type: RGB565
   id: fog3
 - platform: file
-  file: 'hmi-garage/weather/fog/fog4.png'
+  file: '../weather/fog/fog4.png'
   type: RGB565
   id: fog4
 - platform: file
-  file: 'hmi-garage/weather/fog/fog5.png'
+  file: '../weather/fog/fog5.png'
   type: RGB565
   id: fog5
 - platform: file
-  file: 'hmi-garage/weather/fog/fog6.png'
+  file: '../weather/fog/fog6.png'
   type: RGB565
   id: fog6
 - platform: file
-  file: 'hmi-garage/weather/fog/fog7.png'
+  file: '../weather/fog/fog7.png'
   type: RGB565
   id: fog7
 - platform: file
-  file: 'hmi-garage/weather/fog/fog8.png'
+  file: '../weather/fog/fog8.png'
   type: RGB565
   id: fog8
 - platform: file
-  file: 'hmi-garage/weather/fog/fog9.png'
+  file: '../weather/fog/fog9.png'
   type: RGB565
   id: fog9
 - platform: file
-  file: 'hmi-garage/weather/fog/fog10.png'
+  file: '../weather/fog/fog10.png'
   type: RGB565
   id: fog10
 - platform: file
-  file: 'hmi-garage/weather/fog/fog11.png'
+  file: '../weather/fog/fog11.png'
   type: RGB565
   id: fog11
 - platform: file
-  file: 'hmi-garage/weather/fog/fog12.png'
+  file: '../weather/fog/fog12.png'
   type: RGB565
   id: fog12
   
 # RAINY ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy0.png'
+  file: '../weather/rainy/rainy0.png'
   type: RGB565
   id: rainy0
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy1.png'
+  file: '../weather/rainy/rainy1.png'
   type: RGB565
   id: rainy1
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy2.png'
+  file: '../weather/rainy/rainy2.png'
   type: RGB565
   id: rainy2
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy3.png'
+  file: '../weather/rainy/rainy3.png'
   type: RGB565
   id: rainy3
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy4.png'
+  file: '../weather/rainy/rainy4.png'
   type: RGB565
   id: rainy4
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy5.png'
+  file: '../weather/rainy/rainy5.png'
   type: RGB565
   id: rainy5
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy6.png'
+  file: '../weather/rainy/rainy6.png'
   type: RGB565
   id: rainy6
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy7.png'
+  file: '../weather/rainy/rainy7.png'
   type: RGB565
   id: rainy7
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy8.png'
+  file: '../weather/rainy/rainy8.png'
   type: RGB565
   id: rainy8
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy9.png'
+  file: '../weather/rainy/rainy9.png'
   type: RGB565
   id: rainy9
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy10.png'
+  file: '../weather/rainy/rainy10.png'
   type: RGB565
   id: rainy10
 - platform: file
-  file: 'hmi-garage/weather/rainy/rainy11.png'
+  file: '../weather/rainy/rainy11.png'
   type: RGB565
   id: rainy11
 
 # LIGHTNING RAINY ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/lightning_rainy/lightning_rainy0.png'
+  file: '../weather/lightning_rainy/lightning_rainy0.png'
   type: RGB565
   id: lightning_rainy0
 - platform: file
-  file: 'hmi-garage/weather/lightning_rainy/lightning_rainy1.png'
+  file: '../weather/lightning_rainy/lightning_rainy1.png'
   type: RGB565
   id: lightning_rainy1
 - platform: file
-  file: 'hmi-garage/weather/lightning_rainy/lightning_rainy2.png'
+  file: '../weather/lightning_rainy/lightning_rainy2.png'
   type: RGB565
   id: lightning_rainy2
 - platform: file
-  file: 'hmi-garage/weather/lightning_rainy/lightning_rainy3.png'
+  file: '../weather/lightning_rainy/lightning_rainy3.png'
   type: RGB565
   id: lightning_rainy3
 
 # POURING ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring0.png'
+  file: '../weather/pouring/pouring0.png'
   type: RGB565
   id: pouring0
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring1.png'
+  file: '../weather/pouring/pouring1.png'
   type: RGB565
   id: pouring1
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring2.png'
+  file: '../weather/pouring/pouring2.png'
   type: RGB565
   id: pouring2
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring3.png'
+  file: '../weather/pouring/pouring3.png'
   type: RGB565
   id: pouring3
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring4.png'
+  file: '../weather/pouring/pouring4.png'
   type: RGB565
   id: pouring4
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring5.png'
+  file: '../weather/pouring/pouring5.png'
   type: RGB565
   id: pouring5
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring6.png'
+  file: '../weather/pouring/pouring6.png'
   type: RGB565
   id: pouring6
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring7.png'
+  file: '../weather/pouring/pouring7.png'
   type: RGB565
   id: pouring7
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring8.png'
+  file: '../weather/pouring/pouring8.png'
   type: RGB565
   id: pouring8
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring9.png'
+  file: '../weather/pouring/pouring9.png'
   type: RGB565
   id: pouring9
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring10.png'
+  file: '../weather/pouring/pouring10.png'
   type: RGB565
   id: pouring10
 - platform: file
-  file: 'hmi-garage/weather/pouring/pouring11.png'
+  file: '../weather/pouring/pouring11.png'
   type: RGB565
   id: pouring11
 
 # LIGHTNING ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/lightning/lightning0.png'
+  file: '../weather/lightning/lightning0.png'
   type: RGB565
   id: lightning0
 - platform: file
-  file: 'hmi-garage/weather/lightning/lightning1.png'
+  file: '../weather/lightning/lightning1.png'
   type: RGB565
   id: lightning1
 - platform: file
-  file: 'hmi-garage/weather/lightning/lightning2.png'
+  file: '../weather/lightning/lightning2.png'
   type: RGB565
   id: lightning2
 - platform: file
-  file: 'hmi-garage/weather/lightning/lightning3.png'
+  file: '../weather/lightning/lightning3.png'
   type: RGB565
   id: lightning3
 
   # SNOWY ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy0.png'
+  file: '../weather/snowy/snowy0.png'
   type: RGB565
   id: snowy0
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy1.png'
+  file: '../weather/snowy/snowy1.png'
   type: RGB565
   id: snowy1
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy2.png'
+  file: '../weather/snowy/snowy2.png'
   type: RGB565
   id: snowy2
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy3.png'
+  file: '../weather/snowy/snowy3.png'
   type: RGB565
   id: snowy3
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy4.png'
+  file: '../weather/snowy/snowy4.png'
   type: RGB565
   id: snowy4
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy5.png'
+  file: '../weather/snowy/snowy5.png'
   type: RGB565
   id: snowy5
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy6.png'
+  file: '../weather/snowy/snowy6.png'
   type: RGB565
   id: snowy6
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy7.png'
+  file: '../weather/snowy/snowy7.png'
   type: RGB565
   id: snowy7
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy8.png'
+  file: '../weather/snowy/snowy8.png'
   type: RGB565
   id: snowy8
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy9.png'
+  file: '../weather/snowy/snowy9.png'
   type: RGB565
   id: snowy9
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy10.png'
+  file: '../weather/snowy/snowy10.png'
   type: RGB565
   id: snowy10
 - platform: file
-  file: 'hmi-garage/weather/snowy/snowy11.png'
+  file: '../weather/snowy/snowy11.png'
   type: RGB565
   id: snowy11
 
 # SNOWY RAINY ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy0.png'
+  file: '../weather/snowy_rainy/snowy_rainy0.png'
   type: RGB565
   id: snowy_rainy0
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy1.png'
+  file: '../weather/snowy_rainy/snowy_rainy1.png'
   type: RGB565
   id: snowy_rainy1
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy2.png'
+  file: '../weather/snowy_rainy/snowy_rainy2.png'
   type: RGB565
   id: snowy_rainy2
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy3.png'
+  file: '../weather/snowy_rainy/snowy_rainy3.png'
   type: RGB565
   id: snowy_rainy3
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy4.png'
+  file: '../weather/snowy_rainy/snowy_rainy4.png'
   type: RGB565
   id: snowy_rainy4
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy5.png'
+  file: '../weather/snowy_rainy/snowy_rainy5.png'
   type: RGB565
   id: snowy_rainy5
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy6.png'
+  file: '../weather/snowy_rainy/snowy_rainy6.png'
   type: RGB565
   id: snowy_rainy6
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy7.png'
+  file: '../weather/snowy_rainy/snowy_rainy7.png'
   type: RGB565
   id: snowy_rainy7
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy8.png'
+  file: '../weather/snowy_rainy/snowy_rainy8.png'
   type: RGB565
   id: snowy_rainy8
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy9.png'
+  file: '../weather/snowy_rainy/snowy_rainy9.png'
   type: RGB565
   id: snowy_rainy9
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy10.png'
+  file: '../weather/snowy_rainy/snowy_rainy10.png'
   type: RGB565
   id: snowy_rainy10
 - platform: file
-  file: 'hmi-garage/weather/snowy_rainy/snowy_rainy11.png'
+  file: '../weather/snowy_rainy/snowy_rainy11.png'
   type: RGB565
   id: snowy_rainy11
 
 # HAIL ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/hail/hail0.png'
+  file: '../weather/hail/hail0.png'
   type: RGB565
   id: hail0
 - platform: file
-  file: 'hmi-garage/weather/hail/hail1.png'
+  file: '../weather/hail/hail1.png'
   type: RGB565
   id: hail1
 - platform: file
-  file: 'hmi-garage/weather/hail/hail2.png'
+  file: '../weather/hail/hail2.png'
   type: RGB565
   id: hail2
 - platform: file
-  file: 'hmi-garage/weather/hail/hail3.png'
+  file: '../weather/hail/hail3.png'
   type: RGB565
   id: hail3
 - platform: file
-  file: 'hmi-garage/weather/hail/hail4.png'
+  file: '../weather/hail/hail4.png'
   type: RGB565
   id: hail4
 - platform: file
-  file: 'hmi-garage/weather/hail/hail5.png'
+  file: '../weather/hail/hail5.png'
   type: RGB565
   id: hail5
 - platform: file
-  file: 'hmi-garage/weather/hail/hail6.png'
+  file: '../weather/hail/hail6.png'
   type: RGB565
   id: hail6
 - platform: file
-  file: 'hmi-garage/weather/hail/hail7.png'
+  file: '../weather/hail/hail7.png'
   type: RGB565
   id: hail7
 - platform: file
-  file: 'hmi-garage/weather/hail/hail8.png'
+  file: '../weather/hail/hail8.png'
   type: RGB565
   id: hail8
 - platform: file
-  file: 'hmi-garage/weather/hail/hail9.png'
+  file: '../weather/hail/hail9.png'
   type: RGB565
   id: hail9
 - platform: file
-  file: 'hmi-garage/weather/hail/hail10.png'
+  file: '../weather/hail/hail10.png'
   type: RGB565
   id: hail10
 - platform: file
-  file: 'hmi-garage/weather/hail/hail11.png'
+  file: '../weather/hail/hail11.png'
   type: RGB565
   id: hail11
 
 # PARTLY CLOUDY SUN ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_sun/partlycloudy_sun0.png'
+  file: '../weather/partlycloudy_sun/partlycloudy_sun0.png'
   type: RGB565
   id: partlycloudy_sun0
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_sun/partlycloudy_sun1.png'
+  file: '../weather/partlycloudy_sun/partlycloudy_sun1.png'
   type: RGB565
   id: partlycloudy_sun1
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_sun/partlycloudy_sun2.png'
+  file: '../weather/partlycloudy_sun/partlycloudy_sun2.png'
   type: RGB565
   id: partlycloudy_sun2
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_sun/partlycloudy_sun3.png'
+  file: '../weather/partlycloudy_sun/partlycloudy_sun3.png'
   type: RGB565
   id: partlycloudy_sun3
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_sun/partlycloudy_sun4.png'
+  file: '../weather/partlycloudy_sun/partlycloudy_sun4.png'
   type: RGB565
   id: partlycloudy_sun4
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_sun/partlycloudy_sun5.png'
+  file: '../weather/partlycloudy_sun/partlycloudy_sun5.png'
   type: RGB565
   id: partlycloudy_sun5
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_sun/partlycloudy_sun6.png'
+  file: '../weather/partlycloudy_sun/partlycloudy_sun6.png'
   type: RGB565
   id: partlycloudy_sun6
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_sun/partlycloudy_sun7.png'
+  file: '../weather/partlycloudy_sun/partlycloudy_sun7.png'
   type: RGB565
   id: partlycloudy_sun7
 
 # PARTLY CLOUDY MOON ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_moon/partlycloudy_moon0.png'
+  file: '../weather/partlycloudy_moon/partlycloudy_moon0.png'
   type: RGB565
   id: partlycloudy_moon0
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_moon/partlycloudy_moon1.png'
+  file: '../weather/partlycloudy_moon/partlycloudy_moon1.png'
   type: RGB565
   id: partlycloudy_moon1
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_moon/partlycloudy_moon2.png'
+  file: '../weather/partlycloudy_moon/partlycloudy_moon2.png'
   type: RGB565
   id: partlycloudy_moon2
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_moon/partlycloudy_moon3.png'
+  file: '../weather/partlycloudy_moon/partlycloudy_moon3.png'
   type: RGB565
   id: partlycloudy_moon3
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_moon/partlycloudy_moon4.png'
+  file: '../weather/partlycloudy_moon/partlycloudy_moon4.png'
   type: RGB565
   id: partlycloudy_moon4
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_moon/partlycloudy_moon5.png'
+  file: '../weather/partlycloudy_moon/partlycloudy_moon5.png'
   type: RGB565
   id: partlycloudy_moon5
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_moon/partlycloudy_moon6.png'
+  file: '../weather/partlycloudy_moon/partlycloudy_moon6.png'
   type: RGB565
   id: partlycloudy_moon6
 - platform: file
-  file: 'hmi-garage/weather/partlycloudy_moon/partlycloudy_moon7.png'
+  file: '../weather/partlycloudy_moon/partlycloudy_moon7.png'
   type: RGB565
   id: partlycloudy_moon7
 
 # CLOUDY ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/cloudy/cloudy0.png'
+  file: '../weather/cloudy/cloudy0.png'
   type: RGB565
   id: cloudy0
 - platform: file
-  file: 'hmi-garage/weather/cloudy/cloudy1.png'
+  file: '../weather/cloudy/cloudy1.png'
   type: RGB565
   id: cloudy1
 - platform: file
-  file: 'hmi-garage/weather/cloudy/cloudy2.png'
+  file: '../weather/cloudy/cloudy2.png'
   type: RGB565
   id: cloudy2
 - platform: file
-  file: 'hmi-garage/weather/cloudy/cloudy3.png'
+  file: '../weather/cloudy/cloudy3.png'
   type: RGB565
   id: cloudy3
 
 # WINDY ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/windy/windy0.png'
+  file: '../weather/windy/windy0.png'
   type: RGB565
   id: windy0
 - platform: file
-  file: 'hmi-garage/weather/windy/windy1.png'
+  file: '../weather/windy/windy1.png'
   type: RGB565
   id: windy1
 - platform: file
-  file: 'hmi-garage/weather/windy/windy2.png'
+  file: '../weather/windy/windy2.png'
   type: RGB565
   id: windy2
 - platform: file
-  file: 'hmi-garage/weather/windy/windy3.png'
+  file: '../weather/windy/windy3.png'
   type: RGB565
   id: windy3
 
 # WINDY VARIANT ANIMATION
 - platform: file
-  file: 'hmi-garage/weather/windy_variant/windy_variant0.png'
+  file: '../weather/windy_variant/windy_variant0.png'
   type: RGB565
   id: windy_variant0
 - platform: file
-  file: 'hmi-garage/weather/windy_variant/windy_variant1.png'
+  file: '../weather/windy_variant/windy_variant1.png'
   type: RGB565
   id: windy_variant1
 - platform: file
-  file: 'hmi-garage/weather/windy_variant/windy_variant2.png'
+  file: '../weather/windy_variant/windy_variant2.png'
   type: RGB565
   id: windy_variant2
 - platform: file
-  file: 'hmi-garage/weather/windy_variant/windy_variant3.png'
+  file: '../weather/windy_variant/windy_variant3.png'
   type: RGB565
   id: windy_variant3
 
 # SUNNY
 - platform: file
-  file: 'hmi-garage/weather/sunny.png'
+  file: '../weather/sunny.png'
   type: RGB565
   id: sunny
 
 # CLEAR-NIGHT
 - platform: file
-  file: 'hmi-garage/weather/clear_night.png'
+  file: '../weather/clear_night.png'
   type: RGB565
   id: clear_night

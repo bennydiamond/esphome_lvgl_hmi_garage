@@ -1,14 +1,14 @@
-#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#- file: "../fonts/Lato-Regular.ttf"
 #  id: lato_16
 #  size: 16
 #  bpp: 4
 
-- file: "hmi-garage/fonts/Lato-Regular.ttf"
+- file: "../fonts/Lato-Regular.ttf"
   id: lato_18
   size: 18
   bpp: 4
   extras:
-    - file: "hmi-garage/fonts/Lato-Regular.ttf"
+    - file: "../fonts/Lato-Regular.ttf"
       glyphs: [
         à,
         é,
@@ -30,17 +30,17 @@
         µ
       ]
 
-#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#- file: "../fonts/Lato-Regular.ttf"
 #  id: lato_20
 #  size: 20
 #  bpp: 4
 
-- file: "hmi-garage/fonts/Lato-Regular.ttf"
+- file: "../fonts/Lato-Regular.ttf"
   id: lato_24
   size: 24
   bpp: 4
   extras:
-    - file: "hmi-garage/fonts/Lato-Regular.ttf"
+    - file: "../fonts/Lato-Regular.ttf"
       glyphs: [
         à,
         é,
@@ -59,42 +59,42 @@
         ñ
       ]
 
-- file: "hmi-garage/fonts/Lato-Regular.ttf"
+- file: "../fonts/Lato-Regular.ttf"
   id: lato_30
   size: 30
   bpp: 4
 
-#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#- file: "../fonts/Lato-Regular.ttf"
 #  id: lato_36
 #  size: 36
 #  bpp: 4
 
-#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#- file: "../fonts/Lato-Regular.ttf"
 #  id: lato_42
 #  size: 42
 #  bpp: 4
 
-#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#- file: "../fonts/Lato-Regular.ttf"
 #  id: lato_48
 #  size: 48
 #  bpp: 4
 
-#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#- file: "../fonts/Lato-Regular.ttf"
 #  id: lato_60
 #  size: 60
 #  bpp: 4
 
-- file: "hmi-garage/fonts/Lato-Regular.ttf"
+- file: "../fonts/Lato-Regular.ttf"
   id: lato_72
   size: 72
   bpp: 4
 
-#- file: "hmi-garage/fonts/Lato-Regular.ttf"
+#- file: "../fonts/Lato-Regular.ttf"
 #  id: lato_84
 #  size: 84
 #  bpp: 4
 
-- file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
+- file: "../fonts/materialdesignicons-webfont.ttf"
   id: mdi_icons_24
   size: 24
   bpp: 4
@@ -102,7 +102,7 @@
     "\U000F10CC", # mdi-battery-alert-variant
   ]
 
-- file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
+- file: "../fonts/materialdesignicons-webfont.ttf"
   id: mdi_icons_32
   size: 32
   bpp: 4
@@ -145,7 +145,7 @@
     "\U000F011B", # mdi-cat
   ]
 
-- file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
+- file: "../fonts/materialdesignicons-webfont.ttf"
   id: mdi_icons_48
   size: 48
   bpp: 4
@@ -186,7 +186,7 @@
     "\U000F0B6D", # mdi-car-key
   ]
 
-- file: "hmi-garage/fonts/materialdesignicons-webfont.ttf"
+- file: "../fonts/materialdesignicons-webfont.ttf"
   id: mdi_icons_72
   size: 72
   bpp: 4
@@ -213,7 +213,7 @@
     "\U000F04AE", # mdi-skip-previous
     "\U000F0A48", # mdi-exit-run
   ]
-#- file: "hmi-garage/fonts/Icons.ttf"
+#- file: "../fonts/Icons.ttf"
 #  id: icons_18
 #  size: 18
 #  bpp: 4
@@ -227,7 +227,7 @@
 #    "\U0000e917", # placeholder
 #    ]
 
-#- file: "hmi-garage/fonts/Icons.ttf"
+#- file: "../fonts/Icons.ttf"
 #  id: icons_24
 #  size: 24
 #  bpp: 4
@@ -241,7 +241,7 @@
 #    "\U0000e917", # placeholder
 #    ]
 
-#- file: "hmi-garage/fonts/Icons.ttf"
+#- file: "../fonts/Icons.ttf"
 #  id: icons_30
 #  size: 30
 #  bpp: 4
@@ -255,7 +255,7 @@
 #    "\U0000e917", # placeholder
 #    ]
     
-- file: "hmi-garage/fonts/Icons.ttf"
+- file: "../fonts/Icons.ttf"
   id: icons_36
   size: 36
   bpp: 4
@@ -270,7 +270,7 @@
 #    "\U0000e917", # placeholder
     ]
 
-- file: "hmi-garage/fonts/Icons.ttf"
+- file: "../fonts/Icons.ttf"
   id: icons_48
   size: 48
   bpp: 4
@@ -284,7 +284,7 @@
 #    "\U0000e917", # placeholder
     ]
 
-#- file: "hmi-garage/fonts/Icons.ttf"
+#- file: "../fonts/Icons.ttf"
 #  id: icons_60
 #  size: 60
 #  bpp: 4
@@ -298,7 +298,7 @@
 #    "\U0000e917", # placeholder
 #    ]
 
-#- file: "hmi-garage/fonts/Icons.ttf"
+#- file: "../fonts/Icons.ttf"
 #  id: icons_72
 #  size: 72
 #  bpp: 4
@@ -312,7 +312,7 @@
 #    "\U0000e917", # placeholder
 #    ]
 
-#- file: "hmi-garage/fonts/Icons.ttf"
+#- file: "../fonts/Icons.ttf"
 #  id: icons_84
 #  size: 84
 #  bpp: 4
