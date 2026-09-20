@@ -24,6 +24,7 @@ esp32:
       CONFIG_LV_ATTRIBUTE_FAST_MEM: y
       CONFIG_LV_MEMCPY_MEMSET_STD: y
       CONFIG_LV_DISP_DEF_REFR_PERIOD: "30"
+      CONFIG_SPI_FLASH_HPM_DC_DISABLE: y  # flash chip is a GigaDevice GD25Q64C, no require HPM
     advanced:
       loop_task_stack_size: 8704
       enable_idf_experimental_features: True
