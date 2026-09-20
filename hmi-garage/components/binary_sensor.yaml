@@ -1,8 +1,4 @@
 binary_sensor:
-  - platform: status
-    name: "Status"
-    id: id_bin_status
-    
   - platform: template
     id: id_bin_bl_state
     name: "Device active"

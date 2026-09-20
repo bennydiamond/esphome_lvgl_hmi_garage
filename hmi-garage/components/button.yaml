@@ -1,8 +1,4 @@
 button:
-  - platform: restart
-    name: "Device Restart"
-    id: id_button_device_restart
-
   - platform: template
     name: "Wake Up Device"
     on_press:

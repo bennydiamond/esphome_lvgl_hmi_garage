@@ -38,8 +38,12 @@ script: !include display/simulator_script.yaml
 button:
   - platform: restart
     name: "Device Restart (fake safe mode)"
-    id: id_button_device_restart_safe_mode
+    id: id_button_safe_mode
     internal: True
+  - platform: restart
+    name: "Device Restart"
+    id: id_button_restart
+
 
 light:
   - platform: lvgl

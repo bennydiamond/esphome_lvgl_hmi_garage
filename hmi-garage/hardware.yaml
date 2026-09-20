@@ -46,7 +46,7 @@ esphome:
         
 
 logger:
-  level: INFO
+  id: !extend id_logger
   hardware_uart: UART0
   #baud_rate: 0
   logs: 
@@ -80,7 +80,7 @@ logger:
     number: WARN
 
 api:
-  reboot_timeout: 60s
+  id: !extend id_api
   on_client_connected:
     then:
       - delay: 3s
@@ -124,8 +124,8 @@ debug:
 
 
 wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
+  ssid: ${wifi_ssid}
+  password: ${wifi_password}
   use_address: 192.168.1.139
   power_save_mode: LIGHT
   passive_scan: True
@@ -140,24 +140,13 @@ wifi:
 
 #captive_portal:
 
-ota:
-  platform: esphome
-
-mdns:
-  disabled: True
-  
 #web_server:
 #  port: 80
 #  version: 3
 #  include_internal: True
 
 time:
-  - platform: sntp
-    id: id_sntp_time
-    timezone: America/Toronto
-    servers:
-     - 192.168.0.3
-     - 192.168.0.250
+  - id: !extend id_sntp_time
     on_time_sync:
       - script.execute: time_update
     on_time:
@@ -182,17 +171,13 @@ i2c:
   scan: false
   id: bus_a
 
-button:
-  - platform: safe_mode
-    name: "Device Restart (Safe mode)"
-    id: id_button_device_restart_safe_mode
-    icon: mdi:restart-alert
-
 text_sensor:
+  - id: !remove id_sensor_wifi_info
   - platform: wifi_info
+    id: id_sensor_wifi_info
     ssid:
       name: "WiFi SSID"
-      id: id_wifi_ssid
+      id: id_sensor_wifi_info
       entity_category: diagnostic
       filters:
         - lambda: |-
@@ -206,10 +191,9 @@ text_sensor:
           - lvgl.label.update:
               id: id_lv_lab_debug_network_info_ssid
               text: !lambda 'return ("SSID: " + x).c_str();'
-
     ip_address:
       name: "IP Address"
-      id: id_ip_address
+      id: id_text_ip_address
       entity_category: diagnostic
       filters:
         - lambda: |-
@@ -223,7 +207,6 @@ text_sensor:
           - lvgl.label.update:
               id: id_lv_lab_debug_network_info_ip
               text: !lambda 'return ("IP Address: " + x).c_str();'
-
     mac_address:
       name: "MAC Address"
       id: id_mac_address
@@ -252,28 +235,25 @@ text_sensor:
               text: !lambda "return x.c_str();"
 
 sensor:
-  - platform: wifi_signal
-    name: "WiFi RSSI"
-    id: id_wifi_rssi
+  - id: !extend id_sensor_wifi_signal
     update_interval: 30s
-    entity_category: diagnostic
     on_value: 
       then:
         - lvgl.label.update:
             id: id_lv_lab_wifi_status
             text_color: !lambda |-
-              if (id(id_wifi_rssi).state < 0) {
+              if (x < 0) {
               return lv_color_hex(0x00FF00);
               }
               return lv_color_hex(0x333333);
             text: !lambda |-
-              if (id(id_wifi_rssi).state <= -80) {
+              if (x <= -80) {
               return "${wifi_25}";
-              } else if (id(id_wifi_rssi).state > -80 && id(id_wifi_rssi).state <= -70) {
+              } else if (x > -80 && x <= -70) {
               return "${wifi_50}";
-              } else if (id(id_wifi_rssi).state > -70 && id(id_wifi_rssi).state <= -60) {
+              } else if (x > -70 && x <= -60) {
               return "${wifi_75}";
-              } else if (id(id_wifi_rssi).state > -60) {
+              } else if (x > -60) {
               return "${wifi_100}";
               }
               return "${wifi_100}";

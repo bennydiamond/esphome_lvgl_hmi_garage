@@ -60,7 +60,7 @@ cat:                "\U000F011B" # mdi-cat
 
 ha_instance_url: "http://192.168.0.250:8123"
 # token is valid for 10 years (2025-02-15)
-ha_auth_token: !secret ha_long_term_auth_token
+ha_auth_token: ${ha_auth_token}
 music_cover_jpg_url: 'http://192.168.1.191:82/music_cover.jpg'
 music_cover_png_url: 'http://192.168.1.191:82/music_cover.png'
 default_music_cover_jpg_url: 'http://192.168.1.191:82/default_cover.jpg'

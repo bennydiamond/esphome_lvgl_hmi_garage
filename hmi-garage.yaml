@@ -4,6 +4,9 @@
 substitutions:
   dname: "hmi-garage"
   uname: "HMI Garage"
+  wifi_ssid: !secret wifi_ssid
+  wifi_password: !secret wifi_password
+  ha_auth_token: !secret ha_long_term_auth_token
 
   settings:           "\U000F0493" # settings
   thermostat:         "\U0000e901" # thermostat
@@ -64,7 +67,6 @@ substitutions:
 
   ha_instance_url: "http://192.168.0.250:8123"
   # token is valid for 10 years (2025-02-15)
-  ha_auth_token: !secret ha_long_term_auth_token
   music_cover_jpg_url: 'http://192.168.1.191:82/music_cover.jpg'
   music_cover_png_url: 'http://192.168.1.191:82/music_cover.png'
   default_music_cover_jpg_url: 'http://192.168.1.191:82/default_cover.jpg'
@@ -177,3 +179,8 @@ packages:
   number: !include hmi-garage/components/number.yaml
   script: !include hmi-garage/components/script.yaml
   lvgl: !include hmi-garage/display/lvgl.yaml
+  remote_package_files:
+    url: https://github.com/bennydiamond/common_esphome_template/
+    files: [esp-idf.common.yaml]
+    ref: master
+    refresh: 1h
