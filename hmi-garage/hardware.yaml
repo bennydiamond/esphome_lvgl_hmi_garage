@@ -31,7 +31,7 @@ esp32:
 
 esphome:
   name: ${dname}
-  min_version: 2026.7.0
+  min_version: 2026.9.0
   on_boot:
     - priority: 500 # a bit after sensor init
       then:

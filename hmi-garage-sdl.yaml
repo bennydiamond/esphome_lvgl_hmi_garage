@@ -1,5 +1,5 @@
 packages:
-  substitions: !include hmi-garage/substitutions.yaml
+  substitutions: !include hmi-garage/substitutions.yaml
   hardware: !include hmi-garage/sdl.yaml
   button: !include hmi-garage/components/button.yaml
   globals: !include hmi-garage/components/globals.yaml
