@@ -1,9 +1,5 @@
-# Based of https://github.com/alaltitov/display/tree/main
-
-# ESP32-S3-Touch-LCD-7
-substitutions: !include hmi-garage/substitutions.yaml
-
 packages:
+  substitutions: !include hmi-garage/substitutions.yaml
   hardware: !include hmi-garage/sdl.yaml
   button: !include hmi-garage/components/button.yaml
   globals: !include hmi-garage/components/globals.yaml

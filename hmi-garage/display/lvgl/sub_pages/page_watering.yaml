@@ -125,12 +125,12 @@ lvgl:
                                         }
 
                         - <<: !include { file: page_watering/template.moisture_widget_arc.yaml, 
-                                          vars: { f_name: "Lys de Paix",
-                                                  f_id: id_lv_label_title_lys,
-                                                  battery_alert_ico: id_lv_lab_lys_lowbat,
-                                                  meter_needle: id_lv_meter_moist_lys,
-                                                  numeric_value: id_lv_label_moist_lys,
-                                                  moisture_widget_arc: id_lv_card_soilsensor_lys_outline,
+                                          vars: { f_name: "Zigbee1",
+                                                  f_id: id_lv_label_title_zigbee1,
+                                                  battery_alert_ico: id_lv_lab_zigbee1_lowbat,
+                                                  meter_needle: id_lv_meter_moist_zigbee1,
+                                                  numeric_value: id_lv_label_moist_zigbee1,
+                                                  moisture_widget_arc: id_lv_card_soilsensor_zigbee1_outline,
                                                 } 
                                         }
 

@@ -112,7 +112,7 @@ lvgl:
                   text: "Redémarrer"
             on_press:
               then:
-                - button.press: id_button_device_restart
+                - button.press: id_button_restart
 
         - button:
             align: TOP_LEFT
@@ -130,7 +130,7 @@ lvgl:
                   text: "Redémarrer en\nMode sans échec"
             on_press:
               then:
-                - button.press: id_button_device_restart_safe_mode
+                - button.press: id_button_safe_mode
 
         - button:
             align: TOP_LEFT

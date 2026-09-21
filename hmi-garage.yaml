@@ -1,9 +1,5 @@
-# Based of https://github.com/alaltitov/display/tree/main
-
-# ESP32-S3-Touch-LCD-7
-substitutions: !include hmi-garage/substitutions.yaml
-
 packages:
+  substitutions: !include hmi-garage/substitutions.yaml
   hardware: !include hmi-garage/hardware.yaml
   button: !include hmi-garage/components/button.yaml
   globals: !include hmi-garage/components/globals.yaml
@@ -17,3 +13,8 @@ packages:
   number: !include hmi-garage/components/number.yaml
   script: !include hmi-garage/components/script.yaml
   lvgl: !include hmi-garage/display/lvgl.yaml
+  remote_package_files:
+    url: https://github.com/bennydiamond/common_esphome_template/
+    files: [esp-idf.common.yaml]
+    ref: master
+    refresh: 1h

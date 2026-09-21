@@ -65,18 +65,18 @@ packages:
       is_outside_entity_id: binary_sensor.soilsensor_le_oiseau_is_outside
       card_outline_obj: id_lv_card_soilsensor_le_oiseau_outline
 
-  soilsensor_lys: !include 
+  soilsensor_zigbee1: !include 
     file: template.moisture_sensors.yaml
     vars: 
-      device_disabled_entity_id: binary_sensor.soilsensor_lys_de_paix_disabled
-      low_batt_entity_id: binary_sensor.soilsensor_lys_de_paix_low_battery
-      low_batt_label_ico: id_lv_lab_lys_lowbat
-      moisture_value_entity_id: sensor.soilsensor_lys_de_paix_soil_moisture
-      moisture_value_label: id_lv_label_moist_lys
-      moisture_meter_needle: id_lv_meter_moist_lys
-      low_moisture_entity_id: binary_sensor.soilsensor_lys_de_paix_low_moisture
-      is_outside_entity_id: binary_sensor.soilsensor_lys_de_paix_is_outside
-      card_outline_obj: id_lv_card_soilsensor_lys_outline
+      device_disabled_entity_id: binary_sensor.soilsensor_zigbee1_is_disabled
+      low_batt_entity_id: binary_sensor.entree_soilsensor_zigbee1_low_battery
+      low_batt_label_ico: id_lv_lab_zigbee1_lowbat
+      moisture_value_entity_id: sensor.soilsensor_zigbee1_soil_moisture
+      moisture_value_label: id_lv_label_moist_zigbee1
+      moisture_meter_needle: id_lv_meter_moist_zigbee1
+      low_moisture_entity_id: binary_sensor.entree_soilsensor_zigbee1_low_moisture
+      is_outside_entity_id: binary_sensor.entree_soilsensor_zigbee1_is_outside
+      card_outline_obj: id_lv_card_soilsensor_zigbee1_outline
 
   soilsensor_wh51_0d48ec: !include 
     file: template.moisture_sensors.yaml
@@ -149,3 +149,13 @@ text_sensor:
             id: id_lv_label_title_wh51_00dbd9
             text: !lambda |-
               return id(id_txt_wh51_00dbd9_pretty_name).state.c_str();
+  - platform: homeassistant
+    id: id_txt_zigbee1_pretty_name
+    entity_id: input_text.soilsensor_zigbee1_pretty_name
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_label_title_zigbee1
+            text: !lambda |-
+              return id(id_txt_zigbee1_pretty_name).state.c_str();
