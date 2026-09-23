@@ -69,13 +69,13 @@ packages:
     file: template.moisture_sensors.yaml
     vars: 
       device_disabled_entity_id: binary_sensor.soilsensor_zigbee1_is_disabled
-      low_batt_entity_id: binary_sensor.entree_soilsensor_zigbee1_low_battery
+      low_batt_entity_id: binary_sensor.soilsensor_zigbee1_low_battery
       low_batt_label_ico: id_lv_lab_zigbee1_lowbat
       moisture_value_entity_id: sensor.soilsensor_zigbee1_soil_moisture
       moisture_value_label: id_lv_label_moist_zigbee1
       moisture_meter_needle: id_lv_meter_moist_zigbee1
-      low_moisture_entity_id: binary_sensor.entree_soilsensor_zigbee1_low_moisture
-      is_outside_entity_id: binary_sensor.entree_soilsensor_zigbee1_is_outside
+      low_moisture_entity_id: binary_sensor.soilsensor_zigbee1_low_moisture
+      is_outside_entity_id: binary_sensor.soilsensor_zigbee1_is_outside
       card_outline_obj: id_lv_card_soilsensor_zigbee1_outline
 
   soilsensor_wh51_0d48ec: !include 
