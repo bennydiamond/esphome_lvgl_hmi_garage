@@ -112,7 +112,7 @@ widgets:
             action: light.toggle
             data:
               entity_id: light.${exterieur_cote_lights_ha_entity_id}
-              kelvin: "${default_min_kelvin}"
+              color_temp_kelvin: "${default_min_kelvin}"
               brightness_pct: "65"
       on_long_press:
         then:
@@ -152,7 +152,7 @@ widgets:
             action: light.toggle
             data:
               entity_id: light.${exterieur_garage_lights_ha_entity_id}
-              kelvin: "${default_min_kelvin}"
+              color_temp_kelvin: "${default_min_kelvin}"
               brightness_pct: "65"
       on_long_press:
         then:
@@ -192,7 +192,7 @@ widgets:
             action: light.toggle
             data:
               entity_id: light.${lampadaire_avant_lights_ha_entity_id}
-              kelvin: "${default_min_kelvin}"
+              color_temp_kelvin: "${default_min_kelvin}"
               brightness_pct: "65"
       on_long_press:
         then:
