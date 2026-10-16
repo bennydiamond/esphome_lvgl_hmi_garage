@@ -107,61 +107,51 @@ text_sensor:
                 id: id_lv_lab_music_playpause_icon
                 text: ${play_icon}
 
-#  - platform: homeassistant
-#    id: id_media_now_playing_track
-#    entity_id: ${media_player_title_entity_id}
-#    internal: true
-#    on_value:
-#      then:
-#        - lvgl.label.update:
-#            id: id_lv_lab_now_playing_track_name
-#            text: !lambda |-
-#              std::string str = x;
-#              if (str.length() > 200) {
-#                str = str.substr(0, 200);
-#              }
-#              return str.c_str();
-#        - lvgl.label.update:
-#            id: id_lv_lab_now_playing_album_name
-#            text: " "
-#        - lvgl.label.update:
-#            id: id_lv_lab_now_playing_artist_name
-#            text: " "
-#        - online_image.set_url:
-#            id: id_online_img_now_playing
-#            url: ${default_music_cover_png_url}
-#        - component.update: id_online_img_now_playing
+  - platform: homeassistant
+    id: id_media_now_playing_track
+    entity_id: ${media_player_title_entity_id}
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_now_playing_track_name
+            text: !lambda |-
+              std::string str = x;
+              if (str.length() > 200) {
+                str = str.substr(0, 200);
+              }
+              return str.c_str();
+        - component.update: id_online_img_now_playing
 
-#  - platform: homeassistant
-#    id: id_media_now_playing_album
-#    entity_id: ${media_player_album_entity_id}
-#    internal: true
-#    on_value:
-#      then:
-#        - delay: 80ms # Delay to let field get pre-wiped when receiving track name
-#        - lvgl.label.update:
-#            id: id_lv_lab_now_playing_album_name
-#            text: !lambda |-
-#              std::string str = x;
-#              if (str.length() > 200) {
-#                str = str.substr(0, 200);
-#              }
-#              return str.c_str();
-#  - platform: homeassistant
-#    id: id_media_now_playing_artist
-#    entity_id: ${media_player_artist_entity_id}
-#    internal: true
-#    on_value:
-#      then:
-#        - delay: 80ms # Delay to let field get pre-wiped when receiving track name
-#        - lvgl.label.update:
-#            id: id_lv_lab_now_playing_artist_name
-#            text: !lambda |-
-#              std::string str = x;
-#              if (str.length() > 200) {
-#                str = str.substr(0, 200);
-#              }
-#              return str.c_str();
+  - platform: homeassistant
+    id: id_media_now_playing_album
+    entity_id: ${media_player_album_entity_id}
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_now_playing_album_name
+            text: !lambda |-
+              std::string str = x;
+              if (str.length() > 200) {
+                str = str.substr(0, 200);
+              }
+              return str.c_str();
+
+  - platform: homeassistant
+    id: id_media_now_playing_artist
+    entity_id: ${media_player_artist_entity_id}
+    internal: true
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: id_lv_lab_now_playing_artist_name
+            text: !lambda |-
+              std::string str = x;
+              if (str.length() > 200) {
+                str = str.substr(0, 200);
+              }
+              return str.c_str();
   - platform: homeassistant
     id: id_media_player_repeat
     entity_id: ${mass_garage_entity_id}
