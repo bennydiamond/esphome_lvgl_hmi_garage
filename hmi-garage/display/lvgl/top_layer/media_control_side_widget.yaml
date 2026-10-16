@@ -66,13 +66,16 @@ obj: # Speaker Volume control
             height: 12%
             bg_color: color_blue
           on_value:
-            - lvgl.label.update:
-                id: id_lv_lab_speaker_icon
-                text: !lambda  |-
-                  if(id(id_media_muted).state == true) {return "${volume_off}";}
-                  else if(x < 25) {return "${volume_low}";}
-                  else if (x < 65) {return "${volume_medium}";}
-                  else {return "${volume_high}";}
+            - if:
+                condition:
+                  binary_sensor.is_off: id_media_muted
+                then:
+                  - lvgl.label.update:
+                      id: id_lv_lab_speaker_icon
+                      text: !lambda |-
+                        if (x < 25) { return "${volume_low}"; }
+                        else if (x < 65) { return "${volume_medium}"; }
+                        else { return "${volume_high}"; }
           on_release:
             - homeassistant.action:
                 action: number.set_value

@@ -26,11 +26,20 @@ binary_sensor:
       then:
         - lvgl.label.update:
             id: id_lv_lab_speaker_icon
-            text: !lambda  |-
-              if(id(id_media_muted).state == true) {return "${volume_off}";}
-              else if(id(id_media_volume).state < 25) {return "${volume_low}";}
-              else if (id(id_media_volume).state < 65) {return "${volume_medium}";}
-              else {return "${volume_high}";}
+            text: !lambda |-
+              if (x == true) {
+                return "${volume_off}";
+              }
+              float vol = 0;
+              if (id(id_lv_slid_media_volume) != nullptr) {
+                vol = lv_slider_get_value(id(id_lv_slid_media_volume));
+              }
+              if (vol <= 0 && id(id_media_volume).has_state()) {
+                vol = id(id_media_volume).state;
+              }
+              if (vol < 25) { return "${volume_low}"; }
+              else if (vol < 65) { return "${volume_medium}"; }
+              else { return "${volume_high}"; }
 
   - platform: homeassistant
     id: id_bin_audio_from_mass
@@ -65,6 +74,16 @@ sensor:
       - lvgl.slider.update:
           id: id_lv_slid_media_volume
           value: !lambda "return x;"
+      - if:
+          condition:
+            binary_sensor.is_off: id_media_muted
+          then:
+            - lvgl.label.update:
+                id: id_lv_lab_speaker_icon
+                text: !lambda |-
+                  if (x < 25) { return "${volume_low}"; }
+                  else if (x < 65) { return "${volume_medium}"; }
+                  else { return "${volume_high}"; }
           
 text_sensor:
   - platform: homeassistant
