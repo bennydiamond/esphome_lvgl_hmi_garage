@@ -345,18 +345,7 @@ touchscreen:
     ch422g: io_ex
     number: 1
   on_release:
-    - if:
-        condition:
-          not:
-            - script.is_running: id_script_blink_quit_icon
-        then:
-          - if:
-              condition: lvgl.is_paused
-              then:
-                - logger.log: "LVGL resuming"
-                - lvgl.resume:
-                - lvgl.widget.redraw:
-          - script.execute: id_script_backlight_timeout
+    - script.execute: id_script_backlight_timeout
 
 # Display
 display:
