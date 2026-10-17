@@ -15,6 +15,7 @@ esp32:
       CONFIG_BT_BLE_42_FEATURES_SUPPORTED: y
       CONFIG_ESP_TASK_WDT: y
       CONFIG_ESP_TASK_WDT_TIMEOUT_S: "10"
+      CONFIG_ESP_COEX_SW_COEXIST_ENABLE: n
 
 # Enable logging
 logger:
@@ -55,22 +56,39 @@ wifi:
 captive_portal:
 
 esp32_ble_tracker:
+  software_coexistence: false
   scan_parameters:
     # Don't auto start BLE scanning, we control it in the `api` block's automation.
     continuous: False
     
     active: False  # send scan-request packets to gather more info, like device name for some devices.
 
-    interval: 320ms  # default 320ms - how long to spend on each advert channel
-    window:   300ms  # default 30ms - how long to actually "listen" in each interval. Reduce this if device is unstable.
-    # If the device cannot keep up or becomes unstable, reduce the "window" setting. This may be
-    # required if your device is controlling other sensors or doing PWM for lights etc.
+    interval: 100ms  # Recommended for ESPectre coexistence to keep CSI occupancy >90%
+    window:   10ms
 
 bluetooth_proxy:
   active: False  # allows outbound connections from HA to devices.
 
 external_components:
   - source: github://oxan/esphome-stream-server
+  - source:
+      type: git
+      url: https://github.com/francescopace/espectre
+      ref: main
+      path: src/cpp/frontend/esphome/components
+    components: [ espectre ]
+    refresh: always
+
+# ESPectre - WiFi CSI Motion Detection
+espectre:
+  id: espectre_csi
+  detection_algorithm: lightweight # lightweight (default) or high_accuracy
+  traffic_generator_mode: ping # ping (default), dns (UDP), dns_tcp, wifi_raw, or external
+  evaluation_interval_ms: 250 # 250-1000 recommended; detector and live telemetry interval
+  direct_api: true # Set false to disable Direct HTTP, SSE, raw CSI, and Direct mDNS discovery
+  sensing_switch:
+    id: id_switch_espectre_sensing
+    name: "Sensing Enabled"
 
 uart:
    id: uart_bus
@@ -93,13 +111,16 @@ binary_sensor:
       on_press:
         then:
           - esp32_ble_tracker.stop_scan:
+          - switch.turn_off: id_switch_espectre_sensing
       on_release:
-        - if:
-            condition:
-              - api.connected:
-            then:
-              - esp32_ble_tracker.start_scan:
-                  continuous: true
+        then:
+          - if:
+              condition:
+                - api.connected:
+              then:
+                - esp32_ble_tracker.start_scan:
+                    continuous: true
+          - switch.turn_on: id_switch_espectre_sensing
 
 sensor:
   - platform: wifi_signal
