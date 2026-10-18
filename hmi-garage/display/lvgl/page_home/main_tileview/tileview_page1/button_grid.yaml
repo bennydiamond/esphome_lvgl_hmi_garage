@@ -9,28 +9,16 @@ layout:
 widgets:
   - button:
       id: id_lv_but_gr_light
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
+      styles: style_home_grid_button
       grid_cell_column_pos: 0
       grid_cell_row_pos: 0
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_gr_light
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
+            styles: style_home_grid_icon
             text: "${ceiling_light}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Garage"
       on_short_click:
         - homeassistant.action:
@@ -46,28 +34,16 @@ widgets:
                 time: 300ms
   - button:
       id: id_lv_but_gs
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
+      styles: style_home_grid_button
       grid_cell_column_pos: 1
       grid_cell_row_pos: 0
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_gs
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
+            styles: style_home_grid_icon
             text: "${lights}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Sous-Sol\n Garage"
       on_short_click:
         - homeassistant.action:
@@ -84,28 +60,16 @@ widgets:
 
   - button:
       id: id_lv_but_extc
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
+      styles: style_home_grid_button
       grid_cell_column_pos: 0
       grid_cell_row_pos: 1
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_extc
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
+            styles: style_home_grid_icon
             text: "${light_recessed}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Corniche\n    Coté"
       on_short_click:
         - homeassistant.action:
@@ -124,28 +88,16 @@ widgets:
 
   - button:
       id: id_lv_but_extg
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
+      styles: style_home_grid_button
       grid_cell_column_pos: 1
       grid_cell_row_pos: 1
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_extg
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
+            styles: style_home_grid_icon
             text: "${light_recessed}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Corniche\n  Garage"
       on_short_click:
         - homeassistant.action:
@@ -164,28 +116,16 @@ widgets:
 
   - button:
       id: id_lv_but_lamp
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
+      styles: style_home_grid_button
       grid_cell_column_pos: 0
       grid_cell_row_pos: 2
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_lamp
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
+            styles: style_home_grid_icon
             text: "${lamp_post}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Lampadaire\n    Avant"
       on_short_click:
         - homeassistant.action:
@@ -203,26 +143,18 @@ widgets:
                 time: 300ms
 
   - button:
-      bg_color: color_black
+      styles: style_home_grid_button
       shadow_color: color_mint
-      shadow_spread: 2
       shadow_width: 25
-      shadow_opa: 100%
       grid_cell_column_pos: 1
       grid_cell_row_pos: 2
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
+            styles: style_home_grid_icon
             text_color: color_mint
             text: "${music_note}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
+            styles: style_home_grid_label
             text_color: color_mint
             text: " Musique\n  Garage"
       on_short_click:

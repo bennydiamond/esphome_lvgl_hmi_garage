@@ -1,0 +1,148 @@
+# Centralized LVGL Style Definitions for HMI Entrée
+# Deduplicates styles to reduce generated C++ binary size and RAM usage
+
+# --- Home Grid Button Styles ---
+- id: style_home_grid_button
+  bg_color: color_black
+  shadow_color: color_gray
+  shadow_spread: 2
+  shadow_width: 20
+  shadow_opa: 100%
+  grid_cell_x_align: STRETCH
+  grid_cell_y_align: STRETCH
+
+- id: style_home_grid_icon
+  align: LEFT_MID
+  x: 0
+  text_font: mdi_icons_48
+  text_color: color_gray
+
+- id: style_home_grid_label
+  align: LEFT_MID
+  x: 60
+  text_font: lato_24
+  text_color: color_white
+
+# --- Top Layer Notification Area Styles ---
+- id: style_notif_button
+  pad_all: 0
+  height: 35
+  width: 33
+  border_side: NONE
+  bg_opa: TRANSP
+  shadow_width: 0
+
+- id: style_notif_icon
+  width: 100%
+  height: 100%
+  pad_all: 0
+  align: CENTER
+  text_font: mdi_icons_32
+
+# --- Sub-page Back / Home Navigation Button Styles ---
+- id: style_subpage_back_button
+  x: 0
+  y: 0
+  width: 80
+  height: 50
+  bg_opa: TRANSP
+  shadow_opa: TRANSP
+  radius: 0
+  align: BOTTOM_LEFT
+
+- id: style_subpage_back_icon
+  x: 5
+  y: -5
+  pad_all: 0
+  text_font: montserrat_22
+  text_color: color_gray
+
+# --- Pop-up Message Box Dialog Window Styles ---
+- id: style_popup_overlay
+  width: 100%
+  height: 100%
+  align: CENTER
+  bg_color: color_black
+  bg_opa: 50%
+  pad_all: 0
+  border_width: 0
+
+- id: style_popup_window
+  width: 360
+  height: 280
+  align: CENTER
+  bg_color: color_white
+  radius: 12
+  clip_corner: true
+  border_width: 1
+  border_color: color_gray
+  pad_all: 0
+
+- id: style_popup_title_bar
+  width: 100%
+  height: 44
+  bg_color: color_dark_gray
+  border_width: 0
+  radius: 0
+  pad_all: 0
+
+- id: style_popup_close_button
+  width: 28
+  height: 28
+  radius: 4
+  bg_color: color_gray
+  border_width: 0
+  pad_all: 0
+  align: RIGHT_MID
+  x: -15
+  shadow_width: 4
+  shadow_offset_y: 1
+  shadow_color: color_black
+  shadow_opa: 40%
+
+- id: style_popup_body_container
+  width: 100%
+  pad_left: 18
+  pad_right: 18
+  pad_top: 20
+  pad_bottom: 10
+  border_width: 0
+  bg_opa: 0%
+
+- id: style_popup_footer_container
+  width: 100%
+  height: 54
+  bg_opa: 0%
+  border_width: 0
+  pad_top: 0
+  pad_bottom: 15
+  pad_left: 15
+  pad_right: 15
+
+- id: style_popup_btn
+  height: 34
+  width: size_content
+  pad_left: 24
+  pad_right: 24
+  border_width: 0
+  radius: 6
+  shadow_width: 8
+  shadow_offset_y: 2
+  shadow_color: color_dark_gray
+  shadow_opa: 60%
+
+# --- General Utility Styles ---
+- id: style_transparent_container
+  bg_opa: TRANSP
+  border_opa: TRANSP
+  pad_all: 0
+
+- id: style_touch_overlay_button
+  width: 82
+  height: 80
+  x: 4
+  y: 0
+  opa: TRANSP
+  bg_opa: TRANSP
+  border_width: 0
+  radius: 0

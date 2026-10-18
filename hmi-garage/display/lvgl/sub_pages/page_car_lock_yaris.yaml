@@ -98,21 +98,10 @@ lvgl:
 
             
         - button:
-            x: 0
-            y: 0
-            width: 80
-            height: 50
-            bg_opa: TRANSP
-            shadow_opa: TRANSP
-            radius: 0
-            align: BOTTOM_LEFT
+            styles: style_subpage_back_button
             widgets:
               - label:
-                  x: 5
-                  y: -5
-                  pad_all: 0
-                  text_font: montserrat_22
-                  text_color: color_gray
+                  styles: style_subpage_back_icon
                   text: "\uF015"
             on_press:
               then:

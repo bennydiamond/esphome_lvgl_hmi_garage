@@ -1,13 +1,11 @@
 obj: # Speaker Volume control
   id: id_lvgl_widget_media_control
+  styles: style_transparent_container
   align: TOP_RIGHT
   width: 80
   height: 440
   x: -10
   y: 40
-  pad_all: 0
-  bg_opa: TRANSP
-  border_opa: TRANSP
   scrollable: False
   widgets:
       - line:
@@ -21,15 +19,8 @@ obj: # Speaker Volume control
       # Speaker Icon
       - button:
           id: id_lvgl_button_volume_speaker
-          width: 82
-          height: 80
-          y: 0
-          x: 4
+          styles: style_touch_overlay_button
           align: TOP_MID
-          opa: TRANSP
-          bg_opa: TRANSP
-          border_width: 0
-          radius: 0
           on_press:
             - homeassistant.event:
                 event: esphome.button_pressed
@@ -83,15 +74,8 @@ obj: # Speaker Volume control
                   entity_id: ${volume_control_garage_entity_id}
                   value: !lambda "return x;"
       - button:
-          width: 82
-          height: 80
-          y: 0
-          x: 4
+          styles: style_touch_overlay_button
           align: BOTTOM_MID
-          opa: TRANSP
-          bg_opa: TRANSP
-          border_width: 0
-          radius: 0
           on_press:
             - homeassistant.event:
                 event: esphome.button_pressed

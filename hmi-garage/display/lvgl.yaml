@@ -121,18 +121,6 @@ font: !include fonts.yaml
 image: !include images.yaml
 color: !include colors.yaml
 
-interval:
-  - interval: 200ms
-    startup_delay: 2s
-    then:
-    - if:
-        condition:
-          lvgl.page.is_showing: page_home
-        then:
-          - lvgl.widget.hide: id_lv_lab_time_notif_area
-        else:
-          - lvgl.widget.show: id_lv_lab_time_notif_area
-
 lvgl:
   buffer_size: 100%
 #  on_idle:
@@ -142,6 +130,7 @@ lvgl:
 #          id: id_bin_bl_state
 #          state: False
   gradients: !include lvgl/gradients.yaml  
+  style_definitions: !include lvgl/styles.yaml  
 
   top_layer: # Top Screen Status bar. Visible on all pages.
     widgets:

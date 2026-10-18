@@ -9,28 +9,16 @@ layout:
 widgets:
   - button:
       id: id_lv_but_attic_light
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
+      styles: style_home_grid_button
       grid_cell_column_pos: 0
       grid_cell_row_pos: 0
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_attic_light
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
+            styles: style_home_grid_icon
             text: "${home_floor_g}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Grenier"
       on_short_click:
         - homeassistant.action:
@@ -44,28 +32,19 @@ widgets:
               entity_id: light.${grenier_light_ha_entity_id}
   - button:
       id: id_lv_but_lock_fr
-      bg_color: color_black
+      styles: style_home_grid_button
       shadow_color: color_red
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
       grid_cell_column_pos: 1
       grid_cell_row_pos: 0
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_ico_lock_fr
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
+            styles: style_home_grid_icon
             text_color: color_red
             text: "${unlocked}"
         - label:
             id: id_lv_lab_lock_fr
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
+            styles: style_home_grid_label
             text_color: color_red
             text: "Porte Avant"
       on_short_click:
@@ -117,28 +96,18 @@ widgets:
 
   - button:
       id: id_lv_but_water
-      bg_color: color_black
+      styles: style_home_grid_button
       shadow_color: color_blue
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
       grid_cell_column_pos: 0
       grid_cell_row_pos: 1
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_water_but_ico
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
+            styles: style_home_grid_icon
             text_color: color_blue
             text: "${sprinkler}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Arrosage"
       on_short_click:
         then:
@@ -157,27 +126,17 @@ widgets:
 
   - button:
       id: id_lv_but_car_key
-      bg_color: color_black
+      styles: style_home_grid_button
       shadow_color: color_yellow
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
       grid_cell_column_pos: 1
       grid_cell_row_pos: 1
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
+            styles: style_home_grid_icon
             text_color: color_yellow
             text: "${car_key}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Yaris"
       on_short_click:
         - homeassistant.event:
@@ -194,28 +153,18 @@ widgets:
 
   - button:
       id: id_lv_but_players_volums
-      bg_color: color_black
+      styles: style_home_grid_button
       shadow_color: color_white
-      shadow_spread: 2
-      shadow_width: 20
-      shadow_opa: 100%
       grid_cell_column_pos: 0
       grid_cell_row_pos: 2
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
             id: id_lv_lab_vol_but_ico
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
+            styles: style_home_grid_icon
             text_color: color_white
             text: "${speaker_wireless}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
-            text_color: color_white
+            styles: style_home_grid_label
             text: "Volumes"
       on_short_click:
         then:
@@ -233,26 +182,16 @@ widgets:
                 time: 300ms
 
   - button:
-      bg_color: color_black
-      shadow_color: color_gray
-      shadow_spread: 2
+      styles: style_home_grid_button
       shadow_width: 25
-      shadow_opa: 100%
       grid_cell_column_pos: 1
       grid_cell_row_pos: 2
-      grid_cell_x_align: STRETCH
-      grid_cell_y_align: STRETCH
       widgets:
         - label:
-            align: LEFT_MID
-            x: 0
-            text_font: mdi_icons_48
-            text_color: color_gray
+            styles: style_home_grid_icon
             text: "${settings}"
         - label:
-            align: LEFT_MID
-            x: 60
-            text_font: lato_24
+            styles: style_home_grid_label
             text_color: color_gray
             text: "Settings"
       on_short_click:

@@ -34,26 +34,26 @@ obj:
             # Time display. Must be at the start to avoid shifting when other icons appear/disappear
             # Only shown when not on home page
             - label:
+                styles: style_notif_icon
                 id: id_lv_lab_time_notif_area
-                align: CENTER
                 pad_right: 8
                 text_color: color_white
                 text_font: lato_30
                 hidden: true
             # Home Assistant status
             - label:
+                styles: style_notif_icon
                 id: id_lv_lab_ha_status
                 align: TOP_RIGHT
                 text: "${ha}"
                 text_color: color_dark_gray
-                text_font: mdi_icons_32
             # Wi-Fi status
             - label:
+                styles: style_notif_icon
                 id: id_lv_lab_wifi_status
                 align: TOP_RIGHT
                 text: "${wifi_100}"
                 text_color: color_dark_gray
-                text_font: mdi_icons_32
 
 
     - obj:
@@ -75,22 +75,13 @@ obj:
             # Front door
             - button:
                 id: id_lv_but_front_door
-                pad_all: 0  
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: true
                 widgets:
                     - label:
-                        width: 100%
-                        height: 100%
-                        pad_all: 0
-                        align: CENTER
+                        styles: style_notif_icon
                         text: "${door_open}"
                         text_color: color_red
-                        text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - lvgl.widget.show: id_lv_popupbox_front_door
@@ -100,22 +91,13 @@ obj:
             # Patio door
             - button:
                 id: id_lv_but_patio_door
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: true
                 widgets:
                     - label:
-                        width: 100%
-                        height: 100%
-                        pad_all: 0
-                        align: CENTER
+                        styles: style_notif_icon
                         text: "${patio_door_open}"
                         text_color: color_red
-                        text_font: mdi_icons_32
                 on_short_click:
                     then:   
                         - lvgl.widget.show: id_lv_popupbox_patio_door
@@ -125,22 +107,13 @@ obj:
             # River Level critical
             - button:
                 id: id_lv_but_riv_lvl_crit_notif
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: true
                 widgets:
                     - label:
-                        width: 100%
-                        height: 100%
-                        pad_all: 0
-                        align: CENTER
+                        styles: style_notif_icon
                         text: "${waves_arrow_up}"
                         text_color: color_red
-                        text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - lvgl.widget.show: id_lv_popupbox_riv_lvl_crit
@@ -150,22 +123,13 @@ obj:
             # Attic Light ON
             - button:
                 id: id_lv_but_notify_attic_light
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: true
                 widgets:
                     - label:
-                        width: 100%
-                        height: 100%
-                        pad_all: 0
-                        align: CENTER
+                        styles: style_notif_icon
                         text: "${home_floor_g}"
                         text_color: color_warmest_white
-                        text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - lvgl.widget.show: id_lv_popupbox_attic
@@ -175,23 +139,14 @@ obj:
             # HVAC status
             - button:
                 id: id_lv_but_hvac_status
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: true
                 widgets:
                   - label:
+                      styles: style_notif_icon
                       id: id_lv_lab_hvac_status
-                      width: 100%
-                      height: 100%
-                      pad_all: 0
-                      align: CENTER
                       text: "${heating}"
                       text_color: color_orange
-                      text_font: mdi_icons_32
                 on_short_click:
                   then:
                     - lvgl.widget.show: id_lv_popupbox_hvac
@@ -201,23 +156,14 @@ obj:
             # Miner status
             - button:
                 id: id_lv_but_miner_status
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: true
                 widgets:
                   - label:
+                      styles: style_notif_icon
                       id: id_lv_lab_miner_status
-                      width: 100%
-                      height: 100%
-                      pad_all: 0
-                      align: CENTER
                       text: "${heating}"
                       text_color: color_orange
-                      text_font: mdi_icons_32
                 on_short_click:
                   then:
                     - lvgl.widget.show: id_lv_popupbox_miner
@@ -227,23 +173,14 @@ obj:
             # Défi Hilo active
             - button:
                 id: id_lv_but_defi_hilo
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: true
                 widgets:
                   - label:
+                      styles: style_notif_icon
                       id: id_lv_lab_defi_hilo
-                      width: 100%
-                      height: 100%
-                      pad_all: 0
-                      align: CENTER
                       text: "${h_circle_outline}"
                       text_color: color_yellow
-                      text_font: mdi_icons_32
                 on_short_click:
                   then:
                     - lvgl.widget.show: id_lv_popupbox_defi_hilo
@@ -253,22 +190,13 @@ obj:
             # Outside SoilSensors Global Alert
             - button:
                 id: id_lv_but_outside_soil_alert
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0 
+                styles: style_notif_button
                 hidden: true
                 widgets:
                     - label:
-                        width: 100%
-                        height: 100%
-                        pad_all: 0
-                        align: CENTER
+                        styles: style_notif_icon
                         text: "${watering_can}"
                         text_color: color_green
-                        text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - lvgl.widget.show: page_watering
@@ -292,22 +220,13 @@ obj:
             # Inside SoilSensors Global Alert
             - button:
                 id: id_lv_but_inside_soil_alert
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0 
+                styles: style_notif_button
                 hidden: true
                 widgets:
                     - label:
-                        width: 100%
-                        height: 100%
-                        pad_all: 0
-                        align: CENTER
+                        styles: style_notif_icon
                         text: "${watering_can}"
                         text_color: color_blue
-                        text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - lvgl.widget.show: page_watering
@@ -331,19 +250,13 @@ obj:
             # Water Softener Salt Level critical
             - button:
                 id: id_lv_but_salt_lvl
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: True
                 widgets:
                 - label:
-                    align: CENTER
+                    styles: style_notif_icon
                     text: "${salt_shaker}"
                     text_color: color_yellow
-                    text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - lvgl.widget.show: id_lv_popupbox_salt
@@ -353,22 +266,13 @@ obj:
             # Irrigation System Active
             - button:
                 id: id_lv_but_watering_active
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0 
+                styles: style_notif_button
                 hidden: true
                 widgets:
                     - label:
-                        width: 100%
-                        height: 100%
-                        pad_all: 0
-                        align: CENTER
+                        styles: style_notif_icon
                         text: "${sprinkler}"
                         text_color: color_blue
-                        text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - lvgl.widget.show: page_watering
@@ -393,20 +297,14 @@ obj:
             # variable bin day reminder and alert
             - button:
                 id: id_lv_but_variable_bin
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: True
                 widgets:
                 - label:
+                    styles: style_notif_icon
                     id: id_lv_lab_variable_bin
-                    align: CENTER
                     text: "${trash_bin}"
                     text_color: color_red
-                    text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - if:
@@ -440,20 +338,14 @@ obj:
             # Water Softener Salt Level critical
             - button:
                 id: id_lv_but_catstuff_problem
-                pad_all: 0
-                height: 35
-                width: 33
-                border_side: NONE
-                bg_opa: TRANSP
-                shadow_width: 0
+                styles: style_notif_button
                 hidden: True
                 widgets:
                 - label:
+                    styles: style_notif_icon
                     id: id_lv_lab_catstuff_problem
-                    align: CENTER
                     text: "${cat}"
                     text_color: color_red
-                    text_font: mdi_icons_32
                 on_short_click:
                     then:
                         - lvgl.widget.show: id_lv_popupbox_catstuff
