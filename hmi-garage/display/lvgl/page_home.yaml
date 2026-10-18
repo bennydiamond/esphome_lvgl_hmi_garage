@@ -56,6 +56,12 @@ lvgl:
       skip: True
       bg_color: color_black
       scrollable: False
+      on_load:
+        then:
+          - lvgl.widget.hide: id_lv_lab_time_notif_area
+      on_unload:
+        then:
+          - lvgl.widget.show: id_lv_lab_time_notif_area
       widgets:
         - obj:
             id: id_widget_but_all
